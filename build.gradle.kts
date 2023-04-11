@@ -2,8 +2,19 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.detekt.core) apply false
 }
 
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+
+tasks.register("detektAll") {
+    group = "verification"
+    description = "Runs Detekt on every sub-project"
+    dependsOn(
+        subprojects.filter {
+            it.plugins.hasPlugin(libs.plugins.detekt.core.get().pluginId)
+        }.map { it.tasks.named("detekt") }
+    )
 }

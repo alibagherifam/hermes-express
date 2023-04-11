@@ -8,7 +8,7 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
     val libs = getVersionCatalogs()
     setSdkVersionBoundary(android, libs)
     setJvmTargetVersion(android)
-//    configureWithDetekt(libs)
+    configureWithDetekt(libs)
 }
 
 fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>, libs: VersionCatalog) {

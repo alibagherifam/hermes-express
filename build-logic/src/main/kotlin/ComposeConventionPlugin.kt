@@ -44,10 +44,10 @@ class ComposeConventionPlugin : Plugin<Project> {
             implementation(libs, "androidx-compose-material3")
             implementation(libs, "androidx-compose-tooling-preview")
             implementation(libs, "androidx-compose-tooling")
-            /*add(
+            add(
                 "detektPlugins",
                 libs.findLibrary("detekt-composeRules").get()
-            )*/
+            )
         }
     }
 }
