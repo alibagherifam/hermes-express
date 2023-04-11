@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.alibagherifam.hermesexpress.common"
+    namespace = "dev.alibagherifam.hermesexpress.pushnotification"
 }
 
 dependencies {
@@ -16,4 +16,9 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.kotlinx.coroutines.android)
 
+
+    /*    implementation(libs.kotlinx.serialization)
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.retrofit.converter)
+    implementation(libs.squareup.retrofit.core)*/
 }
