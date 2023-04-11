@@ -15,6 +15,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":feature:push-notification"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
