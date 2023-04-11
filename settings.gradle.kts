@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "hermes-express"
 
 include(":biker-app")
+include(":common")
