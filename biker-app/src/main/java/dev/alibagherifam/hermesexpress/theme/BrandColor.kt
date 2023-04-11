@@ -1,0 +1,37 @@
+package dev.alibagherifam.hermesexpress.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+object BrandColor {
+    val Black200 = Color(0xFF1B1C18)
+    val DarkRed = Color(0xFF690005)
+    val Green = Color(0xFFA5D576)
+    val Green2 = Color(0xFFB6D167)
+    val Green3 = Color(0xFFC1F18F)
+    val Green4 = Color(0xFFD2EE80)
+    val Green5 = Color(0xFF506600)
+    val Green6 = Color(0xFF416917)
+    val Green7 = Color(0xFF2B5000)
+    val Green8 = Color(0xFF3C4D00)
+    val LightBlue = Color(0xFFA0CFCC)
+    val LightRed = Color(0xFFBA1A1A)
+    val Pink = Color(0xFFFFDAD6)
+    val Red = Color(0xFF93000A)
+    val Silver = Color(0xFFC4C8BA)
+    val SkyBlue = Color(0xFFBBECE9)
+    val White2 = Color(0xFFE1E4D5)
+    val White3 = Color(0xFFE3E3DC)
+    val White4 = Color(0xFFFDFCF5)
+    val color13 = Color(0xFF00201F)
+    val color14 = Color(0xFF003735)
+    val color15 = Color(0xFF0E2000)
+    val color16 = Color(0xFF161F00)
+    val color17 = Color(0xFF1C3700)
+    val color18 = Color(0xFF1E4E4C)
+    val color19 = Color(0xFF283500)
+    val color21 = Color(0xFF2F312C)
+    val color22 = Color(0xFF386664)
+    val color24 = Color(0xFF410002)
+    val Gray2 = Color(0xFF74796C)
+    val Gray3 = Color(0xFF8E9285)
+}
