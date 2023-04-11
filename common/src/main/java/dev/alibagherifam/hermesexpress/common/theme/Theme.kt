@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.theme
+package dev.alibagherifam.hermesexpress.common.theme
 
 import android.app.Activity
 import android.os.Build
