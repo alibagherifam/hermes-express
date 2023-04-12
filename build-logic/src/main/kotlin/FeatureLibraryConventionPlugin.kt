@@ -11,8 +11,8 @@ class FeatureLibraryConventionPlugin : Plugin<Project> {
             val libs = getVersionCatalogs()
 
             with(pluginManager) {
-                apply("dev.alibagherifam.greedygoblin.android.library")
-                apply("dev.alibagherifam.greedygoblin.compose")
+                apply("dev.alibagherifam.android.library")
+                apply("dev.alibagherifam.compose")
             }
 
             dependencies {
