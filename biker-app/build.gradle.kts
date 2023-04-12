@@ -15,6 +15,8 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":feature:order"))
+    implementation(project(":feature:map"))
     implementation(project(":feature:push-notification"))
 
     implementation(libs.androidx.activity)
