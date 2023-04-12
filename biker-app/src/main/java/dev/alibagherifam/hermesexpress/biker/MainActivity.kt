@@ -3,6 +3,7 @@ package dev.alibagherifam.hermesexpress.biker
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -31,7 +32,24 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    Column(Modifier.fillMaxSize()) {
+        Text(
+            text = "Hello $name!",
+            style = MaterialTheme.typography.displayMedium
+        )
+        Text(
+            text = "Hello $name!",
+            style = MaterialTheme.typography.headlineMedium
+        )
+        Text(
+            text = "Hello $name!",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = "Hello $name!",
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
 }
 
 @Preview(showBackground = true)
