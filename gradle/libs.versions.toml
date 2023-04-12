@@ -45,6 +45,7 @@ detekt-ktlintFormatting = { group = "io.gitlab.arturbosch.detekt", name = "detek
 koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.3" }
 mapbox = { group = "com.mapbox.maps", name = "android", version = "10.12.2" }
+google-playServices-location = { group = "com.google.android.gms", name = "play-services-location", version = "21.0.1" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }

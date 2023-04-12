@@ -8,4 +8,5 @@ android {
 
 dependencies {
     implementation(libs.mapbox)
+    implementation(libs.google.playServices.location)
 }
