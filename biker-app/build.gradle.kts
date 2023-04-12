@@ -16,6 +16,7 @@ android {
 dependencies {
     implementation(project(":common"))
     implementation(project(":feature:order"))
+    implementation(project(":feature:map"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
