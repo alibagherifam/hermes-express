@@ -32,6 +32,11 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.5.0" }
 
+# Square
+squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.10.0" }
+squareup-retrofit-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "0.8.0" }
+squareup-retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.9.0" }
+
 # Others
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
@@ -39,9 +44,7 @@ detekt-composeRules = { group = "com.twitter.compose.rules", name = "detekt", ve
 detekt-ktlintFormatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.3" }
-squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.10.0" }
-squareup-retrofit-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "0.8.0" }
-squareup-retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.9.0" }
+mapbox = { group = "com.mapbox.maps", name = "android", version = "10.12.2" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
