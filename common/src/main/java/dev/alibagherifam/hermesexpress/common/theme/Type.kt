@@ -12,9 +12,8 @@ val HerculanumFontFamily = FontFamily(
     Font(R.font.herculanum)
 )
 
-val TrajanProFontFamily = FontFamily(
-    Font(R.font.trajan_pro),
-    Font(R.font.trajan_pro_bold, FontWeight.Bold)
+val JensonFontFamily = FontFamily(
+    Font(R.font.jenson)
 )
 
 val AppTypography = Typography(
@@ -54,70 +53,70 @@ val AppTypography = Typography(
         letterSpacing = 0.sp,
     ),
     headlineSmall = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = HerculanumFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 24.sp,
         lineHeight = 32.sp,
         letterSpacing = 0.sp,
     ),
     titleLarge = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp,
     ),
     titleMedium = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.1.sp,
     ),
     titleSmall = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.1.sp,
     ),
     bodyLarge = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp,
     ),
     bodyMedium = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.25.sp,
     ),
     bodySmall = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.4.sp,
     ),
     labelLarge = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.1.sp,
     ),
     labelMedium = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 12.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp,
     ),
     labelSmall = TextStyle(
-        fontFamily = TrajanProFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 10.sp,
         lineHeight = 16.sp,
