@@ -40,7 +40,7 @@ squareup-retrofit-converter = { group = "com.jakewharton.retrofit", name = "retr
 squareup-retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.9.0" }
 
 # Firebase
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "31.3.0" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "31.5.0" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 
 # Others
