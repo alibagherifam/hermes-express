@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import dev.alibagherifam.hermesexpress.common.data.OfferStore
-import dev.alibagherifam.hermesexpress.common.domain.generateFakeOrder
 import dev.alibagherifam.hermesexpress.fakeoffer.ui.FakeOrderOfferScreen
 import dev.alibagherifam.hermesexpress.order.ui.OrderDetails
 import dev.alibagherifam.hermesexpress.pushnotification.R
@@ -23,7 +22,7 @@ fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
         FakeOrderOfferScreen()
     } else {
         OrderDetails(
-            order = generateFakeOrder(),
+            requireNotNull(offer),
             onAcceptOfferClick = {
                 OfferStore.saveOffer(null)
             }
