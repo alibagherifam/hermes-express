@@ -1,6 +1,7 @@
 plugins {
     id("dev.alibagherifam.android.library")
     id("dev.alibagherifam.compose")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -15,4 +16,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.koin.android)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
 }

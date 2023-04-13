@@ -30,7 +30,9 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 # KotlinX
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
-kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.5.0" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.4.0" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.5.0" }
+kotlinx-serialization-properties = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-properties", version = "1.5.0" }
 
 # Square
 squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.10.0" }
@@ -50,6 +52,7 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.3" }
 mapbox = { group = "com.mapbox.maps", name = "android", version = "10.12.2" }
 google-playServices-location = { group = "com.google.android.gms", name = "play-services-location", version = "21.0.1" }
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "1.2.2" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
