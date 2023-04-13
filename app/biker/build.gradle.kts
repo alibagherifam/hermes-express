@@ -27,9 +27,3 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.koin.android)
 }
-/*
-packagingOptions {
-    resources {
-        excludes += '/META-INF/{AL2.0,LGPL2.1}'
-    }
-}*/

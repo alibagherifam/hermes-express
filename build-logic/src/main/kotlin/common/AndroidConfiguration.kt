@@ -11,6 +11,7 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
     setJvmTargetVersion(android)
     desugarJdkLibraries(android, libs)
     configureWithDetekt(libs)
+    excludeLicencesFromApk(android)
 }
 
 fun Project.desugarJdkLibraries(
@@ -37,5 +38,11 @@ fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>, libs: VersionCat
             minSdk = libs.getRequiredVersion("androidMinSdk").toInt()
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
+    }
+}
+
+private fun excludeLicencesFromApk(android: CommonExtension<*, *, *, *>) {
+    android.packagingOptions.resources {
+        excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
 }
