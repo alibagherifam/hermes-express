@@ -44,15 +44,15 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version =
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 
 # Others
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "1.2.2" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 detekt-composeRules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
 detekt-ktlintFormatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+google-playServices-location = { group = "com.google.android.gms", name = "play-services-location", version = "21.0.1" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.3" }
 mapbox = { group = "com.mapbox.maps", name = "android", version = "10.12.2" }
-google-playServices-location = { group = "com.google.android.gms", name = "play-services-location", version = "21.0.1" }
-android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "1.2.2" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }

@@ -27,7 +27,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "hermes-express"
 
-include(":biker-app")
+include(":app:biker")
 include(":core:common")
 include(":core:push-notification")
 include(":feature:delivery-offer")
