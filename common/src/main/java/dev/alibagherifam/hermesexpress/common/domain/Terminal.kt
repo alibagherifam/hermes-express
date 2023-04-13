@@ -1,5 +1,8 @@
 package dev.alibagherifam.hermesexpress.common.domain
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Terminal(
     val point: Point,
     val postalAddress: String

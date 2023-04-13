@@ -2,6 +2,7 @@ package dev.alibagherifam.hermesexpress.common.domain
 
 import java.time.Instant
 
+@kotlinx.serialization.Serializable
 data class Order(
     val id: Int,
     val terminals: List<Terminal>,
