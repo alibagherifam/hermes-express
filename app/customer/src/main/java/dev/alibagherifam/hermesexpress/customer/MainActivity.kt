@@ -12,13 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.alibagherifam.hermesexpress.common.theme.AppTheme
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
+            HermesTheme {
                 MainScreen()
             }
         }
@@ -41,7 +41,7 @@ fun MainScreen() {
 @Preview
 @Composable
 fun MainScreenPreview() {
-    AppTheme {
+    HermesTheme {
         MainScreen()
     }
 }

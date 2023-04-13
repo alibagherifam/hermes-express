@@ -81,7 +81,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(
+fun HermesTheme(
     isInDarkMode: Boolean = isSystemInDarkTheme(),
     allowDynamicColor: Boolean = false,
     content: @Composable () -> Unit

@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import dev.alibagherifam.hermesexpress.common.theme.AppTheme
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.map.MapView
 import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
 import kotlinx.coroutines.launch
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
             subscribeForDeliveryOfferMessages()
         }
         setContent {
-            AppTheme {
+            HermesTheme {
                 MainScreen()
             }
         }
@@ -66,7 +66,7 @@ fun MainScreen() {
 @Preview
 @Composable
 fun MainScreenPreview() {
-    AppTheme {
+    HermesTheme {
         MainScreen()
     }
 }

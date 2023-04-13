@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.theme.AppTheme
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
 
@@ -63,7 +63,7 @@ fun TerminalItem(
 @Preview(showBackground = true)
 @Composable
 fun TerminalListPreview() {
-    AppTheme {
+    HermesTheme {
         TerminalList(
             terminals = generateFakeTerminals(),
             onTerminalClick = {}

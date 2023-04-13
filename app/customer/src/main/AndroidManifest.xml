@@ -6,7 +6,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HermesExpress">
+        android:theme="@style/Theme.Hermes">
         <activity
             android:name=".MainActivity"
             android:exported="true">

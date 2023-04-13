@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import dev.alibagherifam.hermesexpress.common.theme.AppTheme
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
@@ -52,7 +52,7 @@ fun ProgressButton(
 @Preview
 @Composable
 fun ProgressButtonPreview() {
-    AppTheme {
+    HermesTheme {
         ProgressButton(
             progress = 0.3f,
             onClick = {}

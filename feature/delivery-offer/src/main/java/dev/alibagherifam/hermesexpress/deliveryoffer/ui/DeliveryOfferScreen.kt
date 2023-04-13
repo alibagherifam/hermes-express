@@ -18,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.theme.AppTheme
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
@@ -93,7 +93,7 @@ fun rememberExpirationPercentage(expireDuration: Duration): State<Float> {
 @Preview(showBackground = true)
 @Composable
 fun DeliveryOfferScreenPreview() {
-    AppTheme {
+    HermesTheme {
         DeliveryOfferScreen(
             offer = generateFakeDeliveryOffer(),
             onAcceptOfferClick = {}
