@@ -54,7 +54,7 @@ fun MainScreen() {
     val scaffoldState = rememberBottomSheetScaffoldState()
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
-        sheetPeekHeight = 160.dp,
+        sheetPeekHeight = 0.dp,
         sheetContent = {
             MainNavHost(scaffoldState)
         }
