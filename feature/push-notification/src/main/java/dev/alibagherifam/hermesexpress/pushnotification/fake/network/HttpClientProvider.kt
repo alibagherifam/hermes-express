@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.pushnotification.network
+package dev.alibagherifam.hermesexpress.pushnotification.fake.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi

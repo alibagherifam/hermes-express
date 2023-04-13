@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.pushnotification.network
+package dev.alibagherifam.hermesexpress.pushnotification.fake.network
 
 import okhttp3.Interceptor
 import okhttp3.Response

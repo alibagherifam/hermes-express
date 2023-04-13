@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.pushnotification.network
+package dev.alibagherifam.hermesexpress.pushnotification.fake.network
 
 object NetworkConstants {
     const val BASE_URL = ""
