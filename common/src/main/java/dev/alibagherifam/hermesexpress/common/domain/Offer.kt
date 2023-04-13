@@ -1,9 +1,11 @@
 package dev.alibagherifam.hermesexpress.common.domain
 
-import java.time.Instant
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.serialization.Serializable
 
-@kotlinx.serialization.Serializable
-data class Order(
+@Serializable
+data class Offer(
     val id: Int,
     val terminals: List<Terminal>,
     val price: Float,
@@ -20,14 +22,14 @@ data class Order(
     }
 }
 
-val Order.isExpired: Boolean get() = Instant.now() > expireAt
-val Order.origin: Terminal get() = terminals.first()
-val Order.designations: List<Terminal> get() = terminals.drop(1)
+val Offer.isExpired: Boolean get() = Clock.System.now() > expireAt
+val Offer.origin: Terminal get() = terminals.first()
+val Offer.designations: List<Terminal> get() = terminals.drop(1)
 
-fun generateFakeOrder() = Order(
+fun generateFakeOrder() = Offer(
     id = 1,
     generateFakeTerminals(),
     price = 24.80f,
-    createdAt = Instant.EPOCH,
-    expireAt = Instant.now()
+    createdAt = Instant.DISTANT_PAST,
+    expireAt = Clock.System.now()
 )

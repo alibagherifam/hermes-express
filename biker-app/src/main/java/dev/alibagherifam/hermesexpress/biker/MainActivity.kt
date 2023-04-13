@@ -15,8 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
 import dev.alibagherifam.hermesexpress.map.MapView
+import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private val requestLocationPermissionLauncher = registerForActivityResult(
@@ -33,6 +36,9 @@ class MainActivity : ComponentActivity() {
             .checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         if (locationPermissionStatus != PackageManager.PERMISSION_GRANTED) {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        lifecycleScope.launch {
+            subscribeForDeliveryOfferMessages()
         }
         setContent {
             AppTheme {

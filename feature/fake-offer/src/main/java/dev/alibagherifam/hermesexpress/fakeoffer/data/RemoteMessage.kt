@@ -3,7 +3,7 @@ package dev.alibagherifam.hermesexpress.fakeoffer.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FakeOrderOffer(
+data class RemoteMessage(
     val to: String,
-    val data: OrderDto
+    val data: Map<String, String>
 )

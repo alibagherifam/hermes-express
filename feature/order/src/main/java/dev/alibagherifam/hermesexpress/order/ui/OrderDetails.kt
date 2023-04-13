@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
-import dev.alibagherifam.hermesexpress.common.domain.Order
+import dev.alibagherifam.hermesexpress.common.domain.Offer
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeOrder
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ import kotlin.time.Duration
 
 @Composable
 fun OrderDetails(
-    order: Order,
+    offer: Offer,
     onAcceptOfferClick: () -> Unit
 ) {
     Column(
@@ -38,13 +38,13 @@ fun OrderDetails(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = formatCurrency(order.price),
+            text = formatCurrency(offer.price),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(Modifier.size(16.dp))
         TerminalList(
-            terminals = order.terminals,
+            terminals = offer.terminals,
             onTerminalClick = {})
         Spacer(Modifier.size(16.dp))
         AcceptOfferButton(
@@ -95,7 +95,7 @@ fun rememberExpirationPercentage(expireDuration: Duration): State<Float> {
 fun OrderDetailsPreview() {
     AppTheme {
         OrderDetails(
-            order = generateFakeOrder(),
+            offer = generateFakeOrder(),
             onAcceptOfferClick = {}
         )
     }

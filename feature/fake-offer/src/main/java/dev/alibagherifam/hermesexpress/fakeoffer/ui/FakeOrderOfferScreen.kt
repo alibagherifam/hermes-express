@@ -29,7 +29,7 @@ fun FakeOrderOfferScreen(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = viewModel::offerFakeOrderToBikers,
+            onClick = viewModel::broadcastFakeDeliveryOffer,
             enabled = !state.isOfferingInProgress
         ) {
             Text(text = stringResource(R.string.label_offer_order))

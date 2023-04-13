@@ -13,8 +13,7 @@ fun provideHttpClient(): Retrofit {
         .addInterceptor(ApiKeyInterceptor())
         .build()
 
-    val jsonConverter = Json { ignoreUnknownKeys = true }
-        .asConverterFactory("application/json".toMediaType())
+    val jsonConverter = Json.asConverterFactory("application/json".toMediaType())
 
     return Retrofit.Builder()
         .baseUrl(NetworkConstants.BASE_URL)
