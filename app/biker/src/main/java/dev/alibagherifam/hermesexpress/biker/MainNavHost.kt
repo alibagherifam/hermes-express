@@ -18,6 +18,11 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
     val offer by DeliveryOfferStore.offer.collectAsState()
+    LaunchedEffect(key1 = offer){
+        launch {
+            scaffoldState.bottomSheetState.expand()
+        }
+    }
     if (offer == null) {
         OfferingFakeDeliveryScreen()
     } else {
@@ -34,9 +39,6 @@ fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
                     context = context,
                     soundResId = R.raw.sfx_harp
                 )
-            }
-            launch {
-                scaffoldState.bottomSheetState.expand()
             }
         }
     }
