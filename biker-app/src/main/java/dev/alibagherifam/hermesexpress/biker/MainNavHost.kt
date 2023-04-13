@@ -11,7 +11,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import dev.alibagherifam.hermesexpress.order.domain.generateFakeOrder
 import dev.alibagherifam.hermesexpress.order.ui.OrderDetails
-import dev.alibagherifam.hermesexpress.pushnotification.fake.OfferOrder
+import dev.alibagherifam.hermesexpress.pushnotification.R
+import dev.alibagherifam.hermesexpress.fakeoffer.ui.FakeOrderOfferingScreen
 import dev.alibagherifam.hermesexpress.pushnotification.playNotificationSound
 import kotlinx.coroutines.launch
 
@@ -19,23 +20,23 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
     var currentScreen by remember { mutableStateOf(1) }
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+
     when (currentScreen) {
-        1 -> OfferOrder(
-            onOfferOrderClick = {
-                scope.launch {
-                    playNotificationSound(
-                        context = context,
-                        soundResId = dev.alibagherifam.hermesexpress.pushnotification.R.raw.sfx_harp
-                    )
-                }
-                scope.launch {
-                    scaffoldState.bottomSheetState.expand()
-                }
-                currentScreen = 2
+        /*
+            val scope = rememberCoroutineScope()
+            val context = LocalContext.current
+            scope.launch {
+                playNotificationSound(
+                    context = context,
+                    soundResId = R.raw.sfx_harp
+                )
             }
-        )
+            scope.launch {
+                scaffoldState.bottomSheetState.expand()
+            }
+            currentScreen = 2
+        */
+        1 -> FakeOrderOfferingScreen()
         2 -> OrderDetails(
             order = generateFakeOrder(),
             onAcceptOfferClick = { currentScreen = 1 }

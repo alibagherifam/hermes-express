@@ -32,4 +32,4 @@ include(":common")
 include(":feature:order")
 include(":feature:map")
 include(":feature:push-notification")
-
+include(":feature:fake-offer")
