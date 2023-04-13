@@ -15,11 +15,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
+    implementation(project(":core:common"))
+    implementation(project(":core:push-notification"))
     implementation(project(":feature:delivery-offer"))
     implementation(project(":feature:map"))
     implementation(project(":feature:offering-fake-delivery"))
-    implementation(project(":feature:push-notification"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)

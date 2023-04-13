@@ -16,7 +16,7 @@ class FeatureLibraryConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
-                add("implementation", project(":common"))
+                add("implementation", project(":core:common"))
                 implementation(libs, "androidx.activity")
                 implementation(libs, "androidx.appcompat")
                 implementation(libs, "androidx.core")

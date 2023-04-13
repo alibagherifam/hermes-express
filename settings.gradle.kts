@@ -28,8 +28,8 @@ dependencyResolutionManagement {
 rootProject.name = "hermes-express"
 
 include(":biker-app")
-include(":common")
+include(":core:common")
+include(":core:push-notification")
 include(":feature:delivery-offer")
 include(":feature:map")
 include(":feature:offering-fake-delivery")
-include(":feature:push-notification")
