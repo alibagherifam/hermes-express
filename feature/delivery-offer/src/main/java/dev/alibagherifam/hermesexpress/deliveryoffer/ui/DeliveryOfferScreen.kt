@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.order.ui
+package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
 import dev.alibagherifam.hermesexpress.common.domain.Offer
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
-import dev.alibagherifam.hermesexpress.common.domain.generateFakeOrder
+import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
 
 @Composable
-fun OrderDetails(
+fun DeliveryOfferScreen(
     offer: Offer,
     onAcceptOfferClick: () -> Unit
 ) {
@@ -92,10 +92,10 @@ fun rememberExpirationPercentage(expireDuration: Duration): State<Float> {
 
 @Preview(showBackground = true)
 @Composable
-fun OrderDetailsPreview() {
+fun DeliveryOfferScreenPreview() {
     AppTheme {
-        OrderDetails(
-            offer = generateFakeOrder(),
+        DeliveryOfferScreen(
+            offer = generateFakeDeliveryOffer(),
             onAcceptOfferClick = {}
         )
     }

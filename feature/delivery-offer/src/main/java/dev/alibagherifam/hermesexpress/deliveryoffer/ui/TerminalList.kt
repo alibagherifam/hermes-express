@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.order.ui
+package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="label_offer_order">Offer Order</string>
+    <string name="label_offer_fake_delivery">Offer Fake Delivery</string>
 </resources>

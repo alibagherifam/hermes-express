@@ -15,10 +15,10 @@ data class Offer(
     val expireAt: Instant,
 ) {
     init {
-        require(id > 0) { "Order ID should be a positive number" }
-        require(terminals.size > 1) { "Order should contains at least 2 terminals" }
-        require(price > 0f) { "Order Price should be a positive number" }
-        require(expireAt > createdAt) { "Order's expiration should be after its creation" }
+        require(id > 0) { "Offer ID should be a positive number" }
+        require(terminals.size > 1) { "Offer should contains at least 2 terminals" }
+        require(price > 0f) { "Offer Price should be a positive number" }
+        require(expireAt > createdAt) { "Offer's expiration should be after its creation" }
     }
 }
 
@@ -26,7 +26,7 @@ val Offer.isExpired: Boolean get() = Clock.System.now() > expireAt
 val Offer.origin: Terminal get() = terminals.first()
 val Offer.designations: List<Terminal> get() = terminals.drop(1)
 
-fun generateFakeOrder() = Offer(
+fun generateFakeDeliveryOffer() = Offer(
     id = 1,
     generateFakeTerminals(),
     price = 24.80f,

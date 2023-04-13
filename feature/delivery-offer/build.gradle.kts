@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.alibagherifam.hermesexpress.feature.order"
+    namespace = "dev.alibagherifam.hermesexpress.feature.deliveryoffer"
 }
 
 dependencies {

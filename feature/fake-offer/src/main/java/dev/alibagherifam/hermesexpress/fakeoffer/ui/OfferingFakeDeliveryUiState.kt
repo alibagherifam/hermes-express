@@ -1,5 +1,5 @@
 package dev.alibagherifam.hermesexpress.fakeoffer.ui
 
-data class FakeOrderOfferUiState(
+data class OfferingFakeDeliveryUiState(
     val isOfferingInProgress: Boolean = false
 )

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.Offer
-import dev.alibagherifam.hermesexpress.common.domain.generateFakeOrder
+import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.fakeoffer.data.CloudMessagingService
 import dev.alibagherifam.hermesexpress.fakeoffer.data.RemoteMessage
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,18 +15,18 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 
-class FakeOrderOfferViewModel(
+class OfferingFakeDeliveryViewModel(
     private val cloudMessagingService: CloudMessagingService
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(FakeOrderOfferUiState())
-    val uiState: StateFlow<FakeOrderOfferUiState> get() = _uiState
+    private val _uiState = MutableStateFlow(OfferingFakeDeliveryUiState())
+    val uiState: StateFlow<OfferingFakeDeliveryUiState> get() = _uiState
 
     fun broadcastFakeDeliveryOffer() {
         viewModelScope.launch {
             _uiState.update {
                 it.copy(isOfferingInProgress = true)
             }
-            sendDeliveryOfferMessage(generateFakeOrder())
+            sendDeliveryOfferMessage(generateFakeDeliveryOffer())
             _uiState.update {
                 it.copy(isOfferingInProgress = false)
             }
