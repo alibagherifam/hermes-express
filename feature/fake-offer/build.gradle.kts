@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.properties)
     implementation(libs.squareup.okhttp)
     implementation(libs.squareup.retrofit.converter)
     implementation(libs.squareup.retrofit.core)
