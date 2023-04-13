@@ -44,7 +44,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version =
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 
 # Others
-android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "1.2.2" }
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.0.3" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 detekt-composeRules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
