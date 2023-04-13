@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
-import dev.alibagherifam.hermesexpress.order.domain.Terminal
-import dev.alibagherifam.hermesexpress.order.domain.generateFakeTerminals
+import dev.alibagherifam.hermesexpress.common.domain.Terminal
+import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
 
 @Composable
 fun TerminalList(

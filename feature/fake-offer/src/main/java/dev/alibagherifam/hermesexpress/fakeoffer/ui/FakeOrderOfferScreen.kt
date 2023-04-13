@@ -18,7 +18,7 @@ import dev.alibagherifam.hermesexpress.fakeoffer.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun FakeOrderOfferingScreen(
+fun FakeOrderOfferScreen(
     viewModel: FakeOrderOfferViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -30,7 +30,7 @@ fun FakeOrderOfferingScreen(
     ) {
         Button(
             onClick = viewModel::offerFakeOrderToBikers,
-            enabled = state.isOfferingInProgress
+            enabled = !state.isOfferingInProgress
         ) {
             Text(text = stringResource(R.string.label_offer_order))
         }
@@ -39,9 +39,9 @@ fun FakeOrderOfferingScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun OfferOrderPreview() {
+fun FakeOrderOfferPreview() {
     AppTheme {
-        FakeOrderOfferingScreen(
+        FakeOrderOfferScreen(
             viewModel = koinViewModel()
         )
     }

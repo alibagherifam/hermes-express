@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.order.domain
+package dev.alibagherifam.hermesexpress.common.domain
 
 import java.time.Instant
 

@@ -19,9 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
-import dev.alibagherifam.hermesexpress.order.domain.Order
-import dev.alibagherifam.hermesexpress.order.domain.formatCurrency
-import dev.alibagherifam.hermesexpress.order.domain.generateFakeOrder
+import dev.alibagherifam.hermesexpress.common.domain.Order
+import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
+import dev.alibagherifam.hermesexpress.common.domain.generateFakeOrder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
