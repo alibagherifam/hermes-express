@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.fakeoffer.network
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.network
 
 import okhttp3.Interceptor
 import okhttp3.Response

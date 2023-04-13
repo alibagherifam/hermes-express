@@ -7,8 +7,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import dev.alibagherifam.hermesexpress.common.data.OfferStore
-import dev.alibagherifam.hermesexpress.fakeoffer.ui.OfferingFakeDeliveryScreen
+import dev.alibagherifam.hermesexpress.common.data.DeliveryOfferStore
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliveryScreen
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.DeliveryOfferScreen
 import dev.alibagherifam.hermesexpress.pushnotification.R
 import dev.alibagherifam.hermesexpress.pushnotification.playNotificationSound
@@ -17,14 +17,14 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
-    val offer by OfferStore.offer.collectAsState()
+    val offer by DeliveryOfferStore.offer.collectAsState()
     if (offer == null) {
         OfferingFakeDeliveryScreen()
     } else {
         DeliveryOfferScreen(
             requireNotNull(offer),
             onAcceptOfferClick = {
-                OfferStore.saveOffer(null)
+                DeliveryOfferStore.saveOffer(null)
             }
         )
         val context = LocalContext.current

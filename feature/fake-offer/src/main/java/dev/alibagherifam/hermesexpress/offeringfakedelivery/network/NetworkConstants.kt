@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.fakeoffer.network
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.network
 
 object NetworkConstants {
     const val BASE_URL = "https://fcm.googleapis.com/"

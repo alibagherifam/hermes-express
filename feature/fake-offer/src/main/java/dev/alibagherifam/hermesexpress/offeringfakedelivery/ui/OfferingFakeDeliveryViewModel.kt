@@ -1,12 +1,12 @@
-package dev.alibagherifam.hermesexpress.fakeoffer.ui
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.domain.Constants
-import dev.alibagherifam.hermesexpress.common.domain.Offer
+import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
-import dev.alibagherifam.hermesexpress.fakeoffer.data.CloudMessagingService
-import dev.alibagherifam.hermesexpress.fakeoffer.data.RemoteMessage
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.data.CloudMessagingService
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.data.RemoteMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -34,7 +34,7 @@ class OfferingFakeDeliveryViewModel(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun sendDeliveryOfferMessage(offer: Offer) {
+    suspend fun sendDeliveryOfferMessage(offer: DeliveryOffer) {
         val data = Properties.encodeToStringMap(offer)
         val receivers = "/topics/${Constants.TOPIC_DELIVERY_OFFER}"
         val message = RemoteMessage(to = receivers, data)

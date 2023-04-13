@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.alibagherifam.hermesexpress.fakeoffer"
+    namespace = "dev.alibagherifam.hermesexpress.offeringfakedelivery"
 }
 
 dependencies {

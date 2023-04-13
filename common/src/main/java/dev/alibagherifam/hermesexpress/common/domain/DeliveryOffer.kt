@@ -5,7 +5,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Offer(
+data class DeliveryOffer(
     val id: Int,
     val terminals: List<Terminal>,
     val price: Float,
@@ -22,11 +22,11 @@ data class Offer(
     }
 }
 
-val Offer.isExpired: Boolean get() = Clock.System.now() > expireAt
-val Offer.origin: Terminal get() = terminals.first()
-val Offer.designations: List<Terminal> get() = terminals.drop(1)
+val DeliveryOffer.isExpired: Boolean get() = Clock.System.now() > expireAt
+val DeliveryOffer.origin: Terminal get() = terminals.first()
+val DeliveryOffer.designations: List<Terminal> get() = terminals.drop(1)
 
-fun generateFakeDeliveryOffer() = Offer(
+fun generateFakeDeliveryOffer() = DeliveryOffer(
     id = 1,
     generateFakeTerminals(),
     price = 24.80f,

@@ -3,9 +3,9 @@ package dev.alibagherifam.hermesexpress.pushnotification
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import dev.alibagherifam.hermesexpress.common.data.OfferStore
+import dev.alibagherifam.hermesexpress.common.data.DeliveryOfferStore
 import dev.alibagherifam.hermesexpress.common.domain.Constants
-import dev.alibagherifam.hermesexpress.common.domain.Offer
+import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.properties.Properties
@@ -23,15 +23,15 @@ class FcmService : FirebaseMessagingService() {
             require(remoteMessage.data.isNotEmpty())
             val payload = remoteMessage.data
             Log.i(TAG, "Message data payload: $payload")
-            convertPayloadToOffer(payload)?.let { offer ->
-                OfferStore.saveOffer(offer)
+            convertPayloadToDeliveryOffer(payload)?.let { offer ->
+                DeliveryOfferStore.saveOffer(offer)
             }
         }
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    private fun convertPayloadToOffer(payload: Map<String, String>): Offer? = try {
-        Properties.decodeFromStringMap<Offer>(payload)
+    private fun convertPayloadToDeliveryOffer(payload: Map<String, String>): DeliveryOffer? = try {
+        Properties.decodeFromStringMap<DeliveryOffer>(payload)
     } catch (e: SerializationException) {
         Log.e(TAG, "Bad payload structure: ${e.message}")
         null

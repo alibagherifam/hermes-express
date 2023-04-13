@@ -17,8 +17,8 @@ android {
 dependencies {
     implementation(project(":common"))
     implementation(project(":feature:delivery-offer"))
-    implementation(project(":feature:fake-offer"))
     implementation(project(":feature:map"))
+    implementation(project(":feature:offering-fake-delivery"))
     implementation(project(":feature:push-notification"))
 
     implementation(libs.androidx.activity)

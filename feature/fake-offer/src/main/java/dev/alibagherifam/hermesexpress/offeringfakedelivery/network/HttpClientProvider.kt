@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.fakeoffer.network
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi

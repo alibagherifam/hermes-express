@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.fakeoffer.ui
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
-import dev.alibagherifam.hermesexpress.fakeoffer.R
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

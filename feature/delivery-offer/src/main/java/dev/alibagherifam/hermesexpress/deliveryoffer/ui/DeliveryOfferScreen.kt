@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.theme.AppTheme
-import dev.alibagherifam.hermesexpress.common.domain.Offer
+import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ import kotlin.time.Duration
 
 @Composable
 fun DeliveryOfferScreen(
-    offer: Offer,
+    offer: DeliveryOffer,
     onAcceptOfferClick: () -> Unit
 ) {
     Column(

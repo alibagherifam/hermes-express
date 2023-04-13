@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.fakeoffer.data
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.data
 
 import retrofit2.http.Body
 import retrofit2.http.POST
