@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.detekt.core) apply false
     alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.googleServices) apply false
 
     alias(libs.plugins.dependencyVersions)
     alias(libs.plugins.gradleDoctor)

@@ -1,6 +1,7 @@
 plugins {
     id("dev.alibagherifam.android.application")
     id("dev.alibagherifam.compose")
+    alias(libs.plugins.googleServices)
 }
 
 android {

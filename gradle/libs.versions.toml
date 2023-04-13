@@ -37,6 +37,10 @@ squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version = "
 squareup-retrofit-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "0.8.0" }
 squareup-retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.9.0" }
 
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "31.3.0" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
+
 # Others
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
@@ -61,4 +65,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version = "1.8.10-1.0.9" }
 dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
 detekt-core = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+googleServices = { id = "com.google.gms.google-services", version = "4.3.15" }
 gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }

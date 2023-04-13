@@ -20,4 +20,6 @@ dependencies {
     implementation(libs.squareup.okhttp)
     implementation(libs.squareup.retrofit.converter)
     implementation(libs.squareup.retrofit.core)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
 }
