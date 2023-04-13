@@ -14,6 +14,17 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
     excludeLicencesFromApk(android)
 }
 
+fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>, libs: VersionCatalog) {
+    android.apply {
+        compileSdk = libs.getRequiredVersion("androidCompileSdk").toInt()
+        buildToolsVersion = libs.getRequiredVersion("androidBuildTools")
+        defaultConfig {
+            minSdk = libs.getRequiredVersion("androidMinSdk").toInt()
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+    }
+}
+
 fun Project.desugarJdkLibraries(
     android: CommonExtension<*, *, *, *>,
     libs: VersionCatalog
@@ -30,19 +41,8 @@ fun Project.desugarJdkLibraries(
     }
 }
 
-fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>, libs: VersionCatalog) {
-    android.apply {
-        compileSdk = libs.getRequiredVersion("androidCompileSdk").toInt()
-        buildToolsVersion = libs.getRequiredVersion("androidBuildTools")
-        defaultConfig {
-            minSdk = libs.getRequiredVersion("androidMinSdk").toInt()
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
-    }
-}
-
 private fun excludeLicencesFromApk(android: CommonExtension<*, *, *, *>) {
-    android.packagingOptions.resources {
+    android.packaging.resources {
         excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
 }
