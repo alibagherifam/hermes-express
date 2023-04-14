@@ -16,7 +16,7 @@ data class DeliveryOffer(
     val timeToLive: Duration,
 ) {
     @Transient
-    val createdAt: Instant = Clock.System.now()
+    val receivedAt: Instant = Clock.System.now()
 
     init {
         require(id > 0) { "Negative ID is not allowed" }
@@ -25,7 +25,7 @@ data class DeliveryOffer(
     }
 }
 
-val DeliveryOffer.isExpired: Boolean get() = Clock.System.now() > createdAt + timeToLive
+val DeliveryOffer.isExpired: Boolean get() = Clock.System.now() > receivedAt + timeToLive
 val DeliveryOffer.origin: Terminal get() = terminals.first()
 val DeliveryOffer.destinations: List<Terminal> get() = terminals.drop(1)
 

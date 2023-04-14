@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import dev.alibagherifam.hermesexpress.common.data.DeliveryOfferStore
+import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.DeliveryOfferScreen
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliveryScreen
 import dev.alibagherifam.hermesexpress.pushnotification.R
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
-    val offer by DeliveryOfferStore.offer.collectAsState()
+    val repository: DeliveryOfferRepository = DeliveryOfferStore
+    val offer by repository.offer.collectAsState()
     LaunchedEffect(key1 = offer) {
         launch {
             scaffoldState.bottomSheetState.expand()
@@ -29,7 +31,7 @@ fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
         DeliveryOfferScreen(
             requireNotNull(offer),
             onAcceptOfferClick = {
-                DeliveryOfferStore.saveOffer(null)
+                repository.clearSavedOffer()
             }
         )
         val context = LocalContext.current
