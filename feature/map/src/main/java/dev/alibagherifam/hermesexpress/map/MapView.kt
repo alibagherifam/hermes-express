@@ -9,8 +9,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
+import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
+import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.Style
+import com.mapbox.maps.plugin.annotation.annotations
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions
+import com.mapbox.maps.plugin.annotation.generated.createCircleAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
 import kotlinx.coroutines.channels.awaitClose
@@ -23,6 +29,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MapView(
+    mapState: MapState,
     modifier: Modifier = Modifier
 ) {
     val scope = rememberCoroutineScope()
@@ -39,23 +46,28 @@ fun MapView(
                     enabled = true
                 }
                 scope.launch {
-                    zoomOnCurrentLocation()
+                    mapState.userCoordinate.value = locationFlow().first()
                 }
             }
         },
         update = { mapView ->
+            val cameraController = mapView.getMapboxMap()
+            val markerCoordinates = mapState.markerCoordinates.value
+            val userCoordinate = mapState.userCoordinate.value ?: return@AndroidView
 
+            if (markerCoordinates.isEmpty()) {
+                cameraController.zoomCameraOnCoordinate(userCoordinate)
+            } else {
+                mapView.annotations
+                    .createCircleAnnotationManager()
+                    .addMarkers(markerCoordinates)
+
+                cameraController.fitCameraForCoordinates(
+                    coordinates = markerCoordinates + userCoordinate
+                )
+            }
         }
     )
-}
-
-suspend fun MapView.zoomOnCurrentLocation(zoomLevel: Double = 14.0) {
-    val currentLocation = locationFlow().first()
-    val cameraOptions = CameraOptions.Builder()
-        .center(currentLocation)
-        .zoom(zoomLevel)
-        .build()
-    getMapboxMap().setCamera(cameraOptions)
 }
 
 fun MapView.locationFlow(): Flow<Point> = callbackFlow {
@@ -65,3 +77,33 @@ fun MapView.locationFlow(): Flow<Point> = callbackFlow {
     location.addOnIndicatorPositionChangedListener(positionChangedListener)
     awaitClose { location.removeOnIndicatorPositionChangedListener(positionChangedListener) }
 }.conflate()
+
+fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
+    val markerOptions = CircleAnnotationOptions()
+        .withCircleRadius(circleRadius = 8.0)
+        .withCircleColor(circleColor = "#EE4E8b")
+        .withCircleStrokeWidth(circleStrokeWidth = 2.0)
+        .withCircleStrokeColor(circleStrokeColor = "#FFFFFF")
+
+    for (point in coordinates) {
+        markerOptions.withPoint(point)
+        create(markerOptions)
+    }
+}
+
+fun MapboxMap.zoomCameraOnCoordinate(
+    coordinate: Point,
+    zoomLevel: Double = 14.0
+) {
+    val cameraOptions = CameraOptions.Builder()
+        .center(coordinate)
+        .zoom(zoomLevel)
+        .build()
+    setCamera(cameraOptions)
+}
+
+fun MapboxMap.fitCameraForCoordinates(coordinates: List<Point>) {
+    val viewportPadding = EdgeInsets(100.0, 100.0, 300.0, 100.0)
+    val fittedCamera = cameraForCoordinates(coordinates, viewportPadding)
+    setCamera(fittedCamera)
+}

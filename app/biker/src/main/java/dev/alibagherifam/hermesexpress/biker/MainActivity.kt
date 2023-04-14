@@ -11,12 +11,14 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
+import dev.alibagherifam.hermesexpress.map.MapState
 import dev.alibagherifam.hermesexpress.map.MapView
 import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
 import kotlinx.coroutines.launch
@@ -52,14 +54,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val scaffoldState = rememberBottomSheetScaffoldState()
+    val mapState = remember { MapState() }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetPeekHeight = 0.dp,
         sheetContent = {
-            MainNavHost(scaffoldState)
+            MainNavHost(mapState, scaffoldState)
         }
     ) {
-        MapView(Modifier.fillMaxSize())
+        MapView(mapState, Modifier.fillMaxSize())
     }
 }
 

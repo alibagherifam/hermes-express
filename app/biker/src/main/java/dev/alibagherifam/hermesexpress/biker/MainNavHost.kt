@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import dev.alibagherifam.hermesexpress.common.data.DeliveryOfferStore
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.DeliveryOfferScreen
+import dev.alibagherifam.hermesexpress.map.MapState
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliveryScreen
 import dev.alibagherifam.hermesexpress.pushnotification.R
 import dev.alibagherifam.hermesexpress.pushnotification.playNotificationSound
@@ -17,7 +18,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
+fun MainNavHost(
+    mapState: MapState,
+    scaffoldState: BottomSheetScaffoldState,
+) {
     val repository: DeliveryOfferRepository = DeliveryOfferStore
     val offer by repository.offer.collectAsState()
     LaunchedEffect(key1 = offer) {
@@ -28,8 +32,12 @@ fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
     if (offer == null) {
         OfferingFakeDeliveryScreen()
     } else {
+        val safeOffer = requireNotNull(offer)
+        mapState.updateMarkerCoordinates(
+            safeOffer.terminals.map { Pair(it.latitude, it.longitude) }
+        )
         DeliveryOfferScreen(
-            requireNotNull(offer),
+            safeOffer,
             onAcceptOfferClick = {
                 repository.clearSavedOffer()
             }
