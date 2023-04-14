@@ -12,9 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 
 @Composable
 fun TerminalList(

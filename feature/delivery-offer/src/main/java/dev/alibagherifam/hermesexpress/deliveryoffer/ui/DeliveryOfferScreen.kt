@@ -18,10 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
+import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
@@ -29,10 +29,11 @@ import kotlin.time.Duration
 @Composable
 fun DeliveryOfferScreen(
     offer: DeliveryOffer,
-    onAcceptOfferClick: () -> Unit
+    onAcceptOfferClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        Modifier
+        modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -45,7 +46,10 @@ fun DeliveryOfferScreen(
         Spacer(Modifier.size(16.dp))
         TerminalList(
             terminals = offer.terminals,
-            onTerminalClick = {})
+            onTerminalClick = {
+                TODO()
+            }
+        )
         Spacer(Modifier.size(16.dp))
         AcceptOfferButton(
             onClick = onAcceptOfferClick,

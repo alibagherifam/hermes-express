@@ -8,8 +8,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import dev.alibagherifam.hermesexpress.common.data.DeliveryOfferStore
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliveryScreen
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.DeliveryOfferScreen
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliveryScreen
 import dev.alibagherifam.hermesexpress.pushnotification.R
 import dev.alibagherifam.hermesexpress.pushnotification.playNotificationSound
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainNavHost(scaffoldState: BottomSheetScaffoldState) {
     val offer by DeliveryOfferStore.offer.collectAsState()
-    LaunchedEffect(key1 = offer){
+    LaunchedEffect(key1 = offer) {
         launch {
             scaffoldState.bottomSheetState.expand()
         }

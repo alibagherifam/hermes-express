@@ -19,11 +19,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OfferingFakeDeliveryScreen(
+    modifier: Modifier = Modifier,
     viewModel: OfferingFakeDeliveryViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
     Box(
-        Modifier
+        modifier
             .fillMaxWidth()
             .padding(16.dp),
         contentAlignment = Alignment.Center
