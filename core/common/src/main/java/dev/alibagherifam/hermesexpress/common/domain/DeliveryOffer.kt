@@ -3,6 +3,8 @@ package dev.alibagherifam.hermesexpress.common.domain
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+import kotlin.time.Duration
 
 @Serializable
 data class DeliveryOffer(
@@ -11,25 +13,25 @@ data class DeliveryOffer(
     val price: Float,
     val isBoxRequired: Boolean = true,
     val reverseLogistics: Boolean = false,
-    val createdAt: Instant,
-    val expireAt: Instant,
+    val timeToLive: Duration,
 ) {
+    @Transient
+    val createdAt: Instant = Clock.System.now()
+
     init {
-        require(id > 0) { "Offer ID should be a positive number" }
-        require(terminals.size > 1) { "Offer should contains at least 2 terminals" }
-        require(price > 0f) { "Offer Price should be a positive number" }
-        require(expireAt > createdAt) { "Offer's expiration should be after its creation" }
+        require(id > 0) { "Negative ID is not allowed" }
+        require(terminals.size > 1) { "At least 2 terminals needed" }
+        require(price > 0f) { "Negative Price is not allowed" }
     }
 }
 
-val DeliveryOffer.isExpired: Boolean get() = Clock.System.now() > expireAt
+val DeliveryOffer.isExpired: Boolean get() = Clock.System.now() > createdAt + timeToLive
 val DeliveryOffer.origin: Terminal get() = terminals.first()
-val DeliveryOffer.designations: List<Terminal> get() = terminals.drop(1)
+val DeliveryOffer.destinations: List<Terminal> get() = terminals.drop(1)
 
 fun generateFakeDeliveryOffer() = DeliveryOffer(
     id = 1,
-    generateFakeTerminals(),
+    terminals = generateFakeTerminals(),
     price = 24.80f,
-    createdAt = Instant.DISTANT_PAST,
-    expireAt = Clock.System.now()
+    timeToLive = with(Duration) { 10.seconds }
 )
