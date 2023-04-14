@@ -30,17 +30,21 @@ fun MapView(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 300.dp),
-        factory = { context -> MapView(context) },
+        factory = { context ->
+            MapView(context).apply {
+                getMapboxMap().apply {
+                    loadStyleUri(Style.MAPBOX_STREETS)
+                }
+                location.updateSettings {
+                    enabled = true
+                }
+                scope.launch {
+                    zoomOnCurrentLocation()
+                }
+            }
+        },
         update = { mapView ->
-            mapView.getMapboxMap().apply {
-                loadStyleUri(Style.MAPBOX_STREETS)
-            }
-            mapView.location.updateSettings {
-                enabled = true
-            }
-            scope.launch {
-                mapView.zoomOnCurrentLocation()
-            }
+
         }
     )
 }
