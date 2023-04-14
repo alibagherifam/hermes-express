@@ -17,13 +17,13 @@ data class Terminal(
 
 fun generateFakeTerminals() = listOf(
     Terminal(
-        latitude = 60.239,
-        longitude = 25.004,
+        latitude = 35.958,
+        longitude = 50.681,
         postalAddress = "Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584"
     ),
     Terminal(
-        latitude = 55.004,
-        longitude = 39.239,
+        latitude = 35.941,
+        longitude = 50.725,
         postalAddress = "Miranda McAnderson, 6543 N 9th Street, AA 33608-1234"
     )
 )
