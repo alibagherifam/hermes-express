@@ -12,13 +12,13 @@ import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
 import com.mapbox.maps.MapboxMap
-import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createCircleAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
+import dev.alibagherifam.hermesexpress.feature.map.R
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
@@ -39,9 +39,9 @@ fun MapView(
             .heightIn(min = 300.dp),
         factory = { context ->
             MapView(context).apply {
-                getMapboxMap().apply {
-                    loadStyleUri(Style.MAPBOX_STREETS)
-                }
+                getMapboxMap().loadStyleUri(
+                    styleUri = context.getString(R.string.mapbox_style_uri)
+                )
                 location.updateSettings {
                     enabled = true
                 }
