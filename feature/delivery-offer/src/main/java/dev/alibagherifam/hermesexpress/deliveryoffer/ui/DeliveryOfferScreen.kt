@@ -9,21 +9,16 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
-import kotlinx.coroutines.delay
-import kotlin.time.Duration
+import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
 fun DeliveryOfferScreen(
@@ -50,48 +45,15 @@ fun DeliveryOfferScreen(
             onTerminalClick
         )
         Spacer(Modifier.size(16.dp))
-        AcceptOfferButton(
+        ProgressButton(
             onClick = onAcceptOfferClick,
+            progress = uiState.offerTimeElapsedPercentage,
             Modifier.widthIn(min = 240.dp),
             isEnabled = !uiState.isAcceptingOfferInProgress
-        )
-    }
-}
-
-@Composable
-fun AcceptOfferButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    isEnabled: Boolean = true
-) {
-    val expirationPercentage by rememberExpirationPercentage(
-        expireDuration = with(Duration) { 20.seconds }
-    )
-    ProgressButton(
-        onClick,
-        progress = expirationPercentage,
-        modifier,
-        isEnabled
-    ) {
-        Text(text = "Accept Offer")
-    }
-}
-
-@Composable
-fun rememberExpirationPercentage(expireDuration: Duration): State<Float> {
-    val percentage = remember {
-        mutableStateOf(0f)
-    }
-    LaunchedEffect(key1 = true) {
-        var elapsedTime = Duration.ZERO
-        val diff = with(Duration) { 50.milliseconds }
-        while (elapsedTime < expireDuration) {
-            elapsedTime += diff
-            percentage.value = (elapsedTime / expireDuration).toFloat()
-            delay(diff)
+        ) {
+            Text(text = stringResource(R.string.label_accept_delivery_offer))
         }
     }
-    return percentage
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFF)

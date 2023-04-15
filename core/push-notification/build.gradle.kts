@@ -1,5 +1,3 @@
-import common.implementation
-
 plugins {
     id("dev.alibagherifam.android.library")
     alias(libs.plugins.kotlin.serialization)

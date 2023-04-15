@@ -43,6 +43,9 @@ fun MainNavHost(
                 userMessage = DeliveryofferR.string.message_offer_accepted
                 navController.navigateToOfferingFakeDelivery()
             },
+            onOfferExpired = {
+                navController.navigateToOfferingFakeDelivery()
+            },
             onTerminalClick = {
                 TODO()
             }

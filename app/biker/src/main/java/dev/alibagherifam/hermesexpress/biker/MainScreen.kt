@@ -30,7 +30,7 @@ fun MainScreen() {
     ) {
         val mapState = remember { MapState() }
         val repository: DeliveryOfferRepository = koinInject()
-        val offer by repository.offer.collectAsState()
+        val offer by repository.getOfferFlow().collectAsState()
         if (offer == null) {
             mapState.clearMarkers()
         } else {

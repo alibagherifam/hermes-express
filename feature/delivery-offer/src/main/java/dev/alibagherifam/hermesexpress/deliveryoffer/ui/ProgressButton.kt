@@ -15,10 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
-import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
 fun ProgressButton(
@@ -56,10 +54,10 @@ fun ProgressButton(
 fun ProgressButtonPreview() {
     HermesTheme {
         ProgressButton(
-            progress = 0.3f,
+            progress = 0.4f,
             onClick = {}
         ) {
-            Text(text = stringResource(R.string.label_accept_delivery_offer))
+            Text("Progress Button")
         }
     }
 }
