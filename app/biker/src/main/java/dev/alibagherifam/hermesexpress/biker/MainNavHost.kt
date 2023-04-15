@@ -22,9 +22,7 @@ fun MainNavHost(
     onAcceptOfferClick: () -> Unit,
 ) {
     LaunchedEffect(key1 = offer) {
-        launch {
-            scaffoldState.bottomSheetState.expand()
-        }
+        scaffoldState.bottomSheetState.expand()
     }
     if (offer == null) {
         OfferingFakeDeliveryScreen()
@@ -41,12 +39,10 @@ fun MainNavHost(
         )
         val context = LocalContext.current
         LaunchedEffect(key1 = Unit) {
-            launch {
-                playNotificationSound(
-                    context = context,
-                    soundResId = R.raw.sfx_harp
-                )
-            }
+            playNotificationSound(
+                context = context,
+                soundResId = R.raw.sfx_harp
+            )
         }
     }
 }

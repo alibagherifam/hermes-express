@@ -24,7 +24,6 @@ import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlin.time.Duration
 
 @Composable
@@ -83,12 +82,10 @@ fun rememberExpirationPercentage(expireDuration: Duration): State<Float> {
     LaunchedEffect(key1 = true) {
         var elapsedTime = Duration.ZERO
         val diff = with(Duration) { 50.milliseconds }
-        launch {
-            while (elapsedTime < expireDuration) {
-                elapsedTime += diff
-                percentage.value = (elapsedTime / expireDuration).toFloat()
-                delay(diff)
-            }
+        while (elapsedTime < expireDuration) {
+            elapsedTime += diff
+            percentage.value = (elapsedTime / expireDuration).toFloat()
+            delay(diff)
         }
     }
     return percentage
