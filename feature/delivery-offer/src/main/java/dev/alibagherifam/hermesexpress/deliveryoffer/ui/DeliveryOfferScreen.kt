@@ -91,7 +91,7 @@ fun rememberExpirationPercentage(expireDuration: Duration): State<Float> {
     return percentage
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFFFFFF)
 @Composable
 fun DeliveryOfferScreenPreview() {
     HermesTheme {

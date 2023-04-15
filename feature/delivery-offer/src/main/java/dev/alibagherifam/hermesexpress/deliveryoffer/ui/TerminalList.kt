@@ -60,7 +60,7 @@ fun TerminalItem(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFFFFFF)
 @Composable
 fun TerminalListPreview() {
     HermesTheme {
