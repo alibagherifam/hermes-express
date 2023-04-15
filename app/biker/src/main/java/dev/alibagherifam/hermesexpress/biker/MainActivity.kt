@@ -11,6 +11,7 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -57,6 +58,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val scaffoldState = rememberBottomSheetScaffoldState()
+    LaunchedEffect(key1 = Unit) {
+        scaffoldState.bottomSheetState.expand()
+    }
     val mapState = remember { MapState() }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -67,7 +71,6 @@ fun MainScreen() {
             MainNavHost(
                 offer,
                 mapState,
-                scaffoldState,
                 onAcceptOfferClick = {
                     repository.clearSavedOffer()
                 }
