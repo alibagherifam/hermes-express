@@ -15,9 +15,10 @@ fun MainNavHost(
     offer: DeliveryOffer?,
     mapState: MapState,
     onAcceptOfferClick: () -> Unit,
+    onFakeOfferSent: () -> Unit
 ) {
     if (offer == null) {
-        OfferingFakeDeliveryScreen()
+        OfferingFakeDeliveryScreen(onFakeOfferSent)
     } else {
         mapState.updateMarkerCoordinates(
             offer.terminals.map { Pair(it.latitude, it.longitude) }

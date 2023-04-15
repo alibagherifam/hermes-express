@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hermes Express Biker</string>
+    <string name="message_fake_offer_sent">We send you a fake offer. Please wait to receive it.</string>
 </resources>

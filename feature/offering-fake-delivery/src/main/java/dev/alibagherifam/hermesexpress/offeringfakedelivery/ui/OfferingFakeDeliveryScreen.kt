@@ -19,6 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OfferingFakeDeliveryScreen(
+    onFakeOfferSent: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: OfferingFakeDeliveryViewModel = koinViewModel()
 ) {
@@ -30,7 +31,10 @@ fun OfferingFakeDeliveryScreen(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = viewModel::broadcastFakeDeliveryOffer,
+            onClick = {
+                viewModel.broadcastFakeDeliveryOffer()
+                onFakeOfferSent()
+            },
             enabled = !state.isOfferingInProgress
         ) {
             Text(text = stringResource(R.string.label_offer_fake_delivery))
@@ -43,7 +47,7 @@ fun OfferingFakeDeliveryScreen(
 fun OfferingFakeDeliveryScreenPreview() {
     HermesTheme {
         OfferingFakeDeliveryScreen(
-            viewModel = koinViewModel()
+            onFakeOfferSent = {}
         )
     }
 }

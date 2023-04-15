@@ -15,7 +15,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -61,6 +63,7 @@ fun MainScreen() {
     LaunchedEffect(key1 = Unit) {
         scaffoldState.bottomSheetState.expand()
     }
+    val scope = rememberCoroutineScope()
     val mapState = remember { MapState() }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -68,11 +71,19 @@ fun MainScreen() {
         sheetContent = {
             val repository: DeliveryOfferRepository = koinInject()
             val offer by repository.offer.collectAsState()
+            val context = LocalContext.current
             MainNavHost(
                 offer,
                 mapState,
                 onAcceptOfferClick = {
                     repository.clearSavedOffer()
+                },
+                onFakeOfferSent = {
+                    scope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            message = context.getString(R.string.message_fake_offer_sent)
+                        )
+                    }
                 }
             )
         }
