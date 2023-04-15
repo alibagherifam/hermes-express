@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -15,9 +17,12 @@ class DeliveryOfferViewModel(
     val uiState: StateFlow<DeliveryOfferUiState> get() = _uiState
 
     init {
-        _uiState.update {
-            it.copy(offer = repository.offer.value)
-        }
+        repository.offer
+            .onEach {
+                _uiState.update {
+                    it.copy(offer = repository.offer.value)
+                }
+            }.launchIn(viewModelScope)
     }
 
     fun acceptOffer() {
@@ -33,5 +38,9 @@ class DeliveryOfferViewModel(
                 )
             }
         }
+    }
+
+    fun consumeAcceptedOffer() {
+        _uiState.update { it.copy(isOfferAccepted = false) }
     }
 }

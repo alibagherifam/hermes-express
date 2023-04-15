@@ -8,15 +8,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import dev.alibagherifam.hermesexpress.deliveryoffer.ui.DeliveryOfferDestination
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliveryDestination
-import dev.alibagherifam.hermesexpress.pushnotification.playNotificationSound
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.addDeliveryOfferDestination
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.navigateToDeliveryOffer
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.addOfferingFakeDeliveryDestination
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.navigateToOfferingFakeDelivery
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R as DeliveryofferR
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.R as OfferingfakeDeliveryR
-import dev.alibagherifam.hermesexpress.pushnotification.R as PushnotificationR
 
 @Composable
-fun MainNavHost(snackbarHostState: SnackbarHostState) {
+fun MainNavHost(
+    snackbarHostState: SnackbarHostState,
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = "offering-fake-delivery"
+) {
     var userMessage: Int? by remember { mutableStateOf(null) }
     val context = LocalContext.current
     LaunchedEffect(key1 = userMessage) {
@@ -24,33 +31,21 @@ fun MainNavHost(snackbarHostState: SnackbarHostState) {
             snackbarHostState.showSnackbar(context.getString(it))
         }
     }
-    var backStack by remember { mutableStateOf(1) }
-    when (backStack) {
-        1 -> {
-            OfferingFakeDeliveryDestination(
-                onFakeOfferSent = {
-                    backStack = 2
-                    userMessage = OfferingfakeDeliveryR.string.message_fake_offer_sent
-                }
-            )
-        }
-        2 -> {
-            DeliveryOfferDestination(
-                onOfferAccepted = {
-                    backStack = 1
-                    userMessage = DeliveryofferR.string.message_offer_accepted
-                },
-                onTerminalClick = {
-                    TODO()
-                }
-            )
-            LaunchedEffect(key1 = Unit) {
-                playNotificationSound(
-                    context = context,
-                    soundResId = PushnotificationR.raw.sfx_harp
-                )
+    NavHost(navController, startDestination) {
+        addOfferingFakeDeliveryDestination(
+            onFakeOfferSent = {
+                userMessage = OfferingfakeDeliveryR.string.message_fake_offer_sent
+                navController.navigateToDeliveryOffer()
             }
-        }
-        else -> error("Unknown destination")
+        )
+        addDeliveryOfferDestination(
+            onOfferAccepted = {
+                userMessage = DeliveryofferR.string.message_offer_accepted
+                navController.navigateToOfferingFakeDelivery()
+            },
+            onTerminalClick = {
+                TODO()
+            }
+        )
     }
 }

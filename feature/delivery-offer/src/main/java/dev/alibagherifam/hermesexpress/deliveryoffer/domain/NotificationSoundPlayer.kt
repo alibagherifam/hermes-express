@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.pushnotification
+package dev.alibagherifam.hermesexpress.deliveryoffer.domain
 
 import android.content.Context
 import android.media.MediaPlayer

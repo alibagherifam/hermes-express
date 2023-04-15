@@ -43,4 +43,8 @@ class OfferingFakeDeliveryViewModel(
         val message = RemoteMessage(to = receivers, data)
         cloudMessagingService.sendMessage(message)
     }
+
+    fun consumeFakeOffer() {
+        _uiState.update { it.copy(isFakeOfferSent = false) }
+    }
 }
