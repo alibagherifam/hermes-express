@@ -7,7 +7,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import dev.alibagherifam.hermesexpress.common.data.DeliveryOfferStore
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.DeliveryOfferScreen
 import dev.alibagherifam.hermesexpress.map.MapState
@@ -15,6 +14,7 @@ import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDeliv
 import dev.alibagherifam.hermesexpress.pushnotification.R
 import dev.alibagherifam.hermesexpress.pushnotification.playNotificationSound
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,7 +22,7 @@ fun MainNavHost(
     mapState: MapState,
     scaffoldState: BottomSheetScaffoldState,
 ) {
-    val repository: DeliveryOfferRepository = DeliveryOfferStore
+    val repository: DeliveryOfferRepository = koinInject()
     val offer by repository.offer.collectAsState()
     LaunchedEffect(key1 = offer) {
         launch {

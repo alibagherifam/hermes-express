@@ -26,4 +26,5 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.navigation)
     implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 }
