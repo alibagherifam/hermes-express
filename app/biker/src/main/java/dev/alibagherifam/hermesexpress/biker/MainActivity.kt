@@ -14,8 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -28,6 +29,8 @@ import dev.alibagherifam.hermesexpress.map.MapView
 import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
+import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R as DeliveryofferR
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.R as FakeDeliveryR
 
 class MainActivity : ComponentActivity() {
     private val requestLocationPermissionLauncher = registerForActivityResult(
@@ -63,7 +66,13 @@ fun MainScreen() {
     LaunchedEffect(key1 = Unit) {
         scaffoldState.bottomSheetState.expand()
     }
-    val scope = rememberCoroutineScope()
+    var userMessage: Int? by remember { mutableStateOf(null) }
+    val context = LocalContext.current
+    LaunchedEffect(key1 = userMessage) {
+        userMessage?.let {
+            scaffoldState.snackbarHostState.showSnackbar(context.getString(it))
+        }
+    }
     val mapState = remember { MapState() }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -71,19 +80,15 @@ fun MainScreen() {
         sheetContent = {
             val repository: DeliveryOfferRepository = koinInject()
             val offer by repository.offer.collectAsState()
-            val context = LocalContext.current
             MainNavHost(
                 offer,
                 mapState,
                 onAcceptOfferClick = {
                     repository.clearSavedOffer()
+                    userMessage = DeliveryofferR.string.message_offer_accepted
                 },
                 onFakeOfferSent = {
-                    scope.launch {
-                        scaffoldState.snackbarHostState.showSnackbar(
-                            message = context.getString(R.string.message_fake_offer_sent)
-                        )
-                    }
+                    userMessage = FakeDeliveryR.string.message_fake_offer_sent
                 }
             )
         }
