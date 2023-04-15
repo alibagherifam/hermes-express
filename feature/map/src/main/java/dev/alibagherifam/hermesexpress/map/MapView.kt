@@ -103,7 +103,7 @@ fun MapboxMap.zoomCameraOnCoordinate(
 }
 
 fun MapboxMap.fitCameraForCoordinates(coordinates: List<Point>) {
-    val viewportPadding = EdgeInsets(100.0, 100.0, 300.0, 100.0)
-    val fittedCamera = cameraForCoordinates(coordinates, viewportPadding)
-    setCamera(fittedCamera)
+    val viewportPadding = EdgeInsets(100.0, 100.0, 500.0, 100.0)
+    val fittedViewPort = cameraForCoordinates(coordinates, viewportPadding)
+    setCamera(fittedViewPort)
 }
