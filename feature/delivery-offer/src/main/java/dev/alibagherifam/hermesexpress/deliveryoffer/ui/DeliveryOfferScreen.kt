@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
+import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
@@ -30,6 +31,7 @@ import kotlin.time.Duration
 fun DeliveryOfferScreen(
     offer: DeliveryOffer,
     onAcceptOfferClick: () -> Unit,
+    onTerminalClick: (Terminal) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -46,9 +48,7 @@ fun DeliveryOfferScreen(
         Spacer(Modifier.size(16.dp))
         TerminalList(
             terminals = offer.terminals,
-            onTerminalClick = {
-                TODO()
-            }
+            onTerminalClick
         )
         Spacer(Modifier.size(16.dp))
         AcceptOfferButton(
@@ -100,7 +100,8 @@ fun DeliveryOfferScreenPreview() {
     HermesTheme {
         DeliveryOfferScreen(
             offer = generateFakeDeliveryOffer(),
-            onAcceptOfferClick = {}
+            onAcceptOfferClick = {},
+            onTerminalClick = {}
         )
     }
 }

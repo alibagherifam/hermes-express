@@ -40,6 +40,9 @@ fun MainNavHost(
             safeOffer,
             onAcceptOfferClick = {
                 repository.clearSavedOffer()
+            },
+            onTerminalClick = {
+
             }
         )
         val context = LocalContext.current
