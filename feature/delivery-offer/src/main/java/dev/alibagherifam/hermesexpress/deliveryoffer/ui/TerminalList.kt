@@ -1,10 +1,15 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +35,12 @@ fun TerminalList(
                 onTerminalClick
             )
             if (index != terminals.lastIndex) {
-                Spacer(Modifier.size(16.dp))
+                Divider(
+                    Modifier.padding(
+                        horizontal = 28.dp,
+                        vertical = 20.dp
+                    )
+                )
             }
         }
     }
@@ -47,12 +57,22 @@ fun TerminalItem(
         modifier.clickable { onClick(terminal) },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = if (number == 0) "Origin:" else "Dest $number:",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.secondary
-        )
-        Spacer(Modifier.size(8.dp))
+        Box(
+            modifier = Modifier
+                .size(width = 20.dp, height = 20.dp)
+                .background(
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    shape = RoundedCornerShape(8.dp)
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = (number + 1).toString(),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onError
+            )
+        }
+        Spacer(Modifier.size(12.dp))
         Text(
             text = terminal.postalAddress,
             style = MaterialTheme.typography.bodySmall

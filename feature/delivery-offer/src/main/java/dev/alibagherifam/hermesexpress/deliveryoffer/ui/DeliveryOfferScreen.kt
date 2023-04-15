@@ -36,7 +36,7 @@ fun DeliveryOfferScreen(
     Column(
         modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+            .padding(start = 20.dp, end = 20.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
