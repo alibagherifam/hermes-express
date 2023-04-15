@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.StateFlow
 interface DeliveryOfferRepository {
     val offer: StateFlow<DeliveryOffer?>
     fun saveOffer(offer: DeliveryOffer)
-    fun clearSavedOffer()
+    suspend fun acceptOffer()
 }

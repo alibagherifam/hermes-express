@@ -28,7 +28,10 @@ class OfferingFakeDeliveryViewModel(
             }
             sendDeliveryOfferMessage(generateFakeDeliveryOffer())
             _uiState.update {
-                it.copy(isOfferingInProgress = false)
+                it.copy(
+                    isOfferingInProgress = false,
+                    isFakeOfferSent = true
+                )
             }
         }
     }

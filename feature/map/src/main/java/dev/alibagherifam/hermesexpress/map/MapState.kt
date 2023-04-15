@@ -13,4 +13,8 @@ class MapState {
             Point.fromLngLat(longitude, latitude)
         }
     }
+
+    fun clearMarkers() {
+        markerCoordinates.value = emptyList()
+    }
 }

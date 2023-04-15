@@ -19,11 +19,10 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun OfferingFakeDeliveryScreen(
-    onFakeOfferSent: () -> Unit,
+    uiState: OfferingFakeDeliveryUiState,
+    onSendFakeOffer: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: OfferingFakeDeliveryViewModel = koinViewModel()
 ) {
-    val state by viewModel.uiState.collectAsState()
     Box(
         modifier
             .fillMaxWidth()
@@ -31,11 +30,8 @@ fun OfferingFakeDeliveryScreen(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = {
-                viewModel.broadcastFakeDeliveryOffer()
-                onFakeOfferSent()
-            },
-            enabled = !state.isOfferingInProgress
+            onClick = onSendFakeOffer,
+            enabled = !uiState.isOfferingInProgress
         ) {
             Text(text = stringResource(R.string.label_offer_fake_delivery))
         }
@@ -47,7 +43,8 @@ fun OfferingFakeDeliveryScreen(
 fun OfferingFakeDeliveryScreenPreview() {
     HermesTheme {
         OfferingFakeDeliveryScreen(
-            onFakeOfferSent = {}
+            uiState = OfferingFakeDeliveryUiState(),
+            onSendFakeOffer = {}
         )
     }
 }

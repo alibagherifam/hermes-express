@@ -6,31 +6,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberBottomSheetScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
-import dev.alibagherifam.hermesexpress.map.MapState
-import dev.alibagherifam.hermesexpress.map.MapView
 import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
 import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
-import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R as DeliveryofferR
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.R as FakeDeliveryR
 
 class MainActivity : ComponentActivity() {
     private val requestLocationPermissionLauncher = registerForActivityResult(
@@ -56,43 +36,5 @@ class MainActivity : ComponentActivity() {
                 MainScreen()
             }
         }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen() {
-    val scaffoldState = rememberBottomSheetScaffoldState()
-    LaunchedEffect(key1 = Unit) {
-        scaffoldState.bottomSheetState.expand()
-    }
-    var userMessage: Int? by remember { mutableStateOf(null) }
-    val context = LocalContext.current
-    LaunchedEffect(key1 = userMessage) {
-        userMessage?.let {
-            scaffoldState.snackbarHostState.showSnackbar(context.getString(it))
-        }
-    }
-    val mapState = remember { MapState() }
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetPeekHeight = 0.dp,
-        sheetContent = {
-            val repository: DeliveryOfferRepository = koinInject()
-            val offer by repository.offer.collectAsState()
-            MainNavHost(
-                offer,
-                mapState,
-                onAcceptOfferClick = {
-                    repository.clearSavedOffer()
-                    userMessage = DeliveryofferR.string.message_offer_accepted
-                },
-                onFakeOfferSent = {
-                    userMessage = FakeDeliveryR.string.message_fake_offer_sent
-                }
-            )
-        }
-    ) {
-        MapView(mapState, Modifier.fillMaxSize())
     }
 }

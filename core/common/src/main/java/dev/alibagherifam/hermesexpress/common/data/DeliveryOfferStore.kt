@@ -12,7 +12,7 @@ class DeliveryOfferStore : DeliveryOfferRepository {
         _offer.value = offer
     }
 
-    override fun clearSavedOffer() {
+    override suspend fun acceptOffer() {
         _offer.value = null
     }
 }

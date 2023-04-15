@@ -25,11 +25,13 @@ fun ProgressButton(
     onClick: () -> Unit,
     progress: Float,
     modifier: Modifier = Modifier,
+    isEnabled: Boolean = true,
     content: @Composable RowScope.() -> Unit
 ) {
     Button(
         onClick,
         Modifier.wrapContentSize(),
+        isEnabled,
         contentPadding = PaddingValues()
     ) {
         Box(modifier.sizeIn(ButtonDefaults.MinWidth, ButtonDefaults.MinHeight)) {
