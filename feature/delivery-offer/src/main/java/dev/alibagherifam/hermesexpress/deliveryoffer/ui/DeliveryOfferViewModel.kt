@@ -48,6 +48,7 @@ class DeliveryOfferViewModel(
                 elapsedTime.coerceAtMost(totalTime)
                 _uiState.update { it.copy(offerTimeElapsed = elapsedTime) }
             }
+            repository.removeOffer()
         }
     }
 
