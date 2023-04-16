@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.sample
 fun MapView(
     mapState: MapState,
     modifier: Modifier = Modifier,
+    cameraLatLong: LatLong? = null,
     markerLatLongs: List<LatLong> = emptyList()
 ) {
     val mapViewScope = rememberCoroutineScope()
@@ -56,6 +57,9 @@ fun MapView(
                         coordinates = markerCoordinates + userCoordinates
                     )
                 }
+            }
+            cameraLatLong?.let { latLong ->
+                mapView.zoomCameraOnCoordinate(latLong.toPoint())
             }
         }
     )

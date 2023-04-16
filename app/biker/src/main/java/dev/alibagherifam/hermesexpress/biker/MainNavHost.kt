@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.addDeliveryOfferDestination
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.navigateToDeliveryOffer
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.addOfferingFakeDeliveryDestination
@@ -20,6 +21,7 @@ import dev.alibagherifam.hermesexpress.offeringfakedelivery.R as OfferingfakeDel
 @Composable
 fun MainNavHost(
     snackbarHostState: SnackbarHostState,
+    onTerminalClick: (Terminal) -> Unit,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "offering-fake-delivery"
 ) {
@@ -45,9 +47,7 @@ fun MainNavHost(
             onOfferExpired = {
                 navController.popBackStack()
             },
-            onTerminalClick = {
-                TODO()
-            }
+            onTerminalClick
         )
     }
 }
