@@ -44,7 +44,7 @@ class OfferingFakeDeliveryViewModel(
         cloudMessagingService.sendMessage(message)
     }
 
-    fun consumeFakeOffer() {
-        _uiState.update { it.copy(isFakeOfferSent = false) }
+    fun resetState() {
+        _uiState.update { OfferingFakeDeliveryUiState() }
     }
 }

@@ -21,7 +21,7 @@ fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
         if (uiState.isFakeOfferSent) {
             SideEffect {
                 onFakeOfferSent()
-                viewModel.consumeFakeOffer()
+                viewModel.resetState()
             }
         }
     }

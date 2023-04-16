@@ -14,7 +14,6 @@ import androidx.navigation.compose.rememberNavController
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.addDeliveryOfferDestination
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.navigateToDeliveryOffer
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.addOfferingFakeDeliveryDestination
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.navigateToOfferingFakeDelivery
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R as DeliveryofferR
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.R as OfferingfakeDeliveryR
 
@@ -41,10 +40,10 @@ fun MainNavHost(
         addDeliveryOfferDestination(
             onOfferAccepted = {
                 userMessage = DeliveryofferR.string.message_offer_accepted
-                navController.navigateToOfferingFakeDelivery()
+                navController.popBackStack()
             },
             onOfferExpired = {
-                navController.navigateToOfferingFakeDelivery()
+                navController.popBackStack()
             },
             onTerminalClick = {
                 TODO()
