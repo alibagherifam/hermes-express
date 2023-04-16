@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,7 +32,9 @@ fun MainScreen() {
     val mapStateHolder by remember { mutableStateOf(MapStateHolder()) }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
-        sheetPeekHeight = 0.dp,
+        snackbarHost = {
+            Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
+        },
         sheetContent = {
             MainNavHost(
                 scaffoldState.snackbarHostState,
