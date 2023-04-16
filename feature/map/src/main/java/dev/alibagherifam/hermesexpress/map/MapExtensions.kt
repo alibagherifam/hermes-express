@@ -4,7 +4,6 @@ import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
-import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
@@ -14,6 +13,9 @@ import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
+
+fun convertLatLongsToPoints(latLongs: List<Pair<Double, Double>>): List<Point> =
+    latLongs.map { (latitude, longitude) -> Point.fromLngLat(longitude, latitude) }
 
 fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
     val markerOptions = CircleAnnotationOptions()
@@ -36,19 +38,23 @@ fun MapView.locationFlow(): Flow<Point> = callbackFlow {
     awaitClose { location.removeOnIndicatorPositionChangedListener(positionChangedListener) }
 }.conflate()
 
-fun MapboxMap.zoomCameraOnCoordinate(
+fun MapView.zoomCameraOnCoordinate(
     coordinate: Point,
     zoomLevel: Double = 14.0
 ) {
+    val cameraController = getMapboxMap()
     val cameraOptions = CameraOptions.Builder()
         .center(coordinate)
         .zoom(zoomLevel)
         .build()
-    setCamera(cameraOptions)
+    cameraController.setCamera(cameraOptions)
 }
 
-fun MapboxMap.fitCameraForCoordinates(coordinates: List<Point>) {
+fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
+    val cameraController = getMapboxMap()
     val viewportPadding = EdgeInsets(100.0, 100.0, 500.0, 100.0)
-    val fittedViewPort = cameraForCoordinates(coordinates, viewportPadding)
-    setCamera(fittedViewPort)
+    cameraController.run {
+        val fittedViewPort = cameraForCoordinates(coordinates, viewportPadding)
+        setCamera(fittedViewPort)
+    }
 }

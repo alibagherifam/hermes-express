@@ -1,20 +1,10 @@
 package dev.alibagherifam.hermesexpress.map
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.mapbox.geojson.Point
+import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
 
+// TODO: Remove this class after knowing WTF is remember() function!
 class MapState {
-    val userCoordinate: MutableState<Point?> = mutableStateOf(null)
-    val markerCoordinates: MutableState<List<Point>> = mutableStateOf(emptyList())
-
-    fun updateMarkerCoordinates(coordinates: List<Pair<Double, Double>>) {
-        markerCoordinates.value = coordinates.map { (latitude, longitude) ->
-            Point.fromLngLat(longitude, latitude)
-        }
-    }
-
-    fun clearMarkers() {
-        markerCoordinates.value = emptyList()
-    }
+    var userCoordinates: Point? = null
+    var markerManager: CircleAnnotationManager? = null
 }

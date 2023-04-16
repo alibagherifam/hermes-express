@@ -31,13 +31,12 @@ fun MainScreen() {
         val mapState = remember { MapState() }
         val repository: DeliveryOfferRepository = koinInject()
         val offer by repository.getOfferFlow().collectAsState()
-        if (offer == null) {
-            mapState.clearMarkers()
-        } else {
-            mapState.updateMarkerCoordinates(
-                requireNotNull(offer).terminals.map { Pair(it.latitude, it.longitude) }
-            )
-        }
-        MapView(mapState, Modifier.fillMaxSize())
+        val terminals = offer?.terminals.orEmpty()
+
+        MapView(
+            mapState,
+            Modifier.fillMaxSize(),
+            markerLatLongs = terminals.map { Pair(it.latitude, it.longitude) }
+        )
     }
 }

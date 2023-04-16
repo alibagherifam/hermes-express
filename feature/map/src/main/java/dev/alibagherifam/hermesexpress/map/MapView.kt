@@ -12,15 +12,19 @@ import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.createCircleAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
 import dev.alibagherifam.hermesexpress.feature.map.R
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.sample
 
+@OptIn(FlowPreview::class)
 @Composable
 fun MapView(
     mapState: MapState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    markerLatLongs: List<Pair<Double, Double>> = emptyList()
 ) {
-    val scope = rememberCoroutineScope()
+    val mapViewScope = rememberCoroutineScope()
     AndroidView(
         modifier = modifier
             .fillMaxWidth()
@@ -30,29 +34,28 @@ fun MapView(
                 getMapboxMap().loadStyleUri(
                     styleUri = context.getString(R.string.mapbox_style_uri)
                 )
-                location.updateSettings {
-                    enabled = true
-                }
-                scope.launch {
-                    mapState.userCoordinate.value = locationFlow().first()
-                }
+                location.updateSettings { enabled = true }
+                locationFlow()
+                    .sample(periodMillis = 1000)
+                    .onEach { newCoordinates ->
+                        if (mapState.userCoordinates == null) {
+                            zoomCameraOnCoordinate(newCoordinates)
+                        }
+                        mapState.userCoordinates = newCoordinates
+                    }.launchIn(mapViewScope)
+                mapState.markerManager = annotations.createCircleAnnotationManager()
             }
         },
         update = { mapView ->
-            val cameraController = mapView.getMapboxMap()
-            val markerCoordinates = mapState.markerCoordinates.value
-            val userCoordinate = mapState.userCoordinate.value ?: return@AndroidView
-
-            if (markerCoordinates.isEmpty()) {
-                cameraController.zoomCameraOnCoordinate(userCoordinate)
-            } else {
-                mapView.annotations
-                    .createCircleAnnotationManager()
-                    .addMarkers(markerCoordinates)
-
-                cameraController.fitCameraForCoordinates(
-                    coordinates = markerCoordinates + userCoordinate
-                )
+            mapState.markerManager?.deleteAll()
+            if (markerLatLongs.isNotEmpty()) {
+                val markerCoordinates = convertLatLongsToPoints(markerLatLongs)
+                mapState.markerManager?.addMarkers(markerCoordinates)
+                mapState.userCoordinates?.let { userCoordinates ->
+                    mapView.fitCameraForCoordinates(
+                        coordinates = markerCoordinates + userCoordinates
+                    )
+                }
             }
         }
     )
