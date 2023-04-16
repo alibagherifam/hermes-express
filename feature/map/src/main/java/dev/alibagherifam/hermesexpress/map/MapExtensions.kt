@@ -43,12 +43,12 @@ fun MapView.locationFlow(): Flow<Point> = callbackFlow {
 }.conflate()
 
 fun MapView.zoomCameraOnCoordinate(
-    coordinate: Point,
+    coordinates: Point,
     zoomLevel: Double = 14.0
 ) {
     val cameraController = getMapboxMap()
     val cameraOptions = CameraOptions.Builder()
-        .center(coordinate)
+        .center(coordinates)
         .zoom(zoomLevel)
         .build()
     cameraController.setCamera(cameraOptions)

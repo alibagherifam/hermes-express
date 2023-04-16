@@ -10,12 +10,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
-import dev.alibagherifam.hermesexpress.map.LatLong
-import dev.alibagherifam.hermesexpress.map.MapState
+import dev.alibagherifam.hermesexpress.map.MapStateHolder
 import dev.alibagherifam.hermesexpress.map.MapView
 import org.koin.compose.koinInject
 
@@ -26,7 +24,7 @@ fun MainScreen() {
     LaunchedEffect(key1 = Unit) {
         scaffoldState.bottomSheetState.expand()
     }
-    var cameraLatLong by remember { mutableStateOf<LatLong?>(null) }
+    val mapStateHolder by remember { mutableStateOf(MapStateHolder()) }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetPeekHeight = 0.dp,
@@ -34,21 +32,19 @@ fun MainScreen() {
             MainNavHost(
                 scaffoldState.snackbarHostState,
                 onTerminalClick = { terminal ->
-                    cameraLatLong = terminal.let { Pair(it.latitude, it.longitude) }
+                    mapStateHolder.moveCamera(
+                        to = terminal.let { Pair(it.latitude, it.longitude) }
+                    )
                 }
             )
         }
     ) {
-        val mapState = remember { MapState() }
         val repository: DeliveryOfferRepository = koinInject()
         val offer by repository.getOfferFlow().collectAsState()
         val terminals = offer?.terminals.orEmpty()
-
-        MapView(
-            mapState,
-            Modifier.fillMaxSize(),
-            cameraLatLong,
-            markerLatLongs = terminals.map { Pair(it.latitude, it.longitude) }
+        mapStateHolder.updateMarkerCoordinates(
+            coordinates = terminals.map { Pair(it.latitude, it.longitude) }
         )
+        MapView(mapStateHolder, Modifier.fillMaxSize())
     }
 }
