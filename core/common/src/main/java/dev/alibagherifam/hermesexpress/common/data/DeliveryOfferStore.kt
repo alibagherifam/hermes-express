@@ -12,6 +12,10 @@ class DeliveryOfferStore : DeliveryOfferRepository {
         _offer.value = offer
     }
 
+    override suspend fun removeOffer() {
+        _offer.value = null
+    }
+
     override suspend fun acceptOffer() {
         _offer.value = null
     }
