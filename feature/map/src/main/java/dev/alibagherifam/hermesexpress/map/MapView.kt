@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.sample
 fun MapView(
     mapState: MapState,
     modifier: Modifier = Modifier,
-    markerLatLongs: List<Pair<Double, Double>> = emptyList()
+    markerLatLongs: List<LatLong> = emptyList()
 ) {
     val mapViewScope = rememberCoroutineScope()
     AndroidView(
@@ -49,7 +49,7 @@ fun MapView(
         update = { mapView ->
             mapState.markerManager?.deleteAll()
             if (markerLatLongs.isNotEmpty()) {
-                val markerCoordinates = convertLatLongsToPoints(markerLatLongs)
+                val markerCoordinates = markerLatLongs.map { it.toPoint() }
                 mapState.markerManager?.addMarkers(markerCoordinates)
                 mapState.userCoordinates?.let { userCoordinates ->
                     mapView.fitCameraForCoordinates(

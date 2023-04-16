@@ -14,8 +14,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 
-fun convertLatLongsToPoints(latLongs: List<Pair<Double, Double>>): List<Point> =
-    latLongs.map { (latitude, longitude) -> Point.fromLngLat(longitude, latitude) }
+typealias LatLong = Pair<Double, Double>
+
+fun LatLong.toPoint(): Point {
+    val (latitude, longitude) = this
+    return Point.fromLngLat(longitude, latitude)
+}
 
 fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
     val markerOptions = CircleAnnotationOptions()
