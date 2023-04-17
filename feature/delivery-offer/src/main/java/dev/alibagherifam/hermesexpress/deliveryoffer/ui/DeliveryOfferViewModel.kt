@@ -1,13 +1,11 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
+import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -16,10 +14,9 @@ import kotlin.time.Duration
 
 class DeliveryOfferViewModel(
     private val repository: DeliveryOfferRepository
-) : ViewModel() {
-    private val _uiState = MutableStateFlow(DeliveryOfferUiState())
-    val uiState: StateFlow<DeliveryOfferUiState> get() = _uiState
-
+) : BaseViewModel<DeliveryOfferUiState>(
+    initialState = DeliveryOfferUiState()
+) {
     private var expireOfferJob: Job? = null
 
     init {
@@ -34,7 +31,7 @@ class DeliveryOfferViewModel(
             if (offer != null) {
                 startExpireOfferJob(offer)
             }
-        }.launchIn(viewModelScope)
+        }.launchIn(safeScope)
     }
 
     private fun startExpireOfferJob(offer: DeliveryOffer) {
@@ -52,22 +49,24 @@ class DeliveryOfferViewModel(
         }
     }
 
-    fun acceptOffer() {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(isAcceptingOfferInProgress = true)
-            }
-            repository.acceptOffer()
-            _uiState.update {
-                it.copy(
-                    isAcceptingOfferInProgress = false,
-                    isOfferAccepted = true
-                )
-            }
+    fun acceptOffer() = safeLaunch {
+        _uiState.update {
+            it.copy(isAcceptingOfferInProgress = true)
+        }
+        repository.acceptOffer()
+        _uiState.update {
+            it.copy(
+                isAcceptingOfferInProgress = false,
+                isOfferAccepted = true
+            )
         }
     }
 
     fun resetState() {
         _uiState.update { DeliveryOfferUiState() }
+    }
+
+    override fun handleIOException(exception: Throwable) {
+        TODO("Not yet implemented")
     }
 }
