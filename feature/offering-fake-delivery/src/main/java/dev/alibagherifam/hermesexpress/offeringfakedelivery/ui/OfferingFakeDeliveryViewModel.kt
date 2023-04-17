@@ -1,17 +1,18 @@
 package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
 
-import dev.alibagherifam.hermesexpress.common.R
 import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.R
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.data.CloudMessagingService
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.data.RemoteMessage
 import kotlinx.coroutines.flow.update
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
+import dev.alibagherifam.hermesexpress.common.R as CommonR
 
 internal class OfferingFakeDeliveryViewModel(
     private val cloudMessagingService: CloudMessagingService,
@@ -38,10 +39,12 @@ internal class OfferingFakeDeliveryViewModel(
         sendDeliveryOfferMessage(
             offer = generateFakeDeliveryOffer(stringProvider)
         )
+        val message = stringProvider.getString(R.string.message_fake_offer_sent)
         _uiState.update {
             it.copy(
                 isOfferingInProgress = false,
-                isFakeOfferSent = true
+                isFakeOfferSent = true,
+                userMessages = it.userMessages + message
             )
         }
     }
@@ -59,7 +62,7 @@ internal class OfferingFakeDeliveryViewModel(
     }
 
     override fun handleIOException(exception: Throwable) {
-        val errorMessage = stringProvider.getString(R.string.message_generic_io_error)
+        val errorMessage = stringProvider.getString(CommonR.string.message_generic_io_error)
         _uiState.update { oldState ->
             oldState.copy(
                 userMessages = oldState.userMessages + errorMessage

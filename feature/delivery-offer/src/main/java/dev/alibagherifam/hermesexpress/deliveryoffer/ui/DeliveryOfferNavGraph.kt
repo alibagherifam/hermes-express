@@ -16,7 +16,8 @@ import org.koin.androidx.compose.koinViewModel
 fun NavGraphBuilder.addDeliveryOfferDestination(
     onOfferAccepted: () -> Unit,
     onOfferExpired: () -> Unit,
-    onTerminalClick: (Terminal) -> Unit
+    onTerminalClick: (Terminal) -> Unit,
+    onUserMessage: (String) -> Unit
 ) {
     composable(route = "delivery-offer") {
         val context = LocalContext.current
@@ -34,6 +35,7 @@ fun NavGraphBuilder.addDeliveryOfferDestination(
             },
             onTerminalClick
         )
+        uiState.userMessages.firstOrNull()?.let(onUserMessage)
         if (uiState.isOfferAccepted || uiState.isOfferExpired) {
             SideEffect {
                 when {

@@ -10,6 +10,7 @@ import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
     onFakeOfferSent: () -> Unit,
+    onUserMessage: (String) -> Unit
 ) {
     composable(route = "offering-fake-delivery") {
         val viewModel: OfferingFakeDeliveryViewModel = koinViewModel()
@@ -20,6 +21,7 @@ fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
                 viewModel.onNewEvent(OfferingFakeDeliveryEvent.BroadcastFakeDeliveryRequested)
             }
         )
+        uiState.userMessages.firstOrNull()?.let(onUserMessage)
         if (uiState.isFakeOfferSent) {
             SideEffect {
                 onFakeOfferSent()
