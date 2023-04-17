@@ -1,46 +1,62 @@
 package dev.alibagherifam.hermesexpress.map
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import com.mapbox.geojson.Point
 
 class MapStateHolder {
-    internal var userLatLong: Point? = null
-    internal var shouldFitCameraForMarkers: Boolean = false
-
-    internal var fixedCameraLatLong by mutableStateOf<Point?>(null)
-    internal var markerLatLongs by mutableStateOf<List<Point>>(emptyList())
+    private val _state = mutableStateOf(MapState())
+    val state: State<MapState> get() = _state
 
     fun moveCamera(to: LatLong) {
-        fixedCameraLatLong = to.toPoint()
+        updateState {
+            it.copy(requestedCameraLatLong = to.toPoint())
+        }
     }
 
     fun moveCameraToUserCoordinates() {
-        userLatLong?.let { fixedCameraLatLong = it }
+        updateState {
+            it.copy(requestedCameraLatLong = it.userCoordinates)
+        }
     }
 
-    fun updateMarkerCoordinates(coordinates: List<LatLong>) {
-        markerLatLongs = coordinates.map { it.toPoint() }
-        shouldFitCameraForMarkers = (userLatLong != null)
+    fun setMarkerCoordinates(coordinates: List<LatLong>) {
+        val markerPoints = coordinates.map { it.toPoint() }
+        if (markerPoints != state.value.markerCoordinates) {
+            updateState { oldState ->
+                oldState.copy(
+                    markerCoordinates = markerPoints,
+                    isAnyMarkerUpdateAvailable = true
+                )
+            }
+        }
     }
 
-    internal fun onNewEvent(event: MapEvent) {
+    fun onNewEvent(event: MapEvent) {
         when (event) {
-            MapEvent.CameraFittedForMarkers -> {
-                shouldFitCameraForMarkers = false
+            MapEvent.MarkersUpdated -> updateState {
+                it.copy(isAnyMarkerUpdateAvailable = false)
             }
 
-            MapEvent.CameraMovedAccordingly -> {
-                fixedCameraLatLong = null
+            MapEvent.CameraMovedAccordingly -> updateState {
+                it.copy(requestedCameraLatLong = null)
             }
 
             is MapEvent.UserCoordinatesChange -> {
-                if (userLatLong == null) {
-                    fixedCameraLatLong = event.newCoordinates
+                if (state.value.userCoordinates == null) {
+                    updateState {
+                        it.copy(
+                            requestedCameraLatLong = event.newCoordinates,
+                            userCoordinates = event.newCoordinates
+                        )
+                    }
+                } else {
+                    _state.value.userCoordinates = event.newCoordinates
                 }
-                userLatLong = event.newCoordinates
             }
         }
+    }
+
+    private fun updateState(update: (MapState) -> MapState) {
+        _state.value = update(_state.value)
     }
 }

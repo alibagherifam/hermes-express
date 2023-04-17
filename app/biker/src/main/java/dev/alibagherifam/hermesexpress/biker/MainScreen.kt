@@ -49,11 +49,15 @@ fun MainScreen() {
         val repository: DeliveryOfferRepository = koinInject()
         val offer by repository.getOfferFlow().collectAsState()
         val terminals = offer?.terminals.orEmpty()
-        mapStateHolder.updateMarkerCoordinates(
+        mapStateHolder.setMarkerCoordinates(
             coordinates = terminals.map { Pair(it.latitude, it.longitude) }
         )
         Box(Modifier.padding(paddingValues)) {
-            MapView(mapStateHolder, Modifier.fillMaxSize())
+            MapView(
+                state = mapStateHolder.state.value,
+                onEvent = mapStateHolder::onNewEvent,
+                Modifier.fillMaxSize()
+            )
             MyLocationButton(
                 onClick = { mapStateHolder.moveCameraToUserCoordinates() },
                 sheetState = scaffoldState.bottomSheetState,

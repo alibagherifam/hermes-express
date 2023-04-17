@@ -25,7 +25,8 @@ import kotlinx.coroutines.flow.sample
 @OptIn(FlowPreview::class)
 @Composable
 fun MapView(
-    stateHolder: MapStateHolder,
+    state: MapState,
+    onEvent: (MapEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var markerManager by remember {
@@ -44,27 +45,26 @@ fun MapView(
                 location.updateSettings { enabled = true }
                 locationFlow()
                     .sample(periodMillis = 800)
-                    .onEach { stateHolder.onNewEvent(MapEvent.UserCoordinatesChange(it)) }
+                    .onEach { onEvent(MapEvent.UserCoordinatesChange(it)) }
                     .launchIn(mapViewScope)
                 markerManager = annotations.createCircleAnnotationManager()
             }
         },
         update = { mapView ->
-            markerManager?.deleteAll()
-            if (stateHolder.markerLatLongs.isNotEmpty()) {
-                val markerCoordinates = stateHolder.markerLatLongs
-                markerManager?.addMarkers(markerCoordinates)
-                if (stateHolder.shouldFitCameraForMarkers) {
-                    val userCoordinates = requireNotNull(stateHolder.userLatLong)
+            if (state.isAnyMarkerUpdateAvailable) {
+                markerManager?.deleteAll()
+                if (state.markerCoordinates.isNotEmpty()) {
+                    markerManager?.addMarkers(state.markerCoordinates)
+                    val userCoordinates = requireNotNull(state.userCoordinates)
                     mapView.fitCameraForCoordinates(
-                        coordinates = markerCoordinates + userCoordinates
+                        coordinates = state.markerCoordinates + userCoordinates
                     )
-                    stateHolder.onNewEvent(MapEvent.CameraFittedForMarkers)
                 }
+                onEvent(MapEvent.MarkersUpdated)
             }
-            stateHolder.fixedCameraLatLong?.let { latLong ->
+            state.requestedCameraLatLong?.let { latLong ->
                 mapView.zoomCameraOnCoordinate(latLong)
-                stateHolder.onNewEvent(MapEvent.CameraMovedAccordingly)
+                onEvent(MapEvent.CameraMovedAccordingly)
             }
         }
     )
