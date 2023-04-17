@@ -12,7 +12,7 @@ import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.decodeFromStringMap
 import org.koin.android.ext.android.inject
 
-class FcmService : FirebaseMessagingService() {
+internal class FcmService : FirebaseMessagingService() {
     private val repository: DeliveryOfferRepository by inject()
 
     override fun onNewToken(token: String) {
@@ -44,4 +44,4 @@ class FcmService : FirebaseMessagingService() {
     }
 }
 
-fun RemoteMessage.isForTopic(topic: String): Boolean = (from == "/topics/$topic")
+internal fun RemoteMessage.isForTopic(topic: String): Boolean = (from == "/topics/$topic")

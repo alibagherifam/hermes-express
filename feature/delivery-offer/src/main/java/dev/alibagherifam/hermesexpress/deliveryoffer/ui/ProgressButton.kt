@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
 @Composable
-fun ProgressButton(
+internal fun ProgressButton(
     progress: Float,
     onPressStateChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -78,7 +78,7 @@ fun ProgressButton(
 
 @Preview
 @Composable
-fun ProgressButtonPreview() {
+internal fun ProgressButtonPreview() {
     HermesTheme {
         ProgressButton(
             progress = 0.4f,

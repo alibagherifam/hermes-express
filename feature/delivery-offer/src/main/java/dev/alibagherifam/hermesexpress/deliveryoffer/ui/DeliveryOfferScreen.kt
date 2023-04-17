@@ -21,7 +21,7 @@ import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
-fun DeliveryOfferScreen(
+internal fun DeliveryOfferScreen(
     uiState: DeliveryOfferUiState,
     onAcceptOfferPressStateChange: (Boolean) -> Unit,
     onTerminalClick: (Terminal) -> Unit,
@@ -60,7 +60,7 @@ fun DeliveryOfferScreen(
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFF)
 @Composable
-fun DeliveryOfferScreenPreview() {
+internal fun DeliveryOfferScreenPreview() {
     HermesTheme {
         DeliveryOfferScreen(
             uiState = DeliveryOfferUiState(

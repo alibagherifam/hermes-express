@@ -17,12 +17,12 @@ import kotlinx.coroutines.flow.conflate
 
 typealias LatLong = Pair<Double, Double>
 
-fun LatLong.toPoint(): Point {
+internal fun LatLong.toPoint(): Point {
     val (latitude, longitude) = this
     return Point.fromLngLat(longitude, latitude)
 }
 
-fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
+internal fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
     val markerOptions = CircleAnnotationOptions()
         .withCircleRadius(circleRadius = 8.0)
         .withCircleColor(circleColor = "#EE4E8b")
@@ -35,7 +35,7 @@ fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
     }
 }
 
-fun MapView.locationFlow(): Flow<Point> = callbackFlow {
+internal fun MapView.locationFlow(): Flow<Point> = callbackFlow {
     val positionChangedListener = OnIndicatorPositionChangedListener { point ->
         trySendBlocking(point)
     }
@@ -43,7 +43,7 @@ fun MapView.locationFlow(): Flow<Point> = callbackFlow {
     awaitClose { location.removeOnIndicatorPositionChangedListener(positionChangedListener) }
 }.conflate()
 
-fun MapView.zoomCameraOnCoordinate(
+internal fun MapView.zoomCameraOnCoordinate(
     coordinates: Point,
     zoomLevel: Double = 14.0
 ) {
@@ -55,7 +55,7 @@ fun MapView.zoomCameraOnCoordinate(
     cameraController.easeTo(cameraOptions)
 }
 
-fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
+internal fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
     val cameraController = getMapboxMap()
     val viewportPadding = EdgeInsets(100.0, 100.0, 500.0, 100.0)
     cameraController.run {

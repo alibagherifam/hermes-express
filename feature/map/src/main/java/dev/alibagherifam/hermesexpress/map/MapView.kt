@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.sample
 
 @OptIn(FlowPreview::class)
 @Composable
-fun MapView(
+internal fun MapView(
     state: MapState,
     onEvent: (MapEvent) -> Unit,
     modifier: Modifier = Modifier

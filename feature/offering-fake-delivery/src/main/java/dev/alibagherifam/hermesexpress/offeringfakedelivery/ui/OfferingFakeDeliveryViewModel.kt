@@ -11,7 +11,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 
-class OfferingFakeDeliveryViewModel(
+internal class OfferingFakeDeliveryViewModel(
     private val cloudMessagingService: CloudMessagingService
 ) : BaseViewModel<OfferingFakeDeliveryUiState>(
     initialState = OfferingFakeDeliveryUiState()
@@ -30,7 +30,7 @@ class OfferingFakeDeliveryViewModel(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun sendDeliveryOfferMessage(offer: DeliveryOffer) {
+    private suspend fun sendDeliveryOfferMessage(offer: DeliveryOffer) {
         val data = Properties.encodeToStringMap(offer)
         val receivers = "/topics/${Constants.TOPIC_DELIVERY_OFFER}"
         val message = RemoteMessage(to = receivers, data)

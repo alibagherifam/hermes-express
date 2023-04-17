@@ -22,7 +22,7 @@ import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
 @Composable
-fun TerminalList(
+internal fun TerminalList(
     terminals: List<Terminal>,
     onTerminalClick: (Terminal) -> Unit,
     modifier: Modifier = Modifier,
@@ -53,7 +53,7 @@ fun TerminalList(
 }
 
 @Composable
-fun TerminalItem(
+internal fun TerminalItem(
     number: Int,
     terminal: Terminal,
     onClick: (Terminal) -> Unit,
@@ -88,7 +88,7 @@ fun TerminalItem(
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFF)
 @Composable
-fun TerminalListPreview() {
+internal fun TerminalListPreview() {
     HermesTheme {
         TerminalList(
             terminals = generateFakeTerminals(),

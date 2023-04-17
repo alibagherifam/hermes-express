@@ -6,7 +6,7 @@ import androidx.annotation.RawRes
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-suspend fun playNotificationSound(
+internal suspend fun playNotificationSound(
     context: Context,
     @RawRes soundResId: Int
 ) = suspendCancellableCoroutine { continuation ->
@@ -22,7 +22,7 @@ suspend fun playNotificationSound(
 }
 
 @Deprecated(message = "Use playNotificationSound() instead")
-class NotificationSoundPlayer(@RawRes private val mediaResId: Int) {
+internal class NotificationSoundPlayer(@RawRes private val mediaResId: Int) {
     private var mediaPlayer: MediaPlayer? = null
 
     fun prepare(context: Context) {

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 
 class MapStateHolder {
     private val _state = mutableStateOf(MapState())
-    val state: State<MapState> get() = _state
+    internal val state: State<MapState> get() = _state
 
     fun moveCamera(to: LatLong) {
         updateState {
@@ -13,7 +13,7 @@ class MapStateHolder {
         }
     }
 
-    fun moveCameraToUserCoordinates() {
+    internal fun moveCameraToUserCoordinates() {
         updateState {
             it.copy(requestedCameraLatLong = it.userCoordinates)
         }
@@ -31,7 +31,7 @@ class MapStateHolder {
         }
     }
 
-    fun onNewEvent(event: MapEvent) {
+    internal fun onNewEvent(event: MapEvent) {
         when (event) {
             MapEvent.MarkersUpdated -> updateState {
                 it.copy(isAnyMarkerUpdateAvailable = false)

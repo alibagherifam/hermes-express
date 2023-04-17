@@ -11,7 +11,7 @@ import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.feature.map.R
 
 @Composable
-fun LocationPermissionDialog(
+internal fun LocationPermissionDialog(
     title: String = stringResource(R.string.label_location_permission),
     message: String = stringResource(R.string.message_location_permission_required),
     onConfirmClick: () -> Unit,
@@ -36,7 +36,7 @@ fun LocationPermissionDialog(
 
 @Preview
 @Composable
-fun LocationPermissionDialogPreview() {
+internal fun LocationPermissionDialogPreview() {
     HermesTheme {
         LocationPermissionDialog(
             onConfirmClick = {},

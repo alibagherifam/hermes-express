@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 @OptIn(ExperimentalSerializationApi::class)
-fun provideHttpClient(): Retrofit {
+internal fun provideHttpClient(): Retrofit {
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(ApiKeyInterceptor())
         .build()

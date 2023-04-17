@@ -14,7 +14,7 @@ abstract class BaseViewModel<State>(initialState: State) : ViewModel() {
     protected val _uiState = MutableStateFlow(initialState)
     val uiState: StateFlow<State> get() = _uiState
 
-    abstract fun handleIOException(exception: Throwable)
+    protected abstract fun handleIOException(exception: Throwable)
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         if (throwable is IOException) {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
 
-class DeliveryOfferViewModel(
+internal class DeliveryOfferViewModel(
     private val repository: DeliveryOfferRepository
 ) : BaseViewModel<DeliveryOfferUiState>(
     initialState = DeliveryOfferUiState()

@@ -18,7 +18,7 @@ import dev.alibagherifam.hermesexpress.offeringfakedelivery.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun OfferingFakeDeliveryScreen(
+internal fun OfferingFakeDeliveryScreen(
     uiState: OfferingFakeDeliveryUiState,
     onSendFakeOffer: () -> Unit,
     modifier: Modifier = Modifier,
@@ -40,7 +40,7 @@ fun OfferingFakeDeliveryScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun OfferingFakeDeliveryScreenPreview() {
+internal fun OfferingFakeDeliveryScreenPreview() {
     HermesTheme {
         OfferingFakeDeliveryScreen(
             uiState = OfferingFakeDeliveryUiState(),
