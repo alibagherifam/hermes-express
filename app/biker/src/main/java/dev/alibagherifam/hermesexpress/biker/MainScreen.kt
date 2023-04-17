@@ -36,7 +36,7 @@ fun MainScreen() {
             Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
         },
         sheetContent = {
-            MainNavHost(
+            BottomSheetContentHost(
                 scaffoldState.snackbarHostState,
                 onTerminalClick = { terminal ->
                     mapStateHolder.moveCamera(

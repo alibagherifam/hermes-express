@@ -19,7 +19,7 @@ import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R as DeliveryofferR
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.R as OfferingfakeDeliveryR
 
 @Composable
-fun MainNavHost(
+fun BottomSheetContentHost(
     snackbarHostState: SnackbarHostState,
     onTerminalClick: (Terminal) -> Unit,
     navController: NavHostController = rememberNavController(),
