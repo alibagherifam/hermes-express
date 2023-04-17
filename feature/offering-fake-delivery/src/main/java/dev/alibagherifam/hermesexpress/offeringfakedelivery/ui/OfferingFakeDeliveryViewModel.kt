@@ -1,5 +1,6 @@
 package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
 
+import dev.alibagherifam.hermesexpress.common.R
 import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
@@ -18,7 +19,19 @@ internal class OfferingFakeDeliveryViewModel(
 ) : BaseViewModel<OfferingFakeDeliveryUiState>(
     initialState = OfferingFakeDeliveryUiState()
 ) {
-    fun broadcastFakeDeliveryOffer() = safeLaunch {
+    fun onNewEvent(event: OfferingFakeDeliveryEvent) {
+        when (event) {
+            is OfferingFakeDeliveryEvent.BroadcastFakeDeliveryRequested -> {
+                broadcastFakeDeliveryOffer()
+            }
+
+            is OfferingFakeDeliveryEvent.UserMessageShown -> {
+                consumeUserMessage(event.message)
+            }
+        }
+    }
+
+    private fun broadcastFakeDeliveryOffer() = safeLaunch {
         _uiState.update {
             it.copy(isOfferingInProgress = true)
         }
@@ -46,6 +59,19 @@ internal class OfferingFakeDeliveryViewModel(
     }
 
     override fun handleIOException(exception: Throwable) {
-        TODO("Not yet implemented")
+        val errorMessage = stringProvider.getString(R.string.message_generic_io_error)
+        _uiState.update { oldState ->
+            oldState.copy(
+                userMessages = oldState.userMessages + errorMessage
+            )
+        }
+    }
+
+    private fun consumeUserMessage(message: String) {
+        _uiState.update { oldState ->
+            oldState.copy(
+                userMessages = oldState.userMessages.filterNot { it == message }
+            )
+        }
     }
 }

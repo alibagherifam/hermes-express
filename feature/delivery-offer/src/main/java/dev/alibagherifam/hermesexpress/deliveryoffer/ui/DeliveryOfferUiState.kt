@@ -8,7 +8,8 @@ internal data class DeliveryOfferUiState(
     val isAcceptingOfferInProgress: Boolean = false,
     val isOfferAccepted: Boolean = false,
     val offerTimeElapsed: Duration = Duration.ZERO,
-    val offerAcceptancePercentage: Float = 0f
+    val offerAcceptancePercentage: Float = 0f,
+    val userMessages: List<String> = emptyList()
 ) {
     val isOfferExpired: Boolean
         get() = (offer != null) && (offerTimeElapsed == offer.timeToLive)

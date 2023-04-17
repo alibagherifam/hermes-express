@@ -16,7 +16,9 @@ fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
         val uiState by viewModel.uiState.collectAsState()
         OfferingFakeDeliveryScreen(
             uiState,
-            onSendFakeOffer = viewModel::broadcastFakeDeliveryOffer
+            onSendFakeOffer = {
+                viewModel.onNewEvent(OfferingFakeDeliveryEvent.BroadcastFakeDeliveryRequested)
+            }
         )
         if (uiState.isFakeOfferSent) {
             SideEffect {

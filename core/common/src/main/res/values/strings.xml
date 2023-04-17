@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="message_generic_io_error">Check your connection please.</string>
+
     <string name="fake_data_address_1">Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584</string>
     <string name="fake_data_address_2">Tunnel St. Hilliard, 345 Bow Ridge Road Lowell, MA 01851</string>
     <string name="fake_data_address_3">Miranda McAnderson, 6543 N 9th Street, AA 33608–1234</string>
