@@ -40,16 +40,24 @@ fun ProgressButton(
         onClick = {},
         Modifier.wrapContentSize(),
         isEnabled,
+        colors = with(MaterialTheme.colorScheme) {
+            ButtonDefaults.buttonColors(
+                containerColor = if (isPressed) secondaryContainer else primary,
+                contentColor = if (isPressed) onSecondaryContainer else onPrimary
+            )
+        },
         interactionSource = interactionSource,
         contentPadding = PaddingValues(),
 
         ) {
         Box(modifier.sizeIn(ButtonDefaults.MinWidth, ButtonDefaults.MinHeight)) {
-            LinearProgressIndicator(
-                progress,
-                Modifier.matchParentSize(),
-                trackColor = MaterialTheme.colorScheme.inversePrimary
-            )
+            if (!isPressed) {
+                LinearProgressIndicator(
+                    progress,
+                    Modifier.matchParentSize(),
+                    trackColor = MaterialTheme.colorScheme.inversePrimary
+                )
+            }
             Row(
                 Modifier
                     .align(Alignment.Center)
