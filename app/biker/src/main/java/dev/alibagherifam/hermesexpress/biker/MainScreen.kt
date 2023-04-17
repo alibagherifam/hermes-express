@@ -9,26 +9,25 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
+import dev.alibagherifam.hermesexpress.map.LatLong
+import dev.alibagherifam.hermesexpress.map.MapScreen
 import dev.alibagherifam.hermesexpress.map.MapStateHolder
-import dev.alibagherifam.hermesexpress.map.MapView
-import dev.alibagherifam.hermesexpress.map.MyLocationButton
-import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    markerCoordinates: List<LatLong>,
+    onLocationPermissionDeny: () -> Unit
+) {
+    val mapStateHolder = remember { MapStateHolder() }
+    mapStateHolder.setMarkerCoordinates(markerCoordinates)
+
     val scaffoldState = rememberBottomSheetScaffoldState()
     LaunchedEffect(key1 = Unit) {
         scaffoldState.bottomSheetState.expand()
     }
-    val mapStateHolder = remember { MapStateHolder() }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         snackbarHost = {
@@ -45,25 +44,11 @@ fun MainScreen() {
             )
         }
     ) { paddingValues ->
-        val repository: DeliveryOfferRepository = koinInject()
-        val offer by repository.getOfferFlow().collectAsState()
-        val terminals = offer?.terminals.orEmpty()
-        mapStateHolder.setMarkerCoordinates(
-            coordinates = terminals.map { Pair(it.latitude, it.longitude) }
+        MapScreen(
+            mapStateHolder,
+            bottomSheetOffset = scaffoldState.bottomSheetState.requireOffset(),
+            onLocationPermissionDeny,
+            Modifier.padding(paddingValues)
         )
-        Box(Modifier.padding(paddingValues)) {
-            MapView(
-                state = mapStateHolder.state.value,
-                onEvent = mapStateHolder::onNewEvent,
-                Modifier.fillMaxSize()
-            )
-            MyLocationButton(
-                onClick = { mapStateHolder.moveCameraToUserCoordinates() },
-                sheetState = scaffoldState.bottomSheetState,
-                Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(end = 20.dp)
-            )
-        }
     }
 }
