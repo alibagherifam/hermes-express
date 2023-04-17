@@ -42,7 +42,8 @@ fun DeliveryOfferScreen(
         Spacer(Modifier.size(16.dp))
         TerminalList(
             terminals = uiState.offer.terminals,
-            onTerminalClick
+            onTerminalClick,
+            showInCompactMode = true
         )
         Spacer(Modifier.size(16.dp))
         ProgressButton(

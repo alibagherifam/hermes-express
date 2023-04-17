@@ -25,13 +25,19 @@ import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 fun TerminalList(
     terminals: List<Terminal>,
     onTerminalClick: (Terminal) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showInCompactMode: Boolean = false
 ) {
+    val indices: List<Int> = if (showInCompactMode) {
+        listOf(0, terminals.lastIndex)
+    } else {
+        terminals.indices.toList()
+    }
     Column(modifier) {
-        terminals.mapIndexed { index, terminal ->
+        for (index in indices) {
             TerminalItem(
                 number = index,
-                terminal,
+                terminals[index],
                 onTerminalClick
             )
             if (index != terminals.lastIndex) {

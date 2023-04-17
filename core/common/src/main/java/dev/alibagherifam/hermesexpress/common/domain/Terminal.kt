@@ -22,6 +22,11 @@ fun generateFakeTerminals() = listOf(
         postalAddress = "Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584"
     ),
     Terminal(
+        latitude = 35.936,
+        longitude = 50.769,
+        postalAddress = "Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584"
+    ),
+    Terminal(
         latitude = 35.941,
         longitude = 50.725,
         postalAddress = "Miranda McAnderson, 6543 N 9th Street, AA 33608-1234"
