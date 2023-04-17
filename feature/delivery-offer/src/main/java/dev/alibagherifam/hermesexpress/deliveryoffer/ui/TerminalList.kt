@@ -36,7 +36,7 @@ fun TerminalList(
     Column(modifier) {
         for (index in indices) {
             TerminalItem(
-                number = index,
+                number = index + 1,
                 terminals[index],
                 onTerminalClick
             )
@@ -73,7 +73,7 @@ fun TerminalItem(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = (number + 1).toString(),
+                text = number.toString(),
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onError
             )
