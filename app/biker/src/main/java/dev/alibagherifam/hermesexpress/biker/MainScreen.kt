@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +28,7 @@ fun MainScreen() {
     LaunchedEffect(key1 = Unit) {
         scaffoldState.bottomSheetState.expand()
     }
-    val mapStateHolder by remember { mutableStateOf(MapStateHolder()) }
+    val mapStateHolder = remember { MapStateHolder() }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         snackbarHost = {
