@@ -3,6 +3,7 @@ package dev.alibagherifam.hermesexpress.biker.ui
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -16,11 +17,12 @@ import kotlinx.coroutines.launch
 fun BottomSheetContentHost(
     snackbarHostState: SnackbarHostState,
     onTerminalClick: (Terminal) -> Unit,
+    modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = "offering-fake-delivery"
 ) {
     val scope = rememberCoroutineScope()
-    NavHost(navController, startDestination) {
+    NavHost(navController, startDestination, modifier) {
         addOfferingFakeDeliveryDestination(
             onFakeOfferSent = {
                 navController.navigateToDeliveryOffer()
