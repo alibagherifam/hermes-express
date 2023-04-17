@@ -37,12 +37,12 @@ class DeliveryOfferViewModel(
     private fun startExpireOfferJob(offer: DeliveryOffer) {
         expireOfferJob = startCountUpTimer(
             totalTime = offer.timeToLive,
-            step = offerExpirationProgressStep,
+            step = smoothTimerStep,
             doOnEachStep = { elapsedTime ->
                 _uiState.update { it.copy(offerTimeElapsed = elapsedTime) }
                 while (isUserAcceptingOffer()) {
                     // Pause expiration during offer acceptance
-                    delay(offerExpirationProgressStep)
+                    delay(smoothTimerStep)
                 }
             },
             doAtTheEnd = { repository.removeOffer() }
@@ -59,10 +59,19 @@ class DeliveryOfferViewModel(
         acceptOfferJob = if (isPressed) {
             startCountUpTimer(
                 totalTime = timeToConfirmOffer,
-                step = with(Duration) { 1.seconds },
-                doAtTheEnd = { acceptOffer() }
+                step = smoothTimerStep,
+                doAtTheEnd = { acceptOffer() },
+                doOnEachStep = { elapsedTime ->
+                    val percentage = (elapsedTime / timeToConfirmOffer).toFloat()
+                    _uiState.update {
+                        it.copy(offerAcceptancePercentage = percentage)
+                    }
+                }
             )
         } else {
+            _uiState.update {
+                it.copy(offerAcceptancePercentage = 0f)
+            }
             acceptOfferJob?.cancel()
             null
         }
@@ -110,6 +119,6 @@ class DeliveryOfferViewModel(
 
     private companion object {
         val timeToConfirmOffer = with(Duration) { 3.seconds }
-        val offerExpirationProgressStep = with(Duration) { 50.milliseconds }
+        val smoothTimerStep = with(Duration) { 50.milliseconds }
     }
 }

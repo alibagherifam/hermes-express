@@ -7,7 +7,8 @@ data class DeliveryOfferUiState(
     val offer: DeliveryOffer? = null,
     val isAcceptingOfferInProgress: Boolean = false,
     val isOfferAccepted: Boolean = false,
-    val offerTimeElapsed: Duration = Duration.ZERO
+    val offerTimeElapsed: Duration = Duration.ZERO,
+    val offerAcceptancePercentage: Float = 0f
 ) {
     val isOfferExpired: Boolean
         get() = (offer != null) && (offerTimeElapsed == offer.timeToLive)

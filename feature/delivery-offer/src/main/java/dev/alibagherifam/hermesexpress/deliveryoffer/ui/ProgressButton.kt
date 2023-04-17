@@ -14,6 +14,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,6 +30,7 @@ fun ProgressButton(
     onPressStateChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
+    contentColorAlpha: Float = 1f,
     content: @Composable RowScope.() -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -36,16 +38,21 @@ fun ProgressButton(
     LaunchedEffect(key1 = isPressed) {
         onPressStateChange(isPressed)
     }
+    val containerColor = with(MaterialTheme.colorScheme) {
+        if (isPressed) {
+            error.copy(alpha = contentColorAlpha.coerceAtLeast(0.2f))
+        } else {
+            primary
+        }
+    }
     Button(
         onClick = {},
         Modifier.wrapContentSize(),
         isEnabled,
-        colors = with(MaterialTheme.colorScheme) {
-            ButtonDefaults.buttonColors(
-                containerColor = if (isPressed) secondaryContainer else primary,
-                contentColor = if (isPressed) onSecondaryContainer else onPrimary
-            )
-        },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+            contentColor = contentColorFor(containerColor)
+        ),
         interactionSource = interactionSource,
         contentPadding = PaddingValues(),
 
