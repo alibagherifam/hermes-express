@@ -23,7 +23,7 @@ import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 @Composable
 fun DeliveryOfferScreen(
     uiState: DeliveryOfferUiState,
-    onAcceptOfferClick: () -> Unit,
+    onAcceptOfferPressStateChange: (Boolean) -> Unit,
     onTerminalClick: (Terminal) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -47,8 +47,8 @@ fun DeliveryOfferScreen(
         )
         Spacer(Modifier.size(16.dp))
         ProgressButton(
-            onClick = onAcceptOfferClick,
             progress = uiState.offerTimeElapsedPercentage,
+            onPressStateChange = onAcceptOfferPressStateChange,
             Modifier.widthIn(min = 240.dp),
             isEnabled = !uiState.isAcceptingOfferInProgress
         ) {
@@ -65,7 +65,7 @@ fun DeliveryOfferScreenPreview() {
             uiState = DeliveryOfferUiState(
                 offer = generateFakeDeliveryOffer()
             ),
-            onAcceptOfferClick = {},
+            onAcceptOfferPressStateChange = {},
             onTerminalClick = {}
         )
     }

@@ -1,6 +1,5 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
-import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
@@ -17,6 +16,7 @@ class DeliveryOfferViewModel(
 ) : BaseViewModel<DeliveryOfferUiState>(
     initialState = DeliveryOfferUiState()
 ) {
+    private var acceptOfferJob: Job? = null
     private var expireOfferJob: Job? = null
 
     init {
@@ -27,7 +27,7 @@ class DeliveryOfferViewModel(
                     offerTimeElapsed = Duration.ZERO
                 )
             }
-            expireOfferJob?.cancel()
+            stopExpireOfferJob()
             if (offer != null) {
                 startExpireOfferJob(offer)
             }
@@ -35,21 +35,59 @@ class DeliveryOfferViewModel(
     }
 
     private fun startExpireOfferJob(offer: DeliveryOffer) {
-        expireOfferJob = viewModelScope.launch {
-            val step = with(Duration) { 50.milliseconds }
-            val totalTime = offer.timeToLive
-            var elapsedTime = Duration.ZERO
-            while (elapsedTime < totalTime) {
-                delay(step)
-                elapsedTime += step
-                elapsedTime.coerceAtMost(totalTime)
+        expireOfferJob = startCountUpTimer(
+            totalTime = offer.timeToLive,
+            step = offerExpirationProgressStep,
+            doOnEachStep = { elapsedTime ->
                 _uiState.update { it.copy(offerTimeElapsed = elapsedTime) }
-            }
-            repository.removeOffer()
+                while (isUserAcceptingOffer()) {
+                    // Pause expiration during offer acceptance
+                    delay(offerExpirationProgressStep)
+                }
+            },
+            doAtTheEnd = { repository.removeOffer() }
+        )
+    }
+
+    private fun stopExpireOfferJob() {
+        expireOfferJob?.cancel()
+        expireOfferJob = null
+    }
+
+    fun onAcceptOfferPressStateChange(isPressed: Boolean) {
+        println("is Press = $isPressed")
+        acceptOfferJob = if (isPressed) {
+            startCountUpTimer(
+                totalTime = timeToConfirmOffer,
+                step = with(Duration) { 1.seconds },
+                doAtTheEnd = { acceptOffer() }
+            )
+        } else {
+            acceptOfferJob?.cancel()
+            null
         }
     }
 
-    fun acceptOffer() = safeLaunch {
+    private fun isUserAcceptingOffer() = (acceptOfferJob != null)
+
+    private fun startCountUpTimer(
+        totalTime: Duration,
+        step: Duration,
+        doAtTheEnd: suspend () -> Unit,
+        doOnEachStep: suspend (Duration) -> Unit = {},
+    ): Job = safeScope.launch {
+        var elapsedTime = Duration.ZERO
+        while (elapsedTime < totalTime) {
+            delay(step)
+            elapsedTime += step
+            elapsedTime.coerceAtMost(totalTime)
+            doOnEachStep(elapsedTime)
+        }
+        doAtTheEnd()
+    }
+
+    private fun acceptOffer() = safeLaunch {
+        stopExpireOfferJob()
         _uiState.update {
             it.copy(isAcceptingOfferInProgress = true)
         }
@@ -68,5 +106,10 @@ class DeliveryOfferViewModel(
 
     override fun handleIOException(exception: Throwable) {
         TODO("Not yet implemented")
+    }
+
+    private companion object {
+        val timeToConfirmOffer = with(Duration) { 3.seconds }
+        val offerExpirationProgressStep = with(Duration) { 50.milliseconds }
     }
 }

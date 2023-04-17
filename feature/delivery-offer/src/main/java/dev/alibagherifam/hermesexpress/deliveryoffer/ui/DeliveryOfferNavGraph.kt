@@ -27,7 +27,7 @@ fun NavGraphBuilder.addDeliveryOfferDestination(
         val uiState by viewModel.uiState.collectAsState()
         DeliveryOfferScreen(
             uiState,
-            onAcceptOfferClick = viewModel::acceptOffer,
+            onAcceptOfferPressStateChange = viewModel::onAcceptOfferPressStateChange,
             onTerminalClick
         )
         if (uiState.isOfferAccepted || uiState.isOfferExpired) {
