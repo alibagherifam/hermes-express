@@ -4,6 +4,7 @@ import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
+import com.mapbox.maps.plugin.animation.easeTo
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
@@ -51,7 +52,7 @@ fun MapView.zoomCameraOnCoordinate(
         .center(coordinates)
         .zoom(zoomLevel)
         .build()
-    cameraController.setCamera(cameraOptions)
+    cameraController.easeTo(cameraOptions)
 }
 
 fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
@@ -59,6 +60,6 @@ fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
     val viewportPadding = EdgeInsets(100.0, 100.0, 500.0, 100.0)
     cameraController.run {
         val fittedViewPort = cameraForCoordinates(coordinates, viewportPadding)
-        setCamera(fittedViewPort)
+        easeTo(fittedViewPort)
     }
 }
