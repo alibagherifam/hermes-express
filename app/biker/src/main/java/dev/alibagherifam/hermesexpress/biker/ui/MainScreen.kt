@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.biker
+package dev.alibagherifam.hermesexpress.biker.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

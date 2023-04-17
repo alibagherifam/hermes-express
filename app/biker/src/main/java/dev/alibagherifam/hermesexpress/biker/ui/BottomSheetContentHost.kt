@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.biker
+package dev.alibagherifam.hermesexpress.biker.ui
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
