@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
-import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
+import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable

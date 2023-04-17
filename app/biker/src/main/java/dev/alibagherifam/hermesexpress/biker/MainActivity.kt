@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import dev.alibagherifam.hermesexpress.common.theme.HermesTheme
+import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
 import kotlinx.coroutines.launch
 

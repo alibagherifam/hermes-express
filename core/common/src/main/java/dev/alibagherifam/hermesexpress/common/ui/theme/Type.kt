@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.common.theme
+package dev.alibagherifam.hermesexpress.common.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
