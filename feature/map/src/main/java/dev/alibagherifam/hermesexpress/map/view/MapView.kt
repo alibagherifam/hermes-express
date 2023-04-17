@@ -1,5 +1,6 @@
 package dev.alibagherifam.hermesexpress.map.view
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
@@ -8,18 +9,20 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import com.mapbox.maps.MapView
+import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
 import dev.alibagherifam.hermesexpress.feature.map.R
-import dev.alibagherifam.hermesexpress.map.screen.MapEvent
-import dev.alibagherifam.hermesexpress.map.screen.MapState
 import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
 import dev.alibagherifam.hermesexpress.map.locationFlow
 import dev.alibagherifam.hermesexpress.map.marker.MarkerColors
 import dev.alibagherifam.hermesexpress.map.marker.MarkerManager
 import dev.alibagherifam.hermesexpress.map.marker.markerDefaultColors
+import dev.alibagherifam.hermesexpress.map.screen.MapEvent
+import dev.alibagherifam.hermesexpress.map.screen.MapState
 import dev.alibagherifam.hermesexpress.map.zoomCameraOnCoordinate
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.launchIn
@@ -32,6 +35,7 @@ internal fun MapView(
     state: MapState,
     onEvent: (MapEvent) -> Unit,
     modifier: Modifier = Modifier,
+    @DrawableRes userLocationIcon: Int = R.drawable.img_wind_rose,
     markerColors: MarkerColors = markerDefaultColors()
 ) {
     val mapViewScope = rememberCoroutineScope()
@@ -45,7 +49,12 @@ internal fun MapView(
                 getMapboxMap().loadStyleUri(
                     styleUri = context.getString(R.string.mapbox_style_uri)
                 )
-                location.updateSettings { enabled = true }
+                location.updateSettings {
+                    enabled = true
+                    locationPuck = LocationPuck2D(
+                        ContextCompat.getDrawable(context, userLocationIcon)
+                    )
+                }
                 locationFlow()
                     .sample(periodMillis = 800)
                     .onEach { onEvent(MapEvent.UserCoordinatesChange(it)) }
