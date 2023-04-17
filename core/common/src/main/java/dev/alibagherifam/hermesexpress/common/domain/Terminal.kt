@@ -1,5 +1,7 @@
 package dev.alibagherifam.hermesexpress.common.domain
 
+import dev.alibagherifam.hermesexpress.common.R
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,20 +17,20 @@ data class Terminal(
     }
 }
 
-fun generateFakeTerminals() = listOf(
+fun generateFakeTerminals(stringProvider: StringProvider) = listOf(
     Terminal(
         latitude = 35.958,
         longitude = 50.681,
-        postalAddress = "Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584"
+        postalAddress = stringProvider.getString(R.string.fake_data_address_1)
     ),
     Terminal(
         latitude = 35.936,
         longitude = 50.769,
-        postalAddress = "Robert Robertson, 1234 NW Bobcat Lane, St. Robert, MO 65584"
+        postalAddress = stringProvider.getString(R.string.fake_data_address_2)
     ),
     Terminal(
         latitude = 35.941,
         longitude = 50.725,
-        postalAddress = "Miranda McAnderson, 6543 N 9th Street, AA 33608-1234"
+        postalAddress = stringProvider.getString(R.string.fake_data_address_3)
     )
 )

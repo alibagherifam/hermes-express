@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
@@ -90,8 +91,9 @@ internal fun TerminalItem(
 @Composable
 internal fun TerminalListPreview() {
     HermesTheme {
+        val context = LocalContext.current
         TerminalList(
-            terminals = generateFakeTerminals(),
+            terminals = generateFakeTerminals { context.getString(it) },
             onTerminalClick = {}
         )
     }

@@ -4,6 +4,7 @@ import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.data.CloudMessagingService
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.data.RemoteMessage
 import kotlinx.coroutines.flow.update
@@ -12,7 +13,8 @@ import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 
 internal class OfferingFakeDeliveryViewModel(
-    private val cloudMessagingService: CloudMessagingService
+    private val cloudMessagingService: CloudMessagingService,
+    private val stringProvider: StringProvider
 ) : BaseViewModel<OfferingFakeDeliveryUiState>(
     initialState = OfferingFakeDeliveryUiState()
 ) {
@@ -20,7 +22,9 @@ internal class OfferingFakeDeliveryViewModel(
         _uiState.update {
             it.copy(isOfferingInProgress = true)
         }
-        sendDeliveryOfferMessage(generateFakeDeliveryOffer())
+        sendDeliveryOfferMessage(
+            offer = generateFakeDeliveryOffer(stringProvider)
+        )
         _uiState.update {
             it.copy(
                 isOfferingInProgress = false,

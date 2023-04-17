@@ -1,9 +1,7 @@
 package dev.alibagherifam.hermesexpress.common.domain
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlin.time.Duration
 
 @Serializable
@@ -15,9 +13,6 @@ data class DeliveryOffer(
     val reverseLogistics: Boolean = false,
     val timeToLive: Duration,
 ) {
-    @Transient
-    val receivedAt: Instant = Clock.System.now()
-
     init {
         require(id > 0) { "Negative ID is not allowed" }
         require(terminals.size > 1) { "At least 2 terminals needed" }
@@ -25,13 +20,9 @@ data class DeliveryOffer(
     }
 }
 
-val DeliveryOffer.isExpired: Boolean get() = Clock.System.now() > receivedAt + timeToLive
-val DeliveryOffer.origin: Terminal get() = terminals.first()
-val DeliveryOffer.destinations: List<Terminal> get() = terminals.drop(1)
-
-fun generateFakeDeliveryOffer() = DeliveryOffer(
+fun generateFakeDeliveryOffer(stringProvider: StringProvider) = DeliveryOffer(
     id = 1,
-    terminals = generateFakeTerminals(),
+    terminals = generateFakeTerminals(stringProvider),
     price = 24.80f,
     timeToLive = with(Duration) { 10.seconds }
 )
