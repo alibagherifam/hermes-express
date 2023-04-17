@@ -5,8 +5,6 @@ import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.animation.easeTo
-import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationManager
-import com.mapbox.maps.plugin.annotation.generated.CircleAnnotationOptions
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
 import kotlinx.coroutines.channels.awaitClose
@@ -20,19 +18,6 @@ typealias LatLong = Pair<Double, Double>
 internal fun LatLong.toPoint(): Point {
     val (latitude, longitude) = this
     return Point.fromLngLat(longitude, latitude)
-}
-
-internal fun CircleAnnotationManager.addMarkers(coordinates: List<Point>) {
-    val markerOptions = CircleAnnotationOptions()
-        .withCircleRadius(circleRadius = 8.0)
-        .withCircleColor(circleColor = "#EE4E8b")
-        .withCircleStrokeWidth(circleStrokeWidth = 2.0)
-        .withCircleStrokeColor(circleStrokeColor = "#FFFFFF")
-
-    for (point in coordinates) {
-        markerOptions.withPoint(point)
-        create(markerOptions)
-    }
 }
 
 internal fun MapView.locationFlow(): Flow<Point> = callbackFlow {

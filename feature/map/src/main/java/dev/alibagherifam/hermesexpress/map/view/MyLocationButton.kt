@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.map
+package dev.alibagherifam.hermesexpress.map.view
 
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.FilledIconButton

@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.map
+package dev.alibagherifam.hermesexpress.map.screen
 
 import com.mapbox.geojson.Point
 

@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.map
+package dev.alibagherifam.hermesexpress.map.view
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button

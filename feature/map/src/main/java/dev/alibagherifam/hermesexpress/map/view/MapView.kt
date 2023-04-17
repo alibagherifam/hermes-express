@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.map
+package dev.alibagherifam.hermesexpress.map.view
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -10,9 +10,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.annotation.annotations
-import com.mapbox.maps.plugin.annotation.generated.createCircleAnnotationManager
+import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
 import dev.alibagherifam.hermesexpress.feature.map.R
+import dev.alibagherifam.hermesexpress.map.screen.MapEvent
+import dev.alibagherifam.hermesexpress.map.screen.MapState
+import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
+import dev.alibagherifam.hermesexpress.map.locationFlow
+import dev.alibagherifam.hermesexpress.map.marker.MarkerColors
+import dev.alibagherifam.hermesexpress.map.marker.MarkerManager
+import dev.alibagherifam.hermesexpress.map.marker.markerDefaultColors
+import dev.alibagherifam.hermesexpress.map.zoomCameraOnCoordinate
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,10 +31,11 @@ import kotlinx.coroutines.flow.sample
 internal fun MapView(
     state: MapState,
     onEvent: (MapEvent) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    markerColors: MarkerColors = markerDefaultColors()
 ) {
     val mapViewScope = rememberCoroutineScope()
-    val markerManagerWrapper = remember { MarkerManagerWrapper(value = null) }
+    val markerManager = remember { MarkerManager(markerColors) }
     AndroidView(
         modifier = modifier
             .fillMaxWidth()
@@ -41,15 +50,15 @@ internal fun MapView(
                     .sample(periodMillis = 800)
                     .onEach { onEvent(MapEvent.UserCoordinatesChange(it)) }
                     .launchIn(mapViewScope)
-                markerManagerWrapper.value = annotations.createCircleAnnotationManager()
+                markerManager.pointAnnotationManager =
+                    annotations.createPointAnnotationManager()
             }
         },
         update = { mapView ->
             if (state.isAnyMarkerUpdateAvailable) {
-                val markerManager = markerManagerWrapper.value
-                markerManager?.deleteAll()
+                markerManager.deleteAllMarkers()
                 if (state.markerCoordinates.isNotEmpty()) {
-                    markerManager?.addMarkers(state.markerCoordinates)
+                    markerManager.addMarkers(state.markerCoordinates)
                     val userCoordinates = requireNotNull(state.userCoordinates)
                     mapView.fitCameraForCoordinates(
                         coordinates = state.markerCoordinates + userCoordinates
