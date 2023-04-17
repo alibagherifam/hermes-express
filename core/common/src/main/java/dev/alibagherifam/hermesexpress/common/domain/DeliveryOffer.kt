@@ -11,7 +11,7 @@ data class DeliveryOffer(
     val price: Float,
     val timeToLive: Duration,
     val estimatedDeliveryTime: Duration,
-    val isFragile: Boolean = false,
+    val isFragile: Boolean = true,
     val isBoxRequired: Boolean = true,
     val reverseLogistics: Boolean = false
 ) {

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_accept_delivery_offer">Accept Offer</string>
+    <string name="label_box_required">Box</string>
+    <string name="label_fragile">Fragile</string>
+    <string name="label_minutes">%1$d min</string>
+
     <string name="message_offer_accepted">You accepted the offer. Good Luck!</string>
+
+    <string name="a11y_box_required">Box Required</string>
+    <string name="a11y_estimated_delivery_time">Estimated Delivery Time</string>
+    <string name="a11y_fragile_shipment">Fragile Shipment</string>
 </resources>

@@ -1,10 +1,9 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,6 +18,9 @@ import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.DeliveryConditionList
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.ProgressButton
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.TerminalList
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
@@ -33,20 +35,20 @@ internal fun DeliveryOfferScreen(
         modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
         Text(
             text = formatCurrency(uiState.offer.price),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary
         )
-        Spacer(Modifier.size(16.dp))
+        DeliveryConditionList(uiState.offer)
         TerminalList(
             terminals = uiState.offer.terminals,
             onTerminalClick,
             showInCompactMode = true
         )
-        Spacer(Modifier.size(16.dp))
         ProgressButton(
             progress = uiState.offerTimeElapsedPercentage,
             onPressStateChange = onAcceptOfferPressStateChange,
