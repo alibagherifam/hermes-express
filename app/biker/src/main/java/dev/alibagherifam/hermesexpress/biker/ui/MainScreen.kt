@@ -1,8 +1,9 @@
 package dev.alibagherifam.hermesexpress.biker.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHost
@@ -16,7 +17,7 @@ import dev.alibagherifam.hermesexpress.map.LatLong
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun MainScreen(
     markerCoordinates: List<LatLong>,
@@ -51,7 +52,7 @@ fun MainScreen(
             mapStateHolder,
             bottomSheetOffset = scaffoldState.bottomSheetState.requireOffset(),
             onLocationPermissionDeny,
-            Modifier.padding(paddingValues)
+            Modifier.consumeWindowInsets(paddingValues)
         )
     }
 }
