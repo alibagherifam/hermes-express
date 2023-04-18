@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="label_offer_fake_delivery">Offer Fake Delivery</string>
-    <string name="message_fake_offer_sent">We send you an offer. Please wait to receive it.</string>
+    <string name="label_offer_fake_delivery">Find me an offer</string>
+    <string name="message_fake_offer_sent">You will receive your offer soon.</string>
 </resources>
