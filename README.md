@@ -1,6 +1,6 @@
 # Hermes Express
 
-![Banner](https://drive.google.com/file/d/1Z2MwLagAlMDlUzVUKHbtEdjbCO4gqqJN/view?usp=sharing)
+![Banner](https://drive.google.com/file/d/1Z2MwLagAlMDlUzVUKHbtEdjbCO4gqqJN/view)
 
 Hermes Express is a personal project that showcases how to build a delivery Android application
 using state-of-the-art technologies in Android development. The app enables bikers to explore
