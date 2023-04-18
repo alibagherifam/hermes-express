@@ -3,11 +3,12 @@ package dev.alibagherifam.hermesexpress.map.marker
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.RectF
 import com.mapbox.geojson.Point
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 
-internal class MarkerManager(private val markerColors: MarkerColors) {
+internal class MarkerManager(private val markerOptions: MarkerOptions) {
     var pointAnnotationManager: PointAnnotationManager? = null
 
     fun addMarkers(coordinates: List<Point>) {
@@ -20,8 +21,8 @@ internal class MarkerManager(private val markerColors: MarkerColors) {
 
     private fun PointAnnotationManager.addMarkers(coordinates: List<Point>) {
         val markerOptions = PointAnnotationOptions()
-            .withTextColor(markerColors.textColor)
-            .withTextSize(14.0)
+            .withTextColor(markerOptions.textColor)
+            .withTextSize(markerOptions.textSize.toDouble())
             .withIconImage(drawCircleBitmap())
 
         for (index in coordinates.indices) {
@@ -33,22 +34,26 @@ internal class MarkerManager(private val markerColors: MarkerColors) {
     }
 
     private fun drawCircleBitmap(): Bitmap {
-        val bitmap = Bitmap.createBitmap(64, 64, Bitmap.Config.ARGB_8888)
+        val bitmapSize = markerOptions.size.toInt()
+        val bitmap = Bitmap.createBitmap(bitmapSize, bitmapSize, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        val paint = Paint()
 
-        val centerX = canvas.width / 2f
-        val centerY = canvas.height / 2f
+        val paint = Paint().apply {
+            color = markerOptions.containerColor
+            style = Paint.Style.FILL
+        }
 
-        val strokeWidth = 4f
-        val radiusOuter = canvas.width / 2f
-        paint.color = markerColors.strokeColor
-        canvas.drawCircle(centerX, centerY, radiusOuter, paint)
+        val topLeftCoordinate = 0f
+        val bottomRightCoordinate = topLeftCoordinate + markerOptions.size
+        val rect = RectF(
+            topLeftCoordinate,
+            topLeftCoordinate,
+            bottomRightCoordinate,
+            bottomRightCoordinate
+        )
 
-        val radiusInner = radiusOuter - strokeWidth
-        paint.color = markerColors.containerColor
-        canvas.drawCircle(centerX, centerY, radiusInner, paint)
-
+        val cornerRadius = markerOptions.cornerRadius
+        canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint)
         return bitmap
     }
 }

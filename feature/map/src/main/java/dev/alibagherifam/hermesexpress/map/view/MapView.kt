@@ -18,9 +18,9 @@ import com.mapbox.maps.plugin.locationcomponent.location
 import dev.alibagherifam.hermesexpress.feature.map.R
 import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
 import dev.alibagherifam.hermesexpress.map.locationFlow
-import dev.alibagherifam.hermesexpress.map.marker.MarkerColors
 import dev.alibagherifam.hermesexpress.map.marker.MarkerManager
-import dev.alibagherifam.hermesexpress.map.marker.markerDefaultColors
+import dev.alibagherifam.hermesexpress.map.marker.MarkerOptions
+import dev.alibagherifam.hermesexpress.map.marker.markerDefaultOptions
 import dev.alibagherifam.hermesexpress.map.screen.MapEvent
 import dev.alibagherifam.hermesexpress.map.screen.MapState
 import dev.alibagherifam.hermesexpress.map.zoomCameraOnCoordinate
@@ -36,10 +36,10 @@ internal fun MapView(
     onEvent: (MapEvent) -> Unit,
     modifier: Modifier = Modifier,
     @DrawableRes userLocationIcon: Int = R.drawable.img_wind_rose,
-    markerColors: MarkerColors = markerDefaultColors()
+    markerOptions: MarkerOptions = markerDefaultOptions()
 ) {
     val mapViewScope = rememberCoroutineScope()
-    val markerManager = remember { MarkerManager(markerColors) }
+    val markerManager = remember { MarkerManager(markerOptions) }
     AndroidView(
         modifier = modifier
             .fillMaxWidth()
