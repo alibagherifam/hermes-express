@@ -24,8 +24,8 @@ fun generateFakeTerminals(stringProvider: StringProvider) = listOf(
         postalAddress = stringProvider.getString(R.string.fake_data_address_1)
     ),
     Terminal(
-        latitude = 35.936,
-        longitude = 50.769,
+        latitude = 35.993,
+        longitude = 50.717,
         postalAddress = stringProvider.getString(R.string.fake_data_address_2)
     ),
     Terminal(

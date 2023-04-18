@@ -42,7 +42,7 @@ internal fun MapView.zoomCameraOnCoordinate(
 
 internal fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
     val cameraController = getMapboxMap()
-    val viewportPadding = EdgeInsets(100.0, 100.0, 500.0, 100.0)
+    val viewportPadding = EdgeInsets(0.0, 100.0, 850.0, 100.0)
     cameraController.run {
         val fittedViewPort = cameraForCoordinates(coordinates, viewportPadding)
         easeTo(fittedViewPort)
