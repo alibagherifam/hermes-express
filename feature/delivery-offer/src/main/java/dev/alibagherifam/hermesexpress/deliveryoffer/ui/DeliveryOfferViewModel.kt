@@ -102,7 +102,7 @@ internal class DeliveryOfferViewModel(
         totalTime: Duration,
         step: Duration,
         doAtTheEnd: suspend () -> Unit,
-        doOnEachStep: suspend (Duration) -> Unit = {},
+        doOnEachStep: suspend (Duration) -> Unit,
     ): Job = safeScope.launch {
         var elapsedTime = Duration.ZERO
         while (elapsedTime < totalTime) {

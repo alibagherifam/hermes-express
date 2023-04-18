@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.map.LatLong
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
@@ -29,6 +30,8 @@ fun MainScreen(
         scaffoldState.bottomSheetState.expand()
     }
     BottomSheetScaffold(
+        sheetTonalElevation = 4.dp,
+        sheetShadowElevation = 4.dp,
         scaffoldState = scaffoldState,
         snackbarHost = {
             Box(Modifier.fillMaxSize()) { SnackbarHost(it) }

@@ -69,7 +69,7 @@ internal fun TerminalItem(
                 .size(width = 20.dp, height = 20.dp)
                 .background(
                     color = MaterialTheme.colorScheme.onErrorContainer,
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(6.dp)
                 ),
             contentAlignment = Alignment.Center
         ) {

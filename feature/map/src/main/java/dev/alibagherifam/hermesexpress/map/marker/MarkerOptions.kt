@@ -23,8 +23,8 @@ fun markerDefaultOptions(): MarkerOptions {
                 size = 20.dp.toPx(),
                 cornerRadius = 6.dp.toPx(),
                 textSize = 16f,
-                textColor = onPrimary.toArgb(),
-                containerColor = primary.toArgb()
+                textColor = onError.toArgb(),
+                containerColor = onErrorContainer.toArgb()
             )
         }
     }
