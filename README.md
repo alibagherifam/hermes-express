@@ -5,8 +5,8 @@
 Hermes Express is a personal project that showcases how to build a delivery Android application
 using state-of-the-art technologies in Android development. The app enables bikers to explore
 delivery offers and accept one to fulfill. Using modern Android development technologies (listed in
-[Technologies](#Technologies) section below), Hermes Express provides a practical example of how to
-create a reliable, scalable, and user-friendly app in the delivery domain.
+the [Technologies](#Technologies) section below), Hermes Express provides a practical example of
+creating a reliable, scalable, and user-friendly app in the delivery domain.
 
 ## Technologies
 
@@ -15,7 +15,7 @@ create a reliable, scalable, and user-friendly app in the delivery domain.
 - [Modular](https://developer.android.com/topic/modularization) by both feature and layer (feature
   and core directories)
 - MVVM + [UDF](https://developer.android.com/jetpack/compose/architecture#udf) state management in
-  presentation layer
+  the presentation layer
 - Reactive style using [Coroutine Flow](https://kotlinlang.org/docs/coroutines-overview.html)
 - [Koin](https://insert-koin.io/) for Dependency Injection
 - [Jetpack Navigation Compose](https://developer.android.com/jetpack/compose/navigation)
