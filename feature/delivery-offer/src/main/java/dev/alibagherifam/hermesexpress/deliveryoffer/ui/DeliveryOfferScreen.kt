@@ -2,8 +2,11 @@ package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -38,11 +41,7 @@ internal fun DeliveryOfferScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
-        Text(
-            text = formatCurrency(uiState.offer.price),
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
+        OfferPriceText(uiState.offer.price)
         DeliveryConditionList(uiState.offer)
         TerminalList(
             terminals = uiState.offer.terminals,
@@ -57,6 +56,29 @@ internal fun DeliveryOfferScreen(
             contentColorAlpha = uiState.offerAcceptancePercentage
         ) {
             Text(text = stringResource(R.string.label_accept_delivery_offer))
+        }
+    }
+}
+
+@Composable
+fun OfferPriceText(
+    price: Float,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier, verticalAlignment = Alignment.CenterVertically) {
+        Spacer(Modifier.weight(0.5f))
+        Text(
+            text = formatCurrency(price),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Spacer(Modifier.size(4.dp))
+        Row(Modifier.weight(0.5f)) {
+            Text(
+                text = stringResource(R.string.label_currency_unit),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
