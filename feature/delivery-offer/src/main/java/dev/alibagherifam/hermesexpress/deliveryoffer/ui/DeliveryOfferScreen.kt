@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -65,21 +64,23 @@ fun OfferPriceText(
     price: Float,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier, verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier) {
         Spacer(Modifier.weight(0.5f))
         Text(
             text = formatCurrency(price),
+            Modifier.alignByBaseline(),
             style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary,
+        )
+        Text(
+            text = stringResource(R.string.label_currency_unit),
+            Modifier
+                .weight(0.5f)
+                .padding(start = 4.dp)
+                .alignByBaseline(),
+            style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.primary
         )
-        Spacer(Modifier.size(4.dp))
-        Row(Modifier.weight(0.5f)) {
-            Text(
-                text = stringResource(R.string.label_currency_unit),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
     }
 }
 
@@ -97,3 +98,4 @@ internal fun DeliveryOfferScreenPreview() {
         )
     }
 }
+//    https://developer.android.com/jetpack/compose/layouts/constraintlayout

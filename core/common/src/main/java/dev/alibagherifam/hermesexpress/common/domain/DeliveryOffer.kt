@@ -28,6 +28,6 @@ fun generateFakeDeliveryOffer(stringProvider: StringProvider) = DeliveryOffer(
     id = 1,
     terminals = generateFakeTerminals(stringProvider),
     price = 24.80f,
-    timeToLive = with(Duration) { 10.seconds },
+    timeToLive = with(Duration) { 20.seconds },
     estimatedDeliveryTime = with(Duration) { 35.minutes }
 )
