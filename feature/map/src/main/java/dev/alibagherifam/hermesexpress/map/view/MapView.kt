@@ -15,6 +15,7 @@ import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.maps.plugin.scalebar.scalebar
 import dev.alibagherifam.hermesexpress.feature.map.R
 import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
 import dev.alibagherifam.hermesexpress.map.locationFlow
@@ -49,6 +50,7 @@ internal fun MapView(
                 getMapboxMap().loadStyleUri(
                     styleUri = context.getString(R.string.mapbox_style_uri)
                 )
+                scalebar.enabled = false
                 location.updateSettings {
                     enabled = true
                     locationPuck = LocationPuck2D(
