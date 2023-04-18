@@ -40,7 +40,7 @@ internal fun MyLocationButtonPreview() {
     HermesTheme {
         MyLocationButton(
             onClick = {},
-            bottomSheetOffset = 0f
+            bottomSheetOffset = with(LocalDensity.current) { 70.dp.toPx() }
         )
     }
 }
