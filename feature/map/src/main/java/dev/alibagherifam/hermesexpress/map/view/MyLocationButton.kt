@@ -1,7 +1,8 @@
 package dev.alibagherifam.hermesexpress.map.view
 
 import androidx.compose.foundation.layout.offset
-import androidx.compose.material3.FilledIconButton
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,13 +20,14 @@ internal fun MyLocationButton(
     bottomSheetOffset: Float,
     modifier: Modifier = Modifier
 ) {
-    FilledIconButton(
+    FloatingActionButton(
         onClick,
         modifier.offset(
             y = with(LocalDensity.current) {
                 bottomSheetOffset.toDp() - 70.dp
             }
-        )
+        ),
+        shape = CircleShape,
     ) {
         Icon(
             painter = painterResource(R.drawable.ic_my_location),
