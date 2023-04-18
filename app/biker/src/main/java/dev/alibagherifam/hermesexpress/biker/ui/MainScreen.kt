@@ -30,12 +30,6 @@ fun MainScreen(
         scaffoldState.bottomSheetState.expand()
     }
     BottomSheetScaffold(
-        sheetTonalElevation = 4.dp,
-        sheetShadowElevation = 4.dp,
-        scaffoldState = scaffoldState,
-        snackbarHost = {
-            Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
-        },
         sheetContent = {
             BottomSheetContentHost(
                 scaffoldState.snackbarHostState,
@@ -45,6 +39,12 @@ fun MainScreen(
                     )
                 }
             )
+        },
+        scaffoldState = scaffoldState,
+        sheetTonalElevation = 3.dp,
+        sheetShadowElevation = 12.dp,
+        snackbarHost = {
+            Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
         }
     ) { paddingValues ->
         MapScreen(
