@@ -9,7 +9,7 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
     val libs = getVersionCatalogs()
     setSdkVersionBoundary(android, libs)
     setJvmTargetVersion(android)
-    desugarJdkLibraries(android, libs)
+//    desugarJdkLibraries(android, libs)
     configureWithDetekt(libs)
     excludeLicencesFromApk(android)
 }
