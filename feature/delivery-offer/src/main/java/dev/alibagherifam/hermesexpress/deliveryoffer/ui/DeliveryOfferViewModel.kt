@@ -152,7 +152,7 @@ internal class DeliveryOfferViewModel(
     }
 
     private companion object {
-        val timeToConfirmOffer = with(Duration) { 3.seconds }
+        val timeToConfirmOffer = with(Duration) { 2.seconds }
         val smoothTimerStep = with(Duration) { 50.milliseconds }
     }
 }

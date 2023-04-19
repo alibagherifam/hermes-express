@@ -9,9 +9,11 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
-import dev.alibagherifam.hermesexpress.deliveryoffer.domain.playNotificationSound
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.playAudio
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.vibrateDevice
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 import org.koin.androidx.compose.koinViewModel
+import kotlin.time.Duration
 
 fun NavGraphBuilder.addDeliveryOfferDestination(
     onOfferAccepted: () -> Unit,
@@ -22,7 +24,7 @@ fun NavGraphBuilder.addDeliveryOfferDestination(
     composable(route = "delivery-offer") {
         val context = LocalContext.current
         LaunchedEffect(key1 = Unit) {
-            playNotificationSound(context, soundResId = R.raw.sfx_harp)
+            playAudio(context, audioResId = R.raw.sfx_harp)
         }
         val viewModel: DeliveryOfferViewModel = koinViewModel()
         val uiState by viewModel.uiState.collectAsState()
@@ -39,7 +41,11 @@ fun NavGraphBuilder.addDeliveryOfferDestination(
         if (uiState.isOfferAccepted || uiState.isOfferExpired) {
             SideEffect {
                 when {
-                    uiState.isOfferAccepted -> onOfferAccepted()
+                    uiState.isOfferAccepted -> {
+                        vibrateDevice(context, with(Duration) { 800.milliseconds })
+                        onOfferAccepted()
+                    }
+
                     uiState.isOfferExpired -> onOfferExpired()
                 }
                 viewModel.resetState()
