@@ -8,7 +8,7 @@ import kotlin.time.Duration
 data class DeliveryOffer(
     val id: Int,
     val terminals: List<Terminal>,
-    val price: Float,
+    val earnings: Float,
     val timeToLive: Duration,
     val estimatedDeliveryTime: Duration,
     val isFragile: Boolean = true,
@@ -18,7 +18,7 @@ data class DeliveryOffer(
     init {
         require(id > 0) { "Negative ID is not allowed" }
         require(terminals.size > 1) { "At least 2 terminals needed" }
-        require(price > 0f) { "Negative Price is not allowed" }
+        require(earnings > 0f) { "Negative earnings is not allowed" }
         require(timeToLive.isPositive()) { "Negative TTL is not allowed" }
         require(estimatedDeliveryTime.isPositive()) { "Negative delivery time is not allowed" }
     }
@@ -27,7 +27,7 @@ data class DeliveryOffer(
 fun generateFakeDeliveryOffer(stringProvider: StringProvider) = DeliveryOffer(
     id = 1,
     terminals = generateFakeTerminals(stringProvider),
-    price = 24.80f,
+    earnings = 24.80f,
     timeToLive = with(Duration) { 20.seconds },
     estimatedDeliveryTime = with(Duration) { 35.minutes }
 )

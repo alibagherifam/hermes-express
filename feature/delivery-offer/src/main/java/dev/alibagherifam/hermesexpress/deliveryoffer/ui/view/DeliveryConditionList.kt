@@ -23,7 +23,7 @@ import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 @Composable
 internal fun DeliveryConditionList(offer: DeliveryOffer) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        DeliveryCondition(
+        DeliveryConditionItem(
             text = stringResource(
                 R.string.label_minutes,
                 offer.estimatedDeliveryTime.inWholeMinutes
@@ -33,7 +33,7 @@ internal fun DeliveryConditionList(offer: DeliveryOffer) {
             iconSize = 18.dp
         )
         if (offer.isFragile) {
-            DeliveryCondition(
+            DeliveryConditionItem(
                 text = stringResource(R.string.label_fragile),
                 contentDescription = stringResource(R.string.a11y_fragile_shipment),
                 iconResId = R.drawable.ic_fragile_filled,
@@ -41,7 +41,7 @@ internal fun DeliveryConditionList(offer: DeliveryOffer) {
             )
         }
         if (offer.isBoxRequired) {
-            DeliveryCondition(
+            DeliveryConditionItem(
                 text = stringResource(R.string.label_box_required),
                 contentDescription = stringResource(R.string.a11y_box_required),
                 iconResId = R.drawable.ic_box_outline,
@@ -52,7 +52,7 @@ internal fun DeliveryConditionList(offer: DeliveryOffer) {
 }
 
 @Composable
-internal fun DeliveryCondition(
+internal fun DeliveryConditionItem(
     text: String,
     contentDescription: String,
     @DrawableRes iconResId: Int,
@@ -73,7 +73,7 @@ internal fun DeliveryCondition(
 
 @Preview(showBackground = true, backgroundColor = 0xffffff)
 @Composable
-internal fun DeliveryConditionsPreview() {
+internal fun DeliveryConditionListPreview() {
     HermesTheme {
         val context = LocalContext.current
         DeliveryConditionList(
