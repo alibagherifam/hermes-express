@@ -6,6 +6,8 @@ import org.koin.dsl.module
 
 val commonModule = module {
     single {
-        StringProvider { androidContext().getString(it) }
+        StringProvider { resId ->
+            androidContext().getString(resId)
+        }
     }
 }

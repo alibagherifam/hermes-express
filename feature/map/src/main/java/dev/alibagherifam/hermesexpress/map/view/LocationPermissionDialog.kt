@@ -12,15 +12,13 @@ import dev.alibagherifam.hermesexpress.feature.map.R
 
 @Composable
 internal fun LocationPermissionDialog(
-    title: String = stringResource(R.string.label_location_permission),
-    message: String = stringResource(R.string.message_location_permission_required),
     onConfirmClick: () -> Unit,
     onDismissRequest: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
-        title = { Text(text = title) },
-        text = { Text(text = message) },
+        title = { Text(text = stringResource(R.string.label_location_permission)) },
+        text = { Text(text = stringResource(R.string.message_location_permission_required)) },
         confirmButton = {
             Button(onClick = onConfirmClick) {
                 Text(text = stringResource(R.string.label_confirm))

@@ -54,9 +54,8 @@ internal fun ProgressButton(
             contentColor = contentColorFor(containerColor)
         ),
         interactionSource = interactionSource,
-        contentPadding = PaddingValues(),
-
-        ) {
+        contentPadding = PaddingValues()
+    ) {
         Box(modifier.sizeIn(ButtonDefaults.MinWidth, ButtonDefaults.MinHeight)) {
             if (!isPressed) {
                 LinearProgressIndicator(
