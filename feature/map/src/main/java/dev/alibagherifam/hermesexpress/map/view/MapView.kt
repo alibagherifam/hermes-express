@@ -15,6 +15,7 @@ import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.maps.plugin.locationcomponent.location2
 import com.mapbox.maps.plugin.scalebar.scalebar
 import dev.alibagherifam.hermesexpress.feature.map.R
 import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
@@ -57,6 +58,7 @@ internal fun MapView(
                         ContextCompat.getDrawable(context, userLocationIcon)
                     )
                 }
+                location2.puckBearingEnabled = false
                 locationFlow()
                     .sample(periodMillis = 800)
                     .onEach { onEvent(MapEvent.UserCoordinatesChange(it)) }
