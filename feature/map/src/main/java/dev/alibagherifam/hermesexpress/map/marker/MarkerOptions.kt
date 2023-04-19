@@ -3,8 +3,10 @@ package dev.alibagherifam.hermesexpress.map.marker
 import androidx.annotation.ColorInt
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 data class MarkerOptions(
@@ -16,16 +18,18 @@ data class MarkerOptions(
 )
 
 @Composable
-fun markerDefaultOptions(): MarkerOptions {
-    return with(MaterialTheme.colorScheme) {
-        with(LocalDensity.current) {
-            MarkerOptions(
-                size = 20.dp.toPx(),
-                cornerRadius = 6.dp.toPx(),
-                textSize = 16f,
-                textColor = onError.toArgb(),
-                containerColor = onErrorContainer.toArgb()
-            )
-        }
-    }
+fun markerDefaultOptions(
+    size: Dp = 20.dp,
+    cornerRadius: Dp = 6.dp,
+    textSize: Float = 16f,
+    textColor: Color = MaterialTheme.colorScheme.onError,
+    containerColor: Color = MaterialTheme.colorScheme.onErrorContainer
+): MarkerOptions = with(LocalDensity.current) {
+    MarkerOptions(
+        size = size.toPx(),
+        cornerRadius = cornerRadius.toPx(),
+        textSize = textSize,
+        textColor = textColor.toArgb(),
+        containerColor = containerColor.toArgb()
+    )
 }
