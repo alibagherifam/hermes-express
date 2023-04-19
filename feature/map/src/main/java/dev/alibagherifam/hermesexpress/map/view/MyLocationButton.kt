@@ -30,7 +30,7 @@ internal fun MyLocationButton(
         shape = CircleShape,
     ) {
         Icon(
-            painter = painterResource(R.drawable.ic_my_location),
+            painter = painterResource(R.drawable.ic_locate_me),
             contentDescription = stringResource(R.string.a11y_my_location_button)
         )
     }

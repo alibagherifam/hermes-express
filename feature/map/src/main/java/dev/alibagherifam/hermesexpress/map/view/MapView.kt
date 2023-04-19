@@ -1,6 +1,5 @@
 package dev.alibagherifam.hermesexpress.map.view
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
@@ -9,7 +8,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.annotation.annotations
@@ -22,7 +20,9 @@ import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
 import dev.alibagherifam.hermesexpress.map.locationFlow
 import dev.alibagherifam.hermesexpress.map.marker.MarkerManager
 import dev.alibagherifam.hermesexpress.map.marker.MarkerOptions
+import dev.alibagherifam.hermesexpress.map.marker.UserLocationIcon
 import dev.alibagherifam.hermesexpress.map.marker.markerDefaultOptions
+import dev.alibagherifam.hermesexpress.map.marker.userLocationDefaultIcon
 import dev.alibagherifam.hermesexpress.map.screen.MapEvent
 import dev.alibagherifam.hermesexpress.map.screen.MapState
 import dev.alibagherifam.hermesexpress.map.zoomCameraOnCoordinate
@@ -37,7 +37,7 @@ internal fun MapView(
     state: MapState,
     onEvent: (MapEvent) -> Unit,
     modifier: Modifier = Modifier,
-    @DrawableRes userLocationIcon: Int = R.drawable.img_wind_rose,
+    userLocationIcon: UserLocationIcon = userLocationDefaultIcon(),
     markerOptions: MarkerOptions = markerDefaultOptions()
 ) {
     val mapViewScope = rememberCoroutineScope()
@@ -54,9 +54,14 @@ internal fun MapView(
                 scalebar.enabled = false
                 location.updateSettings {
                     enabled = true
-                    locationPuck = LocationPuck2D(
-                        ContextCompat.getDrawable(context, userLocationIcon)
-                    )
+                    val isForegroundSet = (userLocationIcon.foreground != null)
+                    val isBackgroundSet = (userLocationIcon.background != null)
+                    if (isForegroundSet || isBackgroundSet) {
+                        locationPuck = LocationPuck2D(
+                            topImage = userLocationIcon.foreground,
+                            bearingImage = userLocationIcon.background,
+                        )
+                    }
                 }
                 location2.puckBearingEnabled = false
                 locationFlow()
