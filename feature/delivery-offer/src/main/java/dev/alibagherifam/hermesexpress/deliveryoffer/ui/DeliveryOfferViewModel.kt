@@ -25,10 +25,7 @@ internal class DeliveryOfferViewModel(
     init {
         repository.getOfferFlow().onEach { offer ->
             _uiState.update {
-                it.copy(
-                    offer = offer,
-                    offerTimeElapsed = Duration.ZERO
-                )
+                it.copy(offer = offer)
             }
             cancelOfferExpiration()
             if (offer != null) {
@@ -64,7 +61,10 @@ internal class DeliveryOfferViewModel(
                     delay(smoothTimerStep)
                 }
             },
-            doAtTheEnd = { repository.removeOffer() }
+            doAtTheEnd = {
+                repository.removeOffer()
+                _uiState.update { it.copy(isOfferExpired = true) }
+            }
         )
     }
 
