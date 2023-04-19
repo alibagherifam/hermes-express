@@ -7,7 +7,7 @@ androidxComposeCompiler = "1.4.5"
 androidxLifecycle = "2.6.1"
 androidxRoom = "2.5.1"
 coil = "2.3.0"
-coroutines = "1.6.4"
+coroutines = "1.7.0-RC"
 detekt = "1.22.0"
 kotlin = "1.8.20"
 
