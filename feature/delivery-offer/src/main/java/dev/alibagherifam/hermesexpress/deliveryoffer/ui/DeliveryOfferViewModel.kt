@@ -1,6 +1,5 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
@@ -20,8 +19,8 @@ internal class DeliveryOfferViewModel(
 ) : BaseViewModel<DeliveryOfferUiState>(
     initialState = DeliveryOfferUiState()
 ) {
-    private var acceptOfferJob: Job? = null
-    private var expireOfferJob: Job? = null
+    private var offerAcceptanceConfirmationJob: Job? = null
+    private var offerExpirationJob: Job? = null
 
     init {
         repository.getOfferFlow().onEach { offer ->
@@ -31,9 +30,9 @@ internal class DeliveryOfferViewModel(
                     offerTimeElapsed = Duration.ZERO
                 )
             }
-            cancelExpireOfferJob()
+            cancelOfferExpiration()
             if (offer != null) {
-                startExpireOfferJob(offer)
+                startOfferExpiration(offer.timeToLive)
             }
         }.launchIn(safeScope)
     }
@@ -42,9 +41,9 @@ internal class DeliveryOfferViewModel(
         when (event) {
             is DeliveryOfferEvent.AcceptOfferPressStateChange -> {
                 if (event.isPressed) {
-                    startAcceptingOfferJob()
+                    startOfferAcceptanceConfirmation()
                 } else {
-                    cancelAcceptingOfferJob()
+                    cancelOfferAcceptanceConfirmation()
                 }
             }
 
@@ -54,9 +53,9 @@ internal class DeliveryOfferViewModel(
         }
     }
 
-    private fun startExpireOfferJob(offer: DeliveryOffer) {
-        expireOfferJob = startCountUpTimer(
-            totalTime = offer.timeToLive,
+    private fun startOfferExpiration(expirationDuration: Duration) {
+        offerExpirationJob = startCountUpTimer(
+            totalTime = expirationDuration,
             step = smoothTimerStep,
             doOnEachStep = { elapsedTime ->
                 _uiState.update { it.copy(offerTimeElapsed = elapsedTime) }
@@ -69,34 +68,34 @@ internal class DeliveryOfferViewModel(
         )
     }
 
-    private fun cancelExpireOfferJob() {
-        expireOfferJob?.cancel()
-        expireOfferJob = null
+    private fun cancelOfferExpiration() {
+        offerExpirationJob?.cancel()
+        offerExpirationJob = null
     }
 
-    private fun startAcceptingOfferJob() {
-        acceptOfferJob = startCountUpTimer(
-            totalTime = timeToConfirmOffer,
+    private fun startOfferAcceptanceConfirmation() {
+        offerAcceptanceConfirmationJob = startCountUpTimer(
+            totalTime = timeToConfirmOfferAcceptance,
             step = smoothTimerStep,
             doAtTheEnd = { acceptOffer() },
             doOnEachStep = { elapsedTime ->
-                val percentage = (elapsedTime / timeToConfirmOffer).toFloat()
+                val percentage = (elapsedTime / timeToConfirmOfferAcceptance).toFloat()
                 _uiState.update {
-                    it.copy(offerAcceptancePercentage = percentage)
+                    it.copy(offerAcceptanceConfirmationPercentage = percentage)
                 }
             }
         )
     }
 
-    private fun cancelAcceptingOfferJob() {
+    private fun cancelOfferAcceptanceConfirmation() {
         _uiState.update {
-            it.copy(offerAcceptancePercentage = 0f)
+            it.copy(offerAcceptanceConfirmationPercentage = 0f)
         }
-        acceptOfferJob?.cancel()
-        acceptOfferJob = null
+        offerAcceptanceConfirmationJob?.cancel()
+        offerAcceptanceConfirmationJob = null
     }
 
-    private fun isAcceptingOfferJobRunning() = (acceptOfferJob != null)
+    private fun isAcceptingOfferJobRunning() = (offerAcceptanceConfirmationJob != null)
 
     private fun startCountUpTimer(
         totalTime: Duration,
@@ -115,7 +114,7 @@ internal class DeliveryOfferViewModel(
     }
 
     private fun acceptOffer() = safeLaunch {
-        cancelExpireOfferJob()
+        cancelOfferExpiration()
         _uiState.update {
             it.copy(isAcceptingOfferInProgress = true)
         }
@@ -152,7 +151,7 @@ internal class DeliveryOfferViewModel(
     }
 
     private companion object {
-        val timeToConfirmOffer = with(Duration) { 2.seconds }
+        val timeToConfirmOfferAcceptance = with(Duration) { 2.seconds }
         val smoothTimerStep = with(Duration) { 50.milliseconds }
     }
 }

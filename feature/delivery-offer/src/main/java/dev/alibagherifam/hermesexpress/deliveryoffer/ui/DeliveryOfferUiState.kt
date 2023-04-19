@@ -5,10 +5,10 @@ import kotlin.time.Duration
 
 internal data class DeliveryOfferUiState(
     val offer: DeliveryOffer? = null,
+    val offerAcceptanceConfirmationPercentage: Float = 0f,
     val isAcceptingOfferInProgress: Boolean = false,
     val isOfferAccepted: Boolean = false,
     val offerTimeElapsed: Duration = Duration.ZERO,
-    val offerAcceptancePercentage: Float = 0f,
     val userMessages: List<String> = emptyList()
 ) {
     val isOfferExpired: Boolean

@@ -49,7 +49,7 @@ internal fun DeliveryOfferScreen(
             onPressStateChange = onAcceptOfferPressStateChange,
             Modifier.widthIn(min = 240.dp),
             isEnabled = !uiState.isAcceptingOfferInProgress,
-            pressedStateColorSaturation = uiState.offerAcceptancePercentage
+            pressedStateColorSaturation = uiState.offerAcceptanceConfirmationPercentage
         ) {
             Text(text = stringResource(R.string.label_accept_delivery_offer))
         }
