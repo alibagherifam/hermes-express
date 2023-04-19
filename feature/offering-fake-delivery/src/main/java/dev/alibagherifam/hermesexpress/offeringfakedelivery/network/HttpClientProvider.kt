@@ -1,13 +1,11 @@
 package dev.alibagherifam.hermesexpress.offeringfakedelivery.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
-@OptIn(ExperimentalSerializationApi::class)
 internal fun provideHttpClient(): Retrofit {
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(ApiKeyInterceptor())
