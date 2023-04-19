@@ -1,22 +1,25 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui.view
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
@@ -39,16 +42,10 @@ internal fun TerminalList(
             TerminalItem(
                 number = index + 1,
                 terminals[index],
-                onTerminalClick
+                onTerminalClick,
+                isFirstItem = (index == 0),
+                isLastItem = (index == terminals.lastIndex)
             )
-            if (index != terminals.lastIndex) {
-                Divider(
-                    Modifier.padding(
-                        horizontal = 28.dp,
-                        vertical = 20.dp
-                    )
-                )
-            }
         }
     }
 }
@@ -58,32 +55,38 @@ internal fun TerminalItem(
     number: Int,
     terminal: Terminal,
     onClick: (Terminal) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isFirstItem: Boolean = false,
+    isLastItem: Boolean = false,
+    timelineWidth: Dp = 1.dp,
+    timelineColor: Color = MaterialTheme.colorScheme.primary
 ) {
+    check(!(isFirstItem && isLastItem)) { "Item can either be first or last one at a time" }
     Row(
-        modifier.clickable { onClick(terminal) },
-        verticalAlignment = Alignment.CenterVertically
+        modifier
+            .height(IntrinsicSize.Max)
+            .clickable { onClick(terminal) }
     ) {
-        Box(
-            modifier = Modifier
-                .size(width = 20.dp, height = 20.dp)
-                .background(
-                    color = MaterialTheme.colorScheme.onErrorContainer,
-                    shape = RoundedCornerShape(6.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = number.toString(),
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onError
+        Box(contentAlignment = Alignment.Center) {
+            DashedVerticalDivider(
+                Modifier.fillMaxHeight(),
+                width = timelineWidth,
+                color = timelineColor,
+                drawHalfTop = !isFirstItem,
+                drawHalfBottom = !isLastItem
             )
+            SquareNumberBullet(number)
         }
         Spacer(Modifier.size(12.dp))
-        Text(
-            text = terminal.postalAddress,
-            style = MaterialTheme.typography.bodySmall
-        )
+        Column {
+            Spacer(Modifier.size(20.dp))
+            Text(
+                text = terminal.postalAddress,
+                style = MaterialTheme.typography.bodySmall
+            )
+            Spacer(Modifier.size(20.dp))
+            Divider(Modifier.padding(start = 8.dp, end = 28.dp))
+        }
     }
 }
 

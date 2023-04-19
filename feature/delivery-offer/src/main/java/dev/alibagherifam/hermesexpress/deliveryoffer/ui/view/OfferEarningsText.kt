@@ -13,7 +13,7 @@ import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
-fun OfferEarningsText(
+internal fun OfferEarningsText(
     earnings: Float,
     modifier: Modifier = Modifier
 ) {
