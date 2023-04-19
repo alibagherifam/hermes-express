@@ -57,8 +57,10 @@ internal class OfferingFakeDeliveryViewModel(
         cloudMessagingService.sendMessage(message)
     }
 
-    fun resetState() {
-        _uiState.update { OfferingFakeDeliveryUiState() }
+    fun consumeIsFakeOfferSent() {
+        _uiState.update {
+            it.copy(isFakeOfferSent = false)
+        }
     }
 
     override fun handleIOException(exception: Throwable) {

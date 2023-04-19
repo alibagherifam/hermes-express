@@ -1,6 +1,6 @@
 package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
 
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
@@ -18,14 +18,16 @@ fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
         OfferingFakeDeliveryScreen(
             uiState,
             onSendFakeOffer = {
-                viewModel.onNewEvent(OfferingFakeDeliveryEvent.BroadcastFakeDeliveryRequested)
+                viewModel.onNewEvent(
+                    OfferingFakeDeliveryEvent.BroadcastFakeDeliveryRequested
+                )
             }
         )
         uiState.userMessages.firstOrNull()?.let(onUserMessage)
-        if (uiState.isFakeOfferSent) {
-            SideEffect {
+        LaunchedEffect(key1 = uiState.isFakeOfferSent) {
+            if (uiState.isFakeOfferSent) {
                 onFakeOfferSent()
-                viewModel.resetState()
+                viewModel.consumeIsFakeOfferSent()
             }
         }
     }

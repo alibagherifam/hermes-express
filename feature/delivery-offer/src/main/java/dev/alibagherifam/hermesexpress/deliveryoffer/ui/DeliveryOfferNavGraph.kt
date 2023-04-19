@@ -1,7 +1,6 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -38,17 +37,16 @@ fun NavGraphBuilder.addDeliveryOfferDestination(
             onTerminalClick
         )
         uiState.userMessages.firstOrNull()?.let(onUserMessage)
-        if (uiState.isOfferAccepted || uiState.isOfferExpired) {
-            SideEffect {
-                when {
-                    uiState.isOfferAccepted -> {
-                        vibrateDevice(context, with(Duration) { 800.milliseconds })
-                        onOfferAccepted()
-                    }
-
-                    uiState.isOfferExpired -> onOfferExpired()
+        LaunchedEffect(key1 = uiState.isOfferAccepted || uiState.isOfferExpired) {
+            when {
+                uiState.isOfferAccepted -> {
+                    vibrateDevice(context, with(Duration) { 800.milliseconds })
+                    onOfferAccepted()
                 }
-                viewModel.resetState()
+
+                uiState.isOfferExpired -> {
+                    onOfferExpired()
+                }
             }
         }
     }

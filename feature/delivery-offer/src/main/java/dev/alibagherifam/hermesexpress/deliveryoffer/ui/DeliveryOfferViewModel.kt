@@ -129,10 +129,6 @@ internal class DeliveryOfferViewModel(
         }
     }
 
-    fun resetState() {
-        _uiState.update { DeliveryOfferUiState() }
-    }
-
     override fun handleIOException(exception: Throwable) {
         val errorMessage = stringProvider.getString(CommonR.string.message_generic_io_error)
         _uiState.update {
