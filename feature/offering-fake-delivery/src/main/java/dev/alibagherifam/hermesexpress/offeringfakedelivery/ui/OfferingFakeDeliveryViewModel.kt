@@ -73,7 +73,8 @@ internal class OfferingFakeDeliveryViewModel(
     private fun consumeUserMessage(message: String) {
         _uiState.update { oldState ->
             oldState.copy(
-                userMessages = oldState.userMessages.filterNot { it == message }
+                userMessages = oldState.userMessages.filterNot { it == message },
+                isOfferingInProgress = false
             )
         }
     }
