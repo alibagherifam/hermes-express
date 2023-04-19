@@ -20,30 +20,3 @@ internal suspend fun playNotificationSound(
         mediaPlayer.release()
     }
 }
-
-@Deprecated(message = "Use playNotificationSound() instead")
-internal class NotificationSoundPlayer(@RawRes private val mediaResId: Int) {
-    private var mediaPlayer: MediaPlayer? = null
-
-    fun prepare(context: Context) {
-        mediaPlayer = MediaPlayer.create(context, mediaResId)
-    }
-
-    fun play() {
-        val player = checkNotNull(mediaPlayer) { "Call prepare() before play()" }
-        player.run {
-            if (isPlaying) {
-                pause()
-            }
-            seekTo(0)
-            start()
-        }
-    }
-
-    fun release() {
-        mediaPlayer?.run {
-            stop()
-            release()
-        }
-    }
-}

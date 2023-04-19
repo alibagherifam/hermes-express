@@ -14,13 +14,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.tooling.preview.Preview
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
@@ -30,7 +30,7 @@ internal fun ProgressButton(
     onPressStateChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    contentColorAlpha: Float = 1f,
+    pressedStateColorSaturation: Float = 0.2f,
     content: @Composable RowScope.() -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -40,7 +40,10 @@ internal fun ProgressButton(
     }
     val containerColor = with(MaterialTheme.colorScheme) {
         if (isPressed) {
-            error.copy(alpha = contentColorAlpha.coerceAtLeast(0.2f))
+            val fraction = pressedStateColorSaturation
+                .plus(0.3f)
+                .coerceAtMost(1f)
+            lerp(inversePrimary, onErrorContainer, fraction)
         } else {
             primary
         }
@@ -51,7 +54,7 @@ internal fun ProgressButton(
         isEnabled,
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
-            contentColor = contentColorFor(containerColor)
+            contentColor = MaterialTheme.colorScheme.onPrimary
         ),
         interactionSource = interactionSource,
         contentPadding = PaddingValues()
