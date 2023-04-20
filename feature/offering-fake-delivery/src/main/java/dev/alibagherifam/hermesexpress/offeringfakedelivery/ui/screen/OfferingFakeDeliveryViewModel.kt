@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen
 
 import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer

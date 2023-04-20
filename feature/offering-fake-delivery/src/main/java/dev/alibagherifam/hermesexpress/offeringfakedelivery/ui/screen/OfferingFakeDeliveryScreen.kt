@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

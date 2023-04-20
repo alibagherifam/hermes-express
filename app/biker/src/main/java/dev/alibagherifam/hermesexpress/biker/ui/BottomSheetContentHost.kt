@@ -8,9 +8,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
-import dev.alibagherifam.hermesexpress.deliveryoffer.ui.addDeliveryOfferDestination
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.addDeliveryOfferScreen
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.navigateToDeliveryOffer
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.addOfferingFakeDeliveryDestination
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.addOfferingFakeDeliveryScreen
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.offeringFakeDeliveryRoute
 import kotlinx.coroutines.launch
 
 @Composable
@@ -19,11 +20,11 @@ fun BottomSheetContentHost(
     onTerminalClick: (Terminal) -> Unit,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = "offering-fake-delivery"
+    startDestination: String = offeringFakeDeliveryRoute
 ) {
     val scope = rememberCoroutineScope()
     NavHost(navController, startDestination, modifier) {
-        addOfferingFakeDeliveryDestination(
+        addOfferingFakeDeliveryScreen(
             onFakeOfferSent = {
                 navController.navigateToDeliveryOffer()
             },
@@ -31,7 +32,7 @@ fun BottomSheetContentHost(
                 scope.launch { snackbarHostState.showSnackbar(it) }
             }
         )
-        addDeliveryOfferDestination(
+        addDeliveryOfferScreen(
             onOfferAccepted = {
                 navController.popBackStack()
             },

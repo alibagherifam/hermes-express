@@ -6,13 +6,18 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen.OfferingFakeDeliveryEvent
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen.OfferingFakeDeliveryScreen
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen.OfferingFakeDeliveryViewModel
 import org.koin.androidx.compose.koinViewModel
 
-fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
+const val offeringFakeDeliveryRoute = "offering-fake-delivery"
+
+fun NavGraphBuilder.addOfferingFakeDeliveryScreen(
     onFakeOfferSent: () -> Unit,
     onUserMessage: (String) -> Unit
 ) {
-    composable(route = "offering-fake-delivery") {
+    composable(offeringFakeDeliveryRoute) {
         val viewModel: OfferingFakeDeliveryViewModel = koinViewModel()
         val uiState by viewModel.uiState.collectAsState()
         OfferingFakeDeliveryScreen(
@@ -34,5 +39,5 @@ fun NavGraphBuilder.addOfferingFakeDeliveryDestination(
 }
 
 fun NavController.navigateToOfferingFakeDelivery() {
-    navigate(route = "offering-fake-delivery")
+    navigate(offeringFakeDeliveryRoute)
 }

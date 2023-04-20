@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.deliveryoffer.ui
+package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
@@ -23,7 +23,7 @@ internal class DeliveryOfferViewModel(
     private var offerExpirationJob: Job? = null
 
     init {
-        repository.getOfferFlow().onEach { offer ->
+        repository.getOfferStream().onEach { offer ->
             _uiState.update {
                 it.copy(offer = offer)
             }

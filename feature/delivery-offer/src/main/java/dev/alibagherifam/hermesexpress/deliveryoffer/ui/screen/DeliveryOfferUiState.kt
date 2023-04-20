@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.deliveryoffer.ui
+package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import kotlin.time.Duration

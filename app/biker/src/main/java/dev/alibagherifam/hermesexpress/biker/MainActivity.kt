@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             HermesTheme {
                 LaunchedEffect(key1 = Unit) { subscribeForDeliveryOfferMessages() }
                 val repository: DeliveryOfferRepository = koinInject()
-                val offer by repository.getOfferFlow().collectAsState()
+                val offer by repository.getOfferStream().collectAsState()
                 val terminals = offer?.terminals.orEmpty()
                 MainScreen(
                     markerCoordinates = terminals.map { Pair(it.latitude, it.longitude) },

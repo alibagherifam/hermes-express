@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
+package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen
 
 sealed interface OfferingFakeDeliveryEvent {
     object BroadcastFakeDeliveryRequested : OfferingFakeDeliveryEvent

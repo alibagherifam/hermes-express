@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.deliveryoffer.ui
+package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

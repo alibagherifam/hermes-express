@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 internal class DeliveryOfferStore : DeliveryOfferRepository {
     private val _offer: MutableStateFlow<DeliveryOffer?> = MutableStateFlow(null)
-    override fun getOfferFlow(): StateFlow<DeliveryOffer?> = _offer
+    override fun getOfferStream(): StateFlow<DeliveryOffer?> = _offer
     override fun saveOffer(offer: DeliveryOffer) {
         _offer.value = offer
     }
