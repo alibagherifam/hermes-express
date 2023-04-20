@@ -13,18 +13,21 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.map.LatLong
+import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun MainScreen(
-    markerCoordinates: List<LatLong>,
+    offer: DeliveryOffer?,
     onLocationPermissionDeny: () -> Unit
 ) {
+    val terminals = offer?.terminals.orEmpty()
     val mapStateHolder = remember { MapStateHolder() }
-    mapStateHolder.setMarkerCoordinates(markerCoordinates)
+    mapStateHolder.setMarkerCoordinates(
+        coordinates = terminals.map { Pair(it.latitude, it.longitude) }
+    )
 
     val scaffoldState = rememberBottomSheetScaffoldState()
     val sheetState = scaffoldState.bottomSheetState
@@ -36,12 +39,13 @@ fun MainScreen(
     BottomSheetScaffold(
         sheetContent = {
             BottomSheetContentHost(
-                scaffoldState.snackbarHostState,
+                offer,
                 onTerminalClick = { terminal ->
                     mapStateHolder.moveCamera(
                         to = terminal.let { Pair(it.latitude, it.longitude) }
                     )
-                }
+                },
+                scaffoldState.snackbarHostState
             )
         },
         scaffoldState = scaffoldState,

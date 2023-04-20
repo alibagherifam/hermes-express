@@ -1,13 +1,13 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
+import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
@@ -23,15 +23,12 @@ internal class DeliveryOfferViewModel(
     private var offerExpirationJob: Job? = null
 
     init {
-        repository.getOfferStream().onEach { offer ->
-            _uiState.update {
-                it.copy(offer = offer)
-            }
-            cancelOfferExpiration()
-            if (offer != null) {
-                startOfferExpiration(offer.timeToLive)
-            }
-        }.launchIn(safeScope)
+        viewModelScope.launch {
+            val offer = repository.getOfferStream().first()
+            requireNotNull(offer)
+            _uiState.update { it.copy(offer = offer) }
+            startOfferExpiration(offer.timeToLive)
+        }
     }
 
     fun onNewEvent(event: DeliveryOfferEvent) {
