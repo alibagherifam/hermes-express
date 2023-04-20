@@ -30,7 +30,7 @@ rootProject.name = "hermes-express"
 include(":app:biker")
 include(":app:customer")
 include(":core:common")
-include(":core:push-notification")
+include(":core:cloud-messaging")
 include(":feature:delivery-offer")
 include(":feature:map")
 include(":feature:offering-fake-delivery")

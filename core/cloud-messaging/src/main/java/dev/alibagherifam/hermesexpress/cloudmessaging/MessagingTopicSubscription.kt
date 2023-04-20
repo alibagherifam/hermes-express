@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.pushnotification
+package dev.alibagherifam.hermesexpress.cloudmessaging
 
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging

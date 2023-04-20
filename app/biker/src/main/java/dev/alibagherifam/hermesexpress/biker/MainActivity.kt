@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import dev.alibagherifam.hermesexpress.biker.ui.MainScreen
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
-import dev.alibagherifam.hermesexpress.pushnotification.subscribeForDeliveryOfferMessages
+import dev.alibagherifam.hermesexpress.cloudmessaging.subscribeForDeliveryOfferMessages
 import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {

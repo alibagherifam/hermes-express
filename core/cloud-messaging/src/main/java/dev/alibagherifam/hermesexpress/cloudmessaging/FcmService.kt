@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.pushnotification
+package dev.alibagherifam.hermesexpress.cloudmessaging
 
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService

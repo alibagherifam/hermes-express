@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.alibagherifam.hermesexpress.pushnotification"
+    namespace = "dev.alibagherifam.hermesexpress.cloudmessaging"
 }
 
 dependencies {

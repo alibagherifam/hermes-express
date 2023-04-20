@@ -16,7 +16,7 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
-    implementation(project(":core:push-notification"))
+    implementation(project(":core:cloud-messaging"))
     implementation(project(":feature:delivery-offer"))
     implementation(project(":feature:map"))
     implementation(project(":feature:offering-fake-delivery"))
