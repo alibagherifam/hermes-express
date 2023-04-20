@@ -3,7 +3,6 @@ package dev.alibagherifam.hermesexpress.deliveryoffer.ui.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +20,7 @@ internal fun SquareNumberBullet(
             .size(width = 20.dp, height = 20.dp)
             .background(
                 color = MaterialTheme.colorScheme.onErrorContainer,
-                shape = RoundedCornerShape(6.dp)
+                shape = MaterialTheme.shapes.small
             ),
         contentAlignment = Alignment.Center
     ) {
