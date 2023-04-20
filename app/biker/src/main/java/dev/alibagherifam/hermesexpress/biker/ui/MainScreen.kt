@@ -27,8 +27,11 @@ fun MainScreen(
     mapStateHolder.setMarkerCoordinates(markerCoordinates)
 
     val scaffoldState = rememberBottomSheetScaffoldState()
-    LaunchedEffect(key1 = Unit) {
-        scaffoldState.bottomSheetState.expand()
+    val sheetState = scaffoldState.bottomSheetState
+    if (!sheetState.hasExpandedState) {
+        LaunchedEffect(key1 = Unit) {
+            sheetState.expand()
+        }
     }
     BottomSheetScaffold(
         sheetContent = {
@@ -50,7 +53,7 @@ fun MainScreen(
     ) { paddingValues ->
         MapScreen(
             mapStateHolder,
-            bottomSheetOffset = scaffoldState.bottomSheetState.requireOffset(),
+            bottomSheetOffset = sheetState.requireOffset(),
             onLocationPermissionDeny,
             Modifier.consumeWindowInsets(paddingValues)
         )
