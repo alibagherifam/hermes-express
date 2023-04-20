@@ -22,7 +22,7 @@ internal class MarkerManager(private val markerOptions: MarkerOptions) {
     private fun PointAnnotationManager.addMarkers(coordinates: List<Point>) {
         val markerOptions = PointAnnotationOptions()
             .withTextColor(markerOptions.textColor)
-            .withTextSize(markerOptions.textSize.toDouble())
+            .withTextSize(markerOptions.textSize.value.toDouble())
             .withIconImage(drawCircleBitmap())
 
         for (index in coordinates.indices) {

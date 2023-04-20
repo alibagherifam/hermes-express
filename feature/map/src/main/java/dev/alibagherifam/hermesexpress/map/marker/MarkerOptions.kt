@@ -7,12 +7,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 
 data class MarkerOptions(
     val size: Float,
     val cornerRadius: Float,
-    val textSize: Float,
+    val textSize: TextUnit,
     @ColorInt val textColor: Int,
     @ColorInt val containerColor: Int
 )
@@ -21,7 +22,7 @@ data class MarkerOptions(
 fun markerDefaultOptions(
     size: Dp = 20.dp,
     cornerRadius: Dp = 6.dp,
-    textSize: Float = 16f,
+    textSize: TextUnit = MaterialTheme.typography.labelLarge.fontSize,
     textColor: Color = MaterialTheme.colorScheme.onError,
     containerColor: Color = MaterialTheme.colorScheme.onErrorContainer
 ): MarkerOptions = with(LocalDensity.current) {
