@@ -85,7 +85,9 @@ internal fun TerminalItem(
                 style = MaterialTheme.typography.bodySmall
             )
             Spacer(Modifier.size(20.dp))
-            Divider(Modifier.padding(start = 8.dp, end = 28.dp))
+            if (!isLastItem) {
+                Divider(Modifier.padding(start = 8.dp, end = 28.dp))
+            }
         }
     }
 }
