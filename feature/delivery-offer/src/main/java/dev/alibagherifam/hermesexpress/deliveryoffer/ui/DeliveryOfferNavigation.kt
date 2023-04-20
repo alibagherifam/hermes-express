@@ -1,9 +1,9 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui
 
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -31,7 +31,7 @@ fun NavGraphBuilder.addDeliveryOfferScreen(
             playAudio(context, audioResId = R.raw.sfx_harp)
         }
         val viewModel: DeliveryOfferViewModel = koinViewModel()
-        val uiState by viewModel.uiState.collectAsState()
+        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         DeliveryOfferScreen(
             uiState,
             onAcceptOfferPressStateChange = { isPressed ->
@@ -41,16 +41,26 @@ fun NavGraphBuilder.addDeliveryOfferScreen(
             },
             onTerminalClick
         )
-        uiState.userMessages.firstOrNull()?.let(onUserMessage)
-        LaunchedEffect(key1 = uiState.isOfferAccepted || uiState.isOfferExpired) {
-            when {
-                uiState.isOfferAccepted -> {
-                    vibrateDevice(context, with(Duration) { 800.milliseconds })
-                    onOfferAccepted()
-                }
+        uiState.userMessages.firstOrNull()?.let { message ->
+            LaunchedEffect(key1 = message) {
+                onUserMessage(message)
+                viewModel.onNewEvent(
+                    DeliveryOfferEvent.UserMessageShown(message)
+                )
+            }
+        }
+        val isNavigationRequired = uiState.isOfferAccepted || uiState.isOfferExpired
+        if (isNavigationRequired) {
+            LaunchedEffect(key1 = Unit) {
+                when {
+                    uiState.isOfferAccepted -> {
+                        vibrateDevice(context, with(Duration) { 800.milliseconds })
+                        onOfferAccepted()
+                    }
 
-                uiState.isOfferExpired -> {
-                    onOfferExpired()
+                    else -> {
+                        onOfferExpired()
+                    }
                 }
             }
         }
