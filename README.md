@@ -40,3 +40,9 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 - [Version Catalog](https://docs.gradle.org/current/userguide/platforms.html) for sharing dependency
   versions between subprojects
 - [Detekt](https://detekt.dev/) static analyzer for finding code smells
+
+### UI
+
+- Compose UI
+- Material 3 design system with support for dynamic color (Android 12+)
+- Themed launcher icon (Android 13+)
