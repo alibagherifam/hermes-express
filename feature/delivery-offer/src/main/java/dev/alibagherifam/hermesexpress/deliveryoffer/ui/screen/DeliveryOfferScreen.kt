@@ -1,9 +1,10 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,9 +36,9 @@ internal fun DeliveryOfferScreen(
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         OfferEarningsText(uiState.offer.earnings)
+        Spacer(Modifier.size(6.dp))
         DeliveryConditionList(uiState.offer)
         TerminalList(
             terminals = uiState.offer.terminals,
@@ -47,7 +48,7 @@ internal fun DeliveryOfferScreen(
         ProgressButton(
             progress = uiState.offerTimeElapsedPercentage,
             onPressStateChange = onAcceptOfferPressStateChange,
-            Modifier.widthIn(min = 240.dp),
+            modifier = Modifier.widthIn(min = 260.dp),
             isEnabled = !uiState.isAcceptingOfferInProgress,
             pressedStateColorSaturation = uiState.offerAcceptanceConfirmationPercentage
         ) {

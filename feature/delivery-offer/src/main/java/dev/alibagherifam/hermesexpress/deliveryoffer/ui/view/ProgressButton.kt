@@ -38,22 +38,15 @@ internal fun ProgressButton(
     LaunchedEffect(key1 = isPressed) {
         onPressStateChange(isPressed)
     }
-    val containerColor = with(MaterialTheme.colorScheme) {
-        if (isPressed) {
-            val fraction = pressedStateColorSaturation
-                .plus(0.3f)
-                .coerceAtMost(1f)
-            lerp(inversePrimary, onErrorContainer, fraction)
-        } else {
-            primary
-        }
-    }
     Button(
         onClick = {},
         Modifier.wrapContentSize(),
         isEnabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor,
+            containerColor = containerColorForProgressButton(
+                isPressed,
+                pressedStateColorSaturation
+            ),
             contentColor = MaterialTheme.colorScheme.onPrimary
         ),
         interactionSource = interactionSource,
@@ -75,6 +68,21 @@ internal fun ProgressButton(
                 content()
             }
         }
+    }
+}
+
+@Composable
+internal fun containerColorForProgressButton(
+    isPressed: Boolean,
+    pressedStateColorSaturation: Float
+) = with(MaterialTheme.colorScheme) {
+    if (isPressed) {
+        val fraction = pressedStateColorSaturation
+            .plus(0.3f)
+            .coerceAtMost(1f)
+        lerp(inversePrimary, onErrorContainer, fraction)
+    } else {
+        primary
     }
 }
 
