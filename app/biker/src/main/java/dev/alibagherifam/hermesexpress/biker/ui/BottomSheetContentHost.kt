@@ -26,8 +26,8 @@ fun BottomSheetContentHost(
     startDestination: String = offeringFakeDeliveryRoute
 ) {
     val scope = rememberCoroutineScope()
-    LaunchedEffect(key1 = offer) {
-        if (offer != null) {
+    if (offer != null) {
+        LaunchedEffect(key1 = offer) {
             navController.navigateToDeliveryOffer()
         }
     }
