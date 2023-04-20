@@ -32,7 +32,7 @@ internal fun DeliveryConditionList(offer: DeliveryOffer) {
             iconResId = R.drawable.ic_timer_outline,
             iconSize = 18.dp
         )
-        if (offer.isFragile) {
+        if (offer.isShipmentFragile) {
             DeliveryConditionItem(
                 text = stringResource(R.string.label_fragile),
                 contentDescription = stringResource(R.string.a11y_fragile_shipment),
