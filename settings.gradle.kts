@@ -29,8 +29,9 @@ rootProject.name = "hermes-express"
 
 include(":app:biker")
 include(":app:customer")
-include(":core:common")
 include(":core:cloud-messaging")
+include(":core:common")
+include(":core:http-client")
 include(":feature:delivery-offer")
 include(":feature:map")
 include(":feature:offering-fake-delivery")

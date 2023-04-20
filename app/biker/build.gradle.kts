@@ -16,6 +16,7 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+    implementation(project(":core:http-client"))
     implementation(project(":core:cloud-messaging"))
     implementation(project(":feature:delivery-offer"))
     implementation(project(":feature:map"))
