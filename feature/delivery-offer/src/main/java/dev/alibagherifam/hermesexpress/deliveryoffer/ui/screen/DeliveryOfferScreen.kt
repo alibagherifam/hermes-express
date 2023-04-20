@@ -35,7 +35,7 @@ internal fun DeliveryOfferScreen(
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(18.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         OfferEarningsText(uiState.offer.earnings)
         DeliveryConditionList(uiState.offer)

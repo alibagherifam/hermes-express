@@ -10,9 +10,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.feature.map.R
+import kotlin.math.roundToInt
 
 @Composable
 internal fun MyLocationButton(
@@ -22,11 +24,10 @@ internal fun MyLocationButton(
 ) {
     FloatingActionButton(
         onClick,
-        modifier.offset(
-            y = with(LocalDensity.current) {
-                bottomSheetOffset.toDp() - 70.dp
-            }
-        ),
+        modifier.offset {
+            val spaceBetween = 70.dp.toPx()
+            IntOffset(x = 0, y = (bottomSheetOffset - spaceBetween).roundToInt())
+        },
         shape = CircleShape,
     ) {
         Icon(
