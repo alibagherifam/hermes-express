@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
 @Composable
@@ -96,9 +97,11 @@ internal fun TerminalItem(
 @Composable
 internal fun TerminalListPreview() {
     HermesTheme {
-        val context = LocalContext.current
+        val stringProvider = with(LocalContext.current) {
+            StringProvider { getString(it) }
+        }
         TerminalList(
-            terminals = generateFakeTerminals { context.getString(it) },
+            terminals = generateFakeTerminals(stringProvider),
             onTerminalClick = {}
         )
     }

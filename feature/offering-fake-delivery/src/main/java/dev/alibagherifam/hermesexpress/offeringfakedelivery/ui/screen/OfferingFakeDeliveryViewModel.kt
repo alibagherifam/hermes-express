@@ -33,14 +33,15 @@ internal class OfferingFakeDeliveryViewModel(
     }
 
     private fun broadcastFakeDeliveryOffer() = safeLaunch {
+        // TODO: Get this value from Location Provider
+        val userCoordinates = Pair(35.9818, 50.7387)
         _uiState.update {
             it.copy(isOfferingInProgress = true)
         }
-        sendDeliveryOfferMessage(
-            offer = generateFakeDeliveryOffer(stringProvider)
-        )
-        val message = stringProvider.getString(R.string.message_fake_offer_sent)
+        val fakeOffer = generateFakeDeliveryOffer(stringProvider, userCoordinates)
+        sendDeliveryOfferMessage(fakeOffer)
         _uiState.update {
+            val message = stringProvider.getString(R.string.message_fake_offer_sent)
             it.copy(
                 isOfferingInProgress = false,
                 isFakeOfferSent = true,

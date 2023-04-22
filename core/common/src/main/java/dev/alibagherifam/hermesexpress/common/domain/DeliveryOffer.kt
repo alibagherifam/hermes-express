@@ -24,9 +24,12 @@ data class DeliveryOffer(
     }
 }
 
-fun generateFakeDeliveryOffer(stringProvider: StringProvider) = DeliveryOffer(
+fun generateFakeDeliveryOffer(
+    stringProvider: StringProvider,
+    userCoordinates: Pair<Double, Double> = Pair(35.7194, 51.3709)
+) = DeliveryOffer(
     id = 1,
-    terminals = generateFakeTerminals(stringProvider),
+    terminals = generateFakeTerminals(stringProvider, userCoordinates),
     earnings = 24.80f,
     timeToLive = with(Duration) { 20.seconds },
     estimatedDeliveryTime = with(Duration) { 35.minutes }

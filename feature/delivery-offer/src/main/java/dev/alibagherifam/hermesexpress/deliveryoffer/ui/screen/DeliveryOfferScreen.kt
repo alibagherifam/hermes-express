@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.DeliveryConditionList
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.OfferEarningsText
@@ -61,10 +62,12 @@ internal fun DeliveryOfferScreen(
 @Composable
 internal fun DeliveryOfferScreenPreview() {
     HermesTheme {
-        val context = LocalContext.current
+        val stringProvider = with(LocalContext.current) {
+            StringProvider { getString(it) }
+        }
         DeliveryOfferScreen(
             uiState = DeliveryOfferUiState(
-                offer = generateFakeDeliveryOffer { context.getString(it) }
+                offer = generateFakeDeliveryOffer(stringProvider)
             ),
             onAcceptOfferPressStateChange = {},
             onTerminalClick = {}

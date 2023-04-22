@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
@@ -75,9 +76,11 @@ internal fun DeliveryConditionItem(
 @Composable
 internal fun DeliveryConditionListPreview() {
     HermesTheme {
-        val context = LocalContext.current
+        val stringProvider = with(LocalContext.current) {
+            StringProvider { getString(it) }
+        }
         DeliveryConditionList(
-            offer = generateFakeDeliveryOffer { context.getString(it) }
+            offer = generateFakeDeliveryOffer(stringProvider)
         )
     }
 }
