@@ -1,7 +1,6 @@
 package dev.alibagherifam.hermesexpress.map.view
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -43,9 +42,7 @@ internal fun MapView(
     val mapViewScope = rememberCoroutineScope()
     val markerManager = remember { MarkerManager(markerOptions) }
     AndroidView(
-        modifier = modifier
-            .fillMaxWidth()
-            .heightIn(min = 300.dp),
+        modifier = modifier.sizeIn(minHeight = 300.dp, minWidth = 300.dp),
         factory = { context ->
             MapView(context).apply {
                 getMapboxMap().loadStyleUri(
