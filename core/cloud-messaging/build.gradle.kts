@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
+    implementation(libs.androidx.datastore)
     implementation(libs.firebase.messaging)
     implementation(libs.koin.android)
     implementation(libs.kotlinx.coroutines.android)

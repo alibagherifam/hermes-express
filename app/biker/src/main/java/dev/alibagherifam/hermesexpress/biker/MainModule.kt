@@ -8,9 +8,11 @@ import dev.alibagherifam.hermesexpress.offeringfakedelivery.offeringFakeDelivery
 import org.koin.dsl.module
 
 val mainModule = module {
-    includes(commonModule)
-    includes(cloudMessagingModule)
-    includes(deliveryOfferModule)
-    includes(httpClientModule)
-    includes(offeringFakeDeliveryModule)
+    includes(
+        cloudMessagingModule,
+        commonModule,
+        deliveryOfferModule,
+        httpClientModule,
+        offeringFakeDeliveryModule
+    )
 }
