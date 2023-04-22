@@ -5,15 +5,14 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOfferRepository
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.decodeFromStringMap
 import org.koin.android.ext.android.inject
 
-internal class FcmService : FirebaseMessagingService() {
-    private val repository: DeliveryOfferRepository by inject()
+internal class FirebaseCloudMessagingService : FirebaseMessagingService() {
+    private val offerPipeline: CloudMessagingDeliveryOfferDatasource by inject()
 
     override fun onNewToken(token: String) {
         Log.i(TAG, "onNewToken: $token")
@@ -26,7 +25,7 @@ internal class FcmService : FirebaseMessagingService() {
             val payload = remoteMessage.data
             Log.i(TAG, "Message data payload: $payload")
             convertPayloadToDeliveryOffer(payload)?.let { offer ->
-                repository.saveOffer(offer)
+                offerPipeline.emitOffer(offer)
             }
         }
     }

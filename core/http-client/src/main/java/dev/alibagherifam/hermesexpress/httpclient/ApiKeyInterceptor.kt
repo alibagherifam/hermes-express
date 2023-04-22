@@ -8,8 +8,8 @@ internal class ApiKeyInterceptor : Interceptor {
         val request = chain.request()
         val updatedRequest = request.newBuilder()
             .addHeader(
-                name = NetworkConstants.API_KEY_NAME,
-                value = "key=" + NetworkConstants.API_KEY_VALUE
+                name = Constants.API_KEY_NAME,
+                value = "key=" + Constants.API_KEY_VALUE
             )
             .build()
 

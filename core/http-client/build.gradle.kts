@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
     implementation(libs.koin.android)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.squareup.okhttp)

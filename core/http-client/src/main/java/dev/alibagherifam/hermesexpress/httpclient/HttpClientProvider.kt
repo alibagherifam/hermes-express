@@ -14,7 +14,7 @@ internal fun provideHttpClient(): Retrofit {
     val jsonConverter = Json.asConverterFactory("application/json".toMediaType())
 
     return Retrofit.Builder()
-        .baseUrl(NetworkConstants.BASE_URL)
+        .baseUrl(Constants.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(jsonConverter)
         .build()
