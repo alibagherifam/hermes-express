@@ -2,11 +2,10 @@ package dev.alibagherifam.hermesexpress.map
 
 import com.mapbox.geojson.Point
 import com.mapbox.maps.EdgeInsets
-import com.mapbox.maps.MapView
 import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.plugin.animation.easeTo
+import com.mapbox.maps.plugin.locationcomponent.LocationComponentPlugin
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
-import com.mapbox.maps.plugin.locationcomponent.location
 import dev.alibagherifam.hermesexpress.common.domain.LatLong
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
@@ -19,13 +18,13 @@ internal fun LatLong.toPoint(): Point {
     return Point.fromLngLat(longitude, latitude)
 }
 
-internal fun MapView.getUserLocationStream(): Flow<Point> = callbackFlow {
-    val listener = OnIndicatorPositionChangedListener { point ->
-        trySendBlocking(point)
+internal fun LocationComponentPlugin.getUserLocationStream(): Flow<Point> = callbackFlow {
+    val listener = OnIndicatorPositionChangedListener {
+        trySendBlocking(it)
     }
-    location.addOnIndicatorPositionChangedListener(listener)
+    addOnIndicatorPositionChangedListener(listener)
     awaitClose {
-        location.removeOnIndicatorPositionChangedListener(listener)
+        removeOnIndicatorPositionChangedListener(listener)
     }
 }.conflate()
 

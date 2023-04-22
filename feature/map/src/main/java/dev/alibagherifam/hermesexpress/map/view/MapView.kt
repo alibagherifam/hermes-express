@@ -61,7 +61,7 @@ internal fun MapView(
                     }
                 }
                 location2.puckBearingEnabled = false
-                getUserLocationStream()
+                location.getUserLocationStream()
                     .sample(periodMillis = 800)
                     .onEach { onEvent(MapEvent.UserLocationChange(it)) }
                     .launchIn(mapViewScope)
