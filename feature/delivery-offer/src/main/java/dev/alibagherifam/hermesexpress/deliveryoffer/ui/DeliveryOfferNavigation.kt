@@ -8,8 +8,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
-import dev.alibagherifam.hermesexpress.deliveryoffer.domain.playAudio
-import dev.alibagherifam.hermesexpress.deliveryoffer.domain.vibrateDevice
+import dev.alibagherifam.hermesexpress.deliveryoffer.playAudio
+import dev.alibagherifam.hermesexpress.deliveryoffer.vibrateDevice
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferEvent
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferScreen
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferViewModel

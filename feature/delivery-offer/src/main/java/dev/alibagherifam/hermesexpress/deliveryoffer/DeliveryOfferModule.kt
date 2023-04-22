@@ -6,6 +6,7 @@ import dev.alibagherifam.hermesexpress.deliveryoffer.data.DoubleDatasourceDelive
 import dev.alibagherifam.hermesexpress.deliveryoffer.data.LongPollingDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferViewModel
+import kotlinx.coroutines.GlobalScope
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.named
@@ -22,6 +23,7 @@ val deliveryOfferModule = module {
 
     single<DeliveryOfferRepository> {
         DoubleDatasourceDeliveryOfferRepository(
+            coroutineScope = GlobalScope,
             dataSource1 = get(qualifier = named<CloudMessagingDeliveryOfferDatasource>()),
             dataSource2 = get(qualifier = named<LongPollingDeliveryOfferDatasource>())
         )

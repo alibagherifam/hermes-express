@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 
-class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
+internal class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
     private val Context.dataStore by preferencesDataStore(name = "user-preferences")
     private val dataStore: DataStore<Preferences> = context.dataStore
 

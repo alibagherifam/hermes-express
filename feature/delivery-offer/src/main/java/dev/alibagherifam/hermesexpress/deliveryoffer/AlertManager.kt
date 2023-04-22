@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.deliveryoffer.domain
+package dev.alibagherifam.hermesexpress.deliveryoffer
 
 import android.content.Context
 import android.media.MediaPlayer

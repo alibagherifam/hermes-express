@@ -3,7 +3,7 @@ package dev.alibagherifam.hermesexpress.deliveryoffer.data
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.RealTimeDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 
 internal class DoubleDatasourceDeliveryOfferRepository(
+    coroutineScope: CoroutineScope,
     dataSource1: RealTimeDeliveryOfferDatasource,
     dataSource2: RealTimeDeliveryOfferDatasource
 ) : DeliveryOfferRepository {
@@ -29,7 +30,7 @@ internal class DoubleDatasourceDeliveryOfferRepository(
             .filter { isOfferConsumed() }
             .filter { it.isDuplicate() }
             .onEach { _receivedOffer.value = it }
-            .launchIn(GlobalScope)
+            .launchIn(coroutineScope)
     }
 
     private fun isOfferConsumed(): Boolean = (receivedOffer.value == null)
