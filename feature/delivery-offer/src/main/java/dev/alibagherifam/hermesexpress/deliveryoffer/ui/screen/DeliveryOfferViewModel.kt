@@ -68,6 +68,9 @@ internal class DeliveryOfferViewModel(
     private fun cancelOfferExpiration() {
         offerExpirationJob?.cancel()
         offerExpirationJob = null
+        _uiState.update {
+            it.copy(offerTimeElapsed = Duration.ZERO)
+        }
     }
 
     private fun startOfferAcceptanceConfirmation() {
@@ -85,11 +88,11 @@ internal class DeliveryOfferViewModel(
     }
 
     private fun cancelOfferAcceptanceConfirmation() {
+        offerAcceptanceConfirmationJob?.cancel()
+        offerAcceptanceConfirmationJob = null
         _uiState.update {
             it.copy(offerAcceptanceConfirmationPercentage = 0f)
         }
-        offerAcceptanceConfirmationJob?.cancel()
-        offerAcceptanceConfirmationJob = null
     }
 
     private fun isAcceptingOfferJobRunning() = (offerAcceptanceConfirmationJob != null)

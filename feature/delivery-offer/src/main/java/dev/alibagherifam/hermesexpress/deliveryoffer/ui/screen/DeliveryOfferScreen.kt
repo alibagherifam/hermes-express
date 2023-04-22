@@ -1,11 +1,13 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,14 +48,19 @@ internal fun DeliveryOfferScreen(
             onTerminalClick,
             showInCompactMode = true
         )
-        ProgressButton(
-            progress = uiState.offerTimeElapsedPercentage,
-            onPressStateChange = onAcceptOfferPressStateChange,
-            modifier = Modifier.widthIn(min = 260.dp),
-            isEnabled = !uiState.isAcceptingOfferInProgress,
-            pressedStateColorSaturation = uiState.offerAcceptanceConfirmationPercentage
-        ) {
-            Text(text = stringResource(R.string.label_accept_delivery_offer))
+        Box(contentAlignment = Alignment.Center) {
+            ProgressButton(
+                progress = uiState.offerTimeElapsedPercentage,
+                onPressStateChange = onAcceptOfferPressStateChange,
+                modifier = Modifier.widthIn(min = 260.dp),
+                isEnabled = !uiState.isAcceptingOfferInProgress,
+                pressedStateColorSaturation = uiState.offerAcceptanceConfirmationPercentage
+            ) {
+                Text(text = stringResource(R.string.label_accept_delivery_offer))
+            }
+            if (uiState.isAcceptingOfferInProgress) {
+                CircularProgressIndicator()
+            }
         }
     }
 }
