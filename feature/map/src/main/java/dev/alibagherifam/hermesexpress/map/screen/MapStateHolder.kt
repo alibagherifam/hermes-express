@@ -9,9 +9,9 @@ class MapStateHolder {
     private val _state = mutableStateOf(MapState())
     internal val state: State<MapState> get() = _state
 
-    fun moveCamera(to: LatLong) {
+    fun moveCamera(targetLocation: LatLong) {
         updateState {
-            it.copy(requestedCameraLocation = to.toPoint())
+            it.copy(requestedCameraLocation = targetLocation.toPoint())
         }
     }
 

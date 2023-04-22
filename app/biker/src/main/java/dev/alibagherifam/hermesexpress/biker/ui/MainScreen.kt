@@ -41,7 +41,7 @@ fun MainScreen(
             BottomSheetContentHost(
                 offer,
                 onTerminalClick = { terminal ->
-                    mapStateHolder.moveCamera(to = terminal.location)
+                    mapStateHolder.moveCamera(targetLocation = terminal.location)
                 },
                 scaffoldState.snackbarHostState
             )
