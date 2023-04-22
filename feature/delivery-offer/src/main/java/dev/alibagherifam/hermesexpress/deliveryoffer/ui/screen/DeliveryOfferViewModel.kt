@@ -24,8 +24,7 @@ internal class DeliveryOfferViewModel(
 
     init {
         viewModelScope.launch {
-            val offer = repository.receivedOffer.first()
-            checkNotNull(offer)
+            val offer = checkNotNull(repository.receivedOffer.first())
             _uiState.update { it.copy(offer = offer) }
             startOfferExpiration(offer.timeToLive)
         }

@@ -8,17 +8,13 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
-import dev.alibagherifam.hermesexpress.common.domain.Constants
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 
-class CloudMessaging(context: Context) : CloudMessagingTokenStore {
+class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
     private val Context.dataStore by preferencesDataStore(name = "user-preferences")
     private val dataStore: DataStore<Preferences> = context.dataStore
-    suspend fun subscribeForDeliveryOfferMessages() {
-        Firebase.messaging.subscribeToTopic(Constants.TOPIC_DELIVERY_OFFER).await()
-    }
 
     override suspend fun getToken(): String {
         val savedToken = getSavedToken()

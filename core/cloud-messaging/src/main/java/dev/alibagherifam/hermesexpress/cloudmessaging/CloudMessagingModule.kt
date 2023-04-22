@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val cloudMessagingModule = module {
     single { CloudMessaging(androidContext()) } withOptions {
-        bind<CloudMessagingTokenStore>()
+        bind<CloudMessagingTokenDatasource>()
     }
 
     singleOf(::CloudMessagingDeliveryOfferDatasource) {

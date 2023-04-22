@@ -8,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:cloud-messaging"))
+
     implementation(libs.squareup.retrofit.core)
     implementation(libs.kotlinx.serialization.properties)
 }
