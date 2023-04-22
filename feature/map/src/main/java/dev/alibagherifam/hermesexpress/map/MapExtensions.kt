@@ -1,7 +1,6 @@
 package dev.alibagherifam.hermesexpress.map
 
 import com.mapbox.geojson.Point
-import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
 import com.mapbox.maps.MapboxMap
@@ -29,17 +28,6 @@ internal fun MapView.getUserLocationStream(): Flow<Point> = callbackFlow {
         location.removeOnIndicatorPositionChangedListener(listener)
     }
 }.conflate()
-
-internal fun MapboxMap.zoomCameraOnLocation(
-    location: Point,
-    zoomLevel: Double = 14.0
-) {
-    val cameraOptions = CameraOptions.Builder()
-        .center(location)
-        .zoom(zoomLevel)
-        .build()
-    easeTo(cameraOptions)
-}
 
 internal fun MapboxMap.fitCameraForLocations(locations: List<Point>) {
     val viewportPadding = EdgeInsets(0.0, 100.0, 1000.0, 100.0)

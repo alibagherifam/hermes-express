@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.LocationPuck2D
+import com.mapbox.maps.plugin.animation.easeTo
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
@@ -24,7 +25,6 @@ import dev.alibagherifam.hermesexpress.map.marker.markerDefaultOptions
 import dev.alibagherifam.hermesexpress.map.marker.userLocationDefaultIcon
 import dev.alibagherifam.hermesexpress.map.screen.MapEvent
 import dev.alibagherifam.hermesexpress.map.screen.MapState
-import dev.alibagherifam.hermesexpress.map.zoomCameraOnLocation
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -82,8 +82,8 @@ internal fun MapView(
                 }
                 onEvent(MapEvent.MarkersUpdated)
             }
-            state.requestedCameraLocation?.let { location ->
-                cameraController.zoomCameraOnLocation(location)
+            state.requestedCameraOptions?.let { targetOptions ->
+                cameraController.easeTo(targetOptions)
                 onEvent(MapEvent.CameraMovedAccordingly)
             }
         }
