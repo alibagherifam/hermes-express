@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +20,6 @@ import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
-import dev.alibagherifam.hermesexpress.common.ui.widget.HermesProgressIndicator
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.DeliveryConditionList
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.view.OfferEarningsText
@@ -60,7 +60,7 @@ internal fun DeliveryOfferScreen(
                 Text(text = stringResource(R.string.label_accept_delivery_offer))
             }
             if (uiState.isAcceptingOfferInProgress) {
-                HermesProgressIndicator(Modifier.matchParentSize())
+                CircularProgressIndicator(Modifier.matchParentSize())
             }
         }
     }
