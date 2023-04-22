@@ -2,7 +2,7 @@ package dev.alibagherifam.hermesexpress.map.screen
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import dev.alibagherifam.hermesexpress.map.LatLong
+import dev.alibagherifam.hermesexpress.common.domain.LatLong
 import dev.alibagherifam.hermesexpress.map.toPoint
 
 class MapStateHolder {

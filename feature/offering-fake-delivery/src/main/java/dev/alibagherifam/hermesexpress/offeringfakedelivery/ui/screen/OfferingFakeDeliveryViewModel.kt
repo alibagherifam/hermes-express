@@ -2,6 +2,7 @@ package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen
 
 import dev.alibagherifam.hermesexpress.common.domain.Constants
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
+import dev.alibagherifam.hermesexpress.common.domain.LatLong
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
@@ -34,7 +35,7 @@ internal class OfferingFakeDeliveryViewModel(
 
     private fun broadcastFakeDeliveryOffer() = safeLaunch {
         // TODO: Get this value from Location Provider
-        val userCoordinates = Pair(35.9818, 50.7387)
+        val userCoordinates = LatLong(35.9818, 50.7387)
         _uiState.update {
             it.copy(isOfferingInProgress = true)
         }

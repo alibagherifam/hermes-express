@@ -19,14 +19,14 @@ data class Terminal(
 
 fun generateFakeTerminals(
     stringProvider: StringProvider,
-    fromOrigin: Pair<Double, Double> = Pair(35.7194, 51.3709)
+    fromOrigin: LatLong = LatLong(35.7194, 51.3709)
 ): List<Terminal> = listOf(
     Pair(+0.0167, +0.0061),
     Pair(+0.0037, -0.0520),
     Pair(-0.0227, -0.0069),
     Pair(-0.0191, +0.0715)
 ).map { coordinatesDiff ->
-    Pair(
+    LatLong(
         fromOrigin.first - coordinatesDiff.first,
         fromOrigin.second - coordinatesDiff.second
     )
