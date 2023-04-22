@@ -6,13 +6,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Terminal(
-    val latitude: Double,
-    val longitude: Double,
+    val coordinates: LatLong,
     val postalAddress: String
 ) {
     init {
-        require(latitude > 0) { "Latitude ID is not allowed" }
-        require(longitude > 0) { "Longitude ID is not allowed" }
+        require(coordinates.first > 0) { "Latitude ID is not allowed" }
+        require(coordinates.second > 0) { "Longitude ID is not allowed" }
         require(postalAddress.isNotEmpty()) { "Postal address can not be empty" }
     }
 }
@@ -37,11 +36,9 @@ fun generateFakeTerminals(
         R.string.fake_data_address_3,
         R.string.fake_data_address_4
     )
-).map {
-    val (latitude, longitude) = it.first
+).map { (coordinates, addressStringRes) ->
     Terminal(
-        latitude,
-        longitude,
-        postalAddress = stringProvider.getString(it.second)
+        coordinates,
+        postalAddress = stringProvider.getString(addressStringRes)
     )
 }

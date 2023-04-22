@@ -14,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
-import dev.alibagherifam.hermesexpress.common.domain.LatLong
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
 
@@ -27,7 +26,7 @@ fun MainScreen(
     val terminals = offer?.terminals.orEmpty()
     val mapStateHolder = remember { MapStateHolder() }
     mapStateHolder.setMarkerCoordinates(
-        coordinates = terminals.map { LatLong(it.latitude, it.longitude) }
+        coordinates = terminals.map { it.coordinates }
     )
 
     val scaffoldState = rememberBottomSheetScaffoldState()
@@ -42,9 +41,7 @@ fun MainScreen(
             BottomSheetContentHost(
                 offer,
                 onTerminalClick = { terminal ->
-                    mapStateHolder.moveCamera(
-                        to = terminal.let { LatLong(it.latitude, it.longitude) }
-                    )
+                    mapStateHolder.moveCamera(to = terminal.coordinates)
                 },
                 scaffoldState.snackbarHostState
             )
