@@ -15,19 +15,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferUiModel
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.toUiModel
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
-internal fun DeliveryConditionList(offer: DeliveryOffer) {
+internal fun DeliveryConditionList(offer: DeliveryOfferUiModel) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         DeliveryConditionItem(
             text = stringResource(
                 R.string.label_minutes,
-                offer.estimatedDeliveryTime.inWholeMinutes
+                offer.estimatedDeliveryTime
             ),
             contentDescription = stringResource(R.string.a11y_estimated_delivery_time),
             iconResId = R.drawable.ic_timer_outline,
@@ -79,8 +81,9 @@ internal fun DeliveryConditionListPreview() {
         val stringProvider = with(LocalContext.current) {
             StringProvider { getString(it) }
         }
-        DeliveryConditionList(
-            offer = generateFakeDeliveryOffer(stringProvider)
-        )
+        val offer = generateFakeDeliveryOffer(stringProvider)
+            .toUiModel(FormatCurrencyUseCase())
+
+        DeliveryConditionList(offer)
     }
 }

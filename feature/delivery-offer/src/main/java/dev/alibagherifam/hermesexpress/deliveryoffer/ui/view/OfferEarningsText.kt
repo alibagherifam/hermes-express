@@ -9,18 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.domain.formatCurrency
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 
 @Composable
 internal fun OfferEarningsText(
-    earnings: Float,
+    text: String,
     modifier: Modifier = Modifier
 ) {
     Row(modifier) {
         Spacer(Modifier.weight(0.5f))
         Text(
-            text = formatCurrency(earnings),
+            text,
             Modifier.alignByBaseline(),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary,

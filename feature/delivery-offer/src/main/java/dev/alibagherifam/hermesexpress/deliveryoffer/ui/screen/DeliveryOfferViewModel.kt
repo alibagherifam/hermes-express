@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -15,6 +16,7 @@ import dev.alibagherifam.hermesexpress.common.R as CommonR
 
 internal class DeliveryOfferViewModel(
     private val repository: DeliveryOfferRepository,
+    private val formatCurrencyUseCase: FormatCurrencyUseCase,
     private val stringProvider: StringProvider
 ) : BaseViewModel<DeliveryOfferUiState>(
     initialState = DeliveryOfferUiState()
@@ -25,7 +27,9 @@ internal class DeliveryOfferViewModel(
     init {
         viewModelScope.launch {
             val offer = checkNotNull(repository.receivedOffer.first())
-            _uiState.update { it.copy(offer = offer) }
+            _uiState.update {
+                it.copy(offer = offer.toUiModel(formatCurrencyUseCase))
+            }
             startOfferExpiration(offer.timeToLive)
         }
     }
@@ -146,7 +150,7 @@ internal class DeliveryOfferViewModel(
     }
 
     private companion object {
-        val timeToConfirmOfferAcceptance = with(Duration) { 2.seconds }
+        val timeToConfirmOfferAcceptance = with(Duration) { (1.5).seconds }
         val smoothTimerStep = with(Duration) { 50.milliseconds }
     }
 }

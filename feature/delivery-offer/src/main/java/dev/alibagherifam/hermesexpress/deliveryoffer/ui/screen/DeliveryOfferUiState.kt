@@ -1,10 +1,9 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen
 
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import kotlin.time.Duration
 
 internal data class DeliveryOfferUiState(
-    val offer: DeliveryOffer? = null,
+    val offer: DeliveryOfferUiModel? = null,
     val offerAcceptanceConfirmationPercentage: Float = 0f,
     val isAcceptingOfferInProgress: Boolean = false,
     val isOfferAccepted: Boolean = false,

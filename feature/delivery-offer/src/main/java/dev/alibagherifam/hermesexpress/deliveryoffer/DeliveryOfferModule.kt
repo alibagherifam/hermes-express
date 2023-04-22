@@ -5,17 +5,18 @@ import dev.alibagherifam.hermesexpress.common.domain.RealTimeDeliveryOfferDataso
 import dev.alibagherifam.hermesexpress.deliveryoffer.data.DoubleDatasourceDeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.data.LongPollingDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferViewModel
 import kotlinx.coroutines.GlobalScope
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.named
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val deliveryOfferModule = module {
-    viewModelOf(::DeliveryOfferViewModel)
     singleOf(::LongPollingDeliveryOfferDatasource) {
         bind<RealTimeDeliveryOfferDatasource>()
         named<LongPollingDeliveryOfferDatasource>()
@@ -28,4 +29,7 @@ val deliveryOfferModule = module {
             dataSource2 = get(qualifier = named<LongPollingDeliveryOfferDatasource>())
         )
     }
+
+    factoryOf(::FormatCurrencyUseCase)
+    viewModelOf(::DeliveryOfferViewModel)
 }
