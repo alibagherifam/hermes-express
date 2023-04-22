@@ -11,22 +11,22 @@ class MapStateHolder {
 
     fun moveCamera(to: LatLong) {
         updateState {
-            it.copy(requestedCameraLatLong = to.toPoint())
+            it.copy(requestedCameraLocation = to.toPoint())
         }
     }
 
-    internal fun moveCameraToUserCoordinates() {
+    internal fun moveCameraToUserLocation() {
         updateState {
-            it.copy(requestedCameraLatLong = it.userCoordinates)
+            it.copy(requestedCameraLocation = it.userLocation)
         }
     }
 
-    fun setMarkerCoordinates(coordinates: List<LatLong>) {
-        val markerPoints = coordinates.map { it.toPoint() }
-        if (markerPoints != state.value.markerCoordinates) {
+    fun setMarkerLocations(locations: List<LatLong>) {
+        val markerPoints = locations.map { it.toPoint() }
+        if (markerPoints != state.value.markerLocations) {
             updateState { oldState ->
                 oldState.copy(
-                    markerCoordinates = markerPoints,
+                    markerLocations = markerPoints,
                     isAnyMarkerUpdateAvailable = true
                 )
             }
@@ -40,19 +40,19 @@ class MapStateHolder {
             }
 
             MapEvent.CameraMovedAccordingly -> updateState {
-                it.copy(requestedCameraLatLong = null)
+                it.copy(requestedCameraLocation = null)
             }
 
-            is MapEvent.UserCoordinatesChange -> {
-                if (state.value.userCoordinates == null) {
+            is MapEvent.UserLocationChange -> {
+                if (state.value.userLocation == null) {
                     updateState {
                         it.copy(
-                            requestedCameraLatLong = event.newCoordinates,
-                            userCoordinates = event.newCoordinates
+                            requestedCameraLocation = event.newLocation,
+                            userLocation = event.newLocation
                         )
                     }
                 } else {
-                    _state.value.userCoordinates = event.newCoordinates
+                    _state.value.userLocation = event.newLocation
                 }
             }
         }

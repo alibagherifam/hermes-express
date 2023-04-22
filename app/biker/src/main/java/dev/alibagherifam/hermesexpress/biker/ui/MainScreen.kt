@@ -25,8 +25,8 @@ fun MainScreen(
 ) {
     val terminals = offer?.terminals.orEmpty()
     val mapStateHolder = remember { MapStateHolder() }
-    mapStateHolder.setMarkerCoordinates(
-        coordinates = terminals.map { it.coordinates }
+    mapStateHolder.setMarkerLocations(
+        locations = terminals.map { it.location }
     )
 
     val scaffoldState = rememberBottomSheetScaffoldState()
@@ -41,7 +41,7 @@ fun MainScreen(
             BottomSheetContentHost(
                 offer,
                 onTerminalClick = { terminal ->
-                    mapStateHolder.moveCamera(to = terminal.coordinates)
+                    mapStateHolder.moveCamera(to = terminal.location)
                 },
                 scaffoldState.snackbarHostState
             )

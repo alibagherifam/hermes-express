@@ -15,8 +15,8 @@ internal class OfferingFakeDeliveryRepository(
 ) {
     suspend fun broadcastFakeDeliveryOffer(stringProvider: StringProvider) {
         // TODO: Get this value from Location Provider
-        val userCoordinates = LatLong(35.9818, 50.7387)
-        val fakeOffer = generateFakeDeliveryOffer(stringProvider, userCoordinates)
+        val userLocation = LatLong(35.9818, 50.7387)
+        val fakeOffer = generateFakeDeliveryOffer(stringProvider, userLocation)
         sendDeliveryOfferMessage(fakeOffer)
     }
 

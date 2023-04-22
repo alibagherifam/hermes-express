@@ -16,8 +16,8 @@ import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.maps.plugin.locationcomponent.location2
 import com.mapbox.maps.plugin.scalebar.scalebar
 import dev.alibagherifam.hermesexpress.feature.map.R
-import dev.alibagherifam.hermesexpress.map.fitCameraForCoordinates
-import dev.alibagherifam.hermesexpress.map.locationFlow
+import dev.alibagherifam.hermesexpress.map.fitCameraForLocations
+import dev.alibagherifam.hermesexpress.map.getUserLocationStream
 import dev.alibagherifam.hermesexpress.map.marker.MarkerManager
 import dev.alibagherifam.hermesexpress.map.marker.MarkerOptions
 import dev.alibagherifam.hermesexpress.map.marker.UserLocationIcon
@@ -25,7 +25,7 @@ import dev.alibagherifam.hermesexpress.map.marker.markerDefaultOptions
 import dev.alibagherifam.hermesexpress.map.marker.userLocationDefaultIcon
 import dev.alibagherifam.hermesexpress.map.screen.MapEvent
 import dev.alibagherifam.hermesexpress.map.screen.MapState
-import dev.alibagherifam.hermesexpress.map.zoomCameraOnCoordinate
+import dev.alibagherifam.hermesexpress.map.zoomCameraOnLocation
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -64,9 +64,9 @@ internal fun MapView(
                     }
                 }
                 location2.puckBearingEnabled = false
-                locationFlow()
+                getUserLocationStream()
                     .sample(periodMillis = 800)
-                    .onEach { onEvent(MapEvent.UserCoordinatesChange(it)) }
+                    .onEach { onEvent(MapEvent.UserLocationChange(it)) }
                     .launchIn(mapViewScope)
                 markerManager.pointAnnotationManager =
                     annotations.createPointAnnotationManager()
@@ -75,17 +75,17 @@ internal fun MapView(
         update = { mapView ->
             if (state.isAnyMarkerUpdateAvailable) {
                 markerManager.deleteAllMarkers()
-                if (state.markerCoordinates.isNotEmpty()) {
-                    markerManager.addMarkers(state.markerCoordinates)
-                    val userCoordinates = requireNotNull(state.userCoordinates)
-                    mapView.fitCameraForCoordinates(
-                        coordinates = state.markerCoordinates + userCoordinates
+                if (state.markerLocations.isNotEmpty()) {
+                    markerManager.addMarkers(state.markerLocations)
+                    val userLocation = requireNotNull(state.userLocation)
+                    mapView.fitCameraForLocations(
+                        locations = state.markerLocations + userLocation
                     )
                 }
                 onEvent(MapEvent.MarkersUpdated)
             }
-            state.requestedCameraLatLong?.let { latLong ->
-                mapView.zoomCameraOnCoordinate(latLong)
+            state.requestedCameraLocation?.let { location ->
+                mapView.zoomCameraOnLocation(location)
                 onEvent(MapEvent.CameraMovedAccordingly)
             }
         }

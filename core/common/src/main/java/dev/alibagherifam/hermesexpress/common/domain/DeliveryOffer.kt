@@ -26,10 +26,10 @@ data class DeliveryOffer(
 
 fun generateFakeDeliveryOffer(
     stringProvider: StringProvider,
-    userCoordinates: LatLong = LatLong(35.7194, 51.3709)
+    userLocation: LatLong = LatLong(35.7194, 51.3709)
 ) = DeliveryOffer(
     id = 1,
-    terminals = generateFakeTerminals(stringProvider, userCoordinates),
+    terminals = generateFakeTerminals(stringProvider, userLocation),
     earnings = 24.80f,
     timeToLive = with(Duration) { 20.seconds },
     estimatedDeliveryTime = with(Duration) { 35.minutes }

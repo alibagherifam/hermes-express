@@ -19,31 +19,33 @@ internal fun LatLong.toPoint(): Point {
     return Point.fromLngLat(longitude, latitude)
 }
 
-internal fun MapView.locationFlow(): Flow<Point> = callbackFlow {
-    val positionChangedListener = OnIndicatorPositionChangedListener { point ->
+internal fun MapView.getUserLocationStream(): Flow<Point> = callbackFlow {
+    val listener = OnIndicatorPositionChangedListener { point ->
         trySendBlocking(point)
     }
-    location.addOnIndicatorPositionChangedListener(positionChangedListener)
-    awaitClose { location.removeOnIndicatorPositionChangedListener(positionChangedListener) }
+    location.addOnIndicatorPositionChangedListener(listener)
+    awaitClose {
+        location.removeOnIndicatorPositionChangedListener(listener)
+    }
 }.conflate()
 
-internal fun MapView.zoomCameraOnCoordinate(
-    coordinates: Point,
+internal fun MapView.zoomCameraOnLocation(
+    location: Point,
     zoomLevel: Double = 14.0
 ) {
     val cameraController = getMapboxMap()
     val cameraOptions = CameraOptions.Builder()
-        .center(coordinates)
+        .center(location)
         .zoom(zoomLevel)
         .build()
     cameraController.easeTo(cameraOptions)
 }
 
-internal fun MapView.fitCameraForCoordinates(coordinates: List<Point>) {
+internal fun MapView.fitCameraForLocations(locations: List<Point>) {
     val cameraController = getMapboxMap()
     val viewportPadding = EdgeInsets(0.0, 100.0, 1000.0, 100.0)
     cameraController.run {
-        val fittedViewPort = cameraForCoordinates(coordinates, viewportPadding)
+        val fittedViewPort = cameraForCoordinates(locations, viewportPadding)
         easeTo(fittedViewPort)
     }
 }

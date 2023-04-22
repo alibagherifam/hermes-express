@@ -34,7 +34,7 @@ fun MapScreen(
                 Modifier.fillMaxSize()
             )
             MyLocationButton(
-                onClick = { mapStateHolder.moveCameraToUserCoordinates() },
+                onClick = { mapStateHolder.moveCameraToUserLocation() },
                 bottomSheetOffset,
                 Modifier
                     .align(Alignment.TopEnd)

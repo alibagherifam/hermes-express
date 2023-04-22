@@ -3,8 +3,8 @@ package dev.alibagherifam.hermesexpress.map.screen
 import com.mapbox.geojson.Point
 
 internal data class MapState(
-    var userCoordinates: Point? = null,
-    val requestedCameraLatLong: Point? = null,
+    var userLocation: Point? = null,
+    val requestedCameraLocation: Point? = null,
     val isAnyMarkerUpdateAvailable: Boolean = false,
-    val markerCoordinates: List<Point> = emptyList()
+    val markerLocations: List<Point> = emptyList()
 )

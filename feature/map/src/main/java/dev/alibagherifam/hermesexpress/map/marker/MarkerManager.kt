@@ -11,23 +11,23 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 internal class MarkerManager(private val markerOptions: MarkerOptions) {
     var pointAnnotationManager: PointAnnotationManager? = null
 
-    fun addMarkers(coordinates: List<Point>) {
-        checkNotNull(pointAnnotationManager).addMarkers(coordinates)
+    fun addMarkers(locations: List<Point>) {
+        checkNotNull(pointAnnotationManager).addMarkers(locations)
     }
 
     fun deleteAllMarkers() {
         checkNotNull(pointAnnotationManager).deleteAll()
     }
 
-    private fun PointAnnotationManager.addMarkers(coordinates: List<Point>) {
+    private fun PointAnnotationManager.addMarkers(locations: List<Point>) {
         val markerOptions = PointAnnotationOptions()
             .withTextColor(markerOptions.textColor)
             .withTextSize(markerOptions.textSize.value.toDouble())
             .withIconImage(drawCircleBitmap())
 
-        for (index in coordinates.indices) {
+        for (index in locations.indices) {
             markerOptions
-                .withPoint(coordinates[index])
+                .withPoint(locations[index])
                 .withTextField((index + 1).toString())
             create(markerOptions)
         }
