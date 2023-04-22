@@ -4,6 +4,7 @@ import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.EdgeInsets
 import com.mapbox.maps.MapView
+import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.plugin.animation.easeTo
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
@@ -29,23 +30,19 @@ internal fun MapView.getUserLocationStream(): Flow<Point> = callbackFlow {
     }
 }.conflate()
 
-internal fun MapView.zoomCameraOnLocation(
+internal fun MapboxMap.zoomCameraOnLocation(
     location: Point,
     zoomLevel: Double = 14.0
 ) {
-    val cameraController = getMapboxMap()
     val cameraOptions = CameraOptions.Builder()
         .center(location)
         .zoom(zoomLevel)
         .build()
-    cameraController.easeTo(cameraOptions)
+    easeTo(cameraOptions)
 }
 
-internal fun MapView.fitCameraForLocations(locations: List<Point>) {
-    val cameraController = getMapboxMap()
+internal fun MapboxMap.fitCameraForLocations(locations: List<Point>) {
     val viewportPadding = EdgeInsets(0.0, 100.0, 1000.0, 100.0)
-    cameraController.run {
-        val fittedViewPort = cameraForCoordinates(locations, viewportPadding)
-        easeTo(fittedViewPort)
-    }
+    val fittedViewPort = cameraForCoordinates(locations, viewportPadding)
+    easeTo(fittedViewPort)
 }

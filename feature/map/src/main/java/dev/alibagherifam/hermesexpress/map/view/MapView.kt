@@ -73,19 +73,20 @@ internal fun MapView(
             }
         },
         update = { mapView ->
+            val cameraController = mapView.getMapboxMap()
             if (state.isAnyMarkerUpdateAvailable) {
                 markerManager.deleteAllMarkers()
                 if (state.markerLocations.isNotEmpty()) {
                     markerManager.addMarkers(state.markerLocations)
                     val userLocation = requireNotNull(state.userLocation)
-                    mapView.fitCameraForLocations(
+                    cameraController.fitCameraForLocations(
                         locations = state.markerLocations + userLocation
                     )
                 }
                 onEvent(MapEvent.MarkersUpdated)
             }
             state.requestedCameraLocation?.let { location ->
-                mapView.zoomCameraOnLocation(location)
+                cameraController.zoomCameraOnLocation(location)
                 onEvent(MapEvent.CameraMovedAccordingly)
             }
         }
