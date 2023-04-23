@@ -26,6 +26,13 @@ internal class OfferingFakeDeliveryViewModel(
     }
 
     private fun broadcastFakeDeliveryOffer() = safeLaunch {
+        if (!repository.isUserLocationAvailable()) {
+            val message = stringProvider.getString(R.string.message_user_location_not_available)
+            _uiState.update {
+                it.copy(userMessages = it.userMessages + message)
+            }
+            return@safeLaunch
+        }
         _uiState.update {
             it.copy(isOfferingInProgress = true)
         }

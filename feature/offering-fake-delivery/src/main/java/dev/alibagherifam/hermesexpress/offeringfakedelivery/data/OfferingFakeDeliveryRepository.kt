@@ -16,8 +16,13 @@ internal class OfferingFakeDeliveryRepository(
     private val locationProvider: LocationProvider,
     private val stringProvider: StringProvider
 ) {
+    suspend fun isUserLocationAvailable(): Boolean =
+        locationProvider.getUserLocationStream().first() != null
+
     suspend fun broadcastFakeDeliveryOffer() {
-        val userLocation = locationProvider.getUserLocationStream().first()
+        val userLocation = checkNotNull(
+            locationProvider.getUserLocationStream().first()
+        )
         val fakeOffer = generateFakeDeliveryOffer(stringProvider, userLocation)
         sendDeliveryOfferMessage(fakeOffer)
     }

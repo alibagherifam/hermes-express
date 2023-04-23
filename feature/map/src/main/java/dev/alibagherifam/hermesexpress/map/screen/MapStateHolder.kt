@@ -64,7 +64,7 @@ class MapStateHolder : KoinComponent {
             }
 
             is MapEvent.UserLocationChange -> {
-                locationProvider.lastLocation = event.newLocation
+                locationProvider.lastLocation.value = event.newLocation
                 val isFirstUserLocation = (state.value.userLocation == null)
                 updateState {
                     it.copy(userLocation = event.newLocation)
