@@ -2,15 +2,10 @@ package dev.alibagherifam.hermesexpress.cloudmessaging
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.properties.Properties
-import kotlinx.serialization.properties.decodeFromStringMap
 import org.koin.android.ext.android.inject
 
 internal class FirebaseCloudMessagingService : FirebaseMessagingService() {
@@ -30,17 +25,8 @@ internal class FirebaseCloudMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.data.isNotEmpty()) {
             val payload = remoteMessage.data
-            convertPayloadToDeliveryOffer(payload)?.let { offer ->
-                deliveryOfferDatasource.emitOffer(offer)
-            }
+            deliveryOfferDatasource.handleMessagePayload(payload)
         }
-    }
-
-    @OptIn(ExperimentalSerializationApi::class)
-    private fun convertPayloadToDeliveryOffer(payload: Map<String, String>): DeliveryOffer? = try {
-        Properties.decodeFromStringMap<DeliveryOffer>(payload)
-    } catch (e: SerializationException) {
-        null
     }
 
     override fun onDestroy() {
