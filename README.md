@@ -1,7 +1,7 @@
 # Hermes Express
 
 > "[Hermes] The herald of the gods, the swift messenger of Zeus, came from the sky and stood before
-> her." (Homer, "The Odyssey").
+> her." — Homer, The Odyssey.
 
 ![Banner](banner.jpg)
 
