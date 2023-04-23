@@ -1,6 +1,7 @@
 package dev.alibagherifam.hermesexpress.cloudmessaging
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -19,10 +20,12 @@ internal class CloudMessaging(context: Context) : CloudMessagingTokenDatasource 
     override suspend fun getToken(): String {
         val savedToken = getSavedToken()
         return if (savedToken != null) {
+            Log.i(TAG, "Saved FCM token: $savedToken")
             savedToken
         } else {
             val newToken = Firebase.messaging.token.await()
             saveToken(newToken)
+            Log.i(TAG, "New FCM updated: $newToken")
             newToken
         }
     }
@@ -39,5 +42,7 @@ internal class CloudMessaging(context: Context) : CloudMessagingTokenDatasource 
     companion object {
         private val KEY_CLOUD_MESSAGING_TOKEN =
             stringPreferencesKey("cloud_messaging_token")
+
+        private const val TAG = "cloud-messaging"
     }
 }
