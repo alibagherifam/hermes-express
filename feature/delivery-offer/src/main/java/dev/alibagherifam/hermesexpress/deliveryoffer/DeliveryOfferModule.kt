@@ -1,7 +1,7 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer
 
 import dev.alibagherifam.hermesexpress.cloudmessaging.CloudMessagingDeliveryOfferDatasource
-import dev.alibagherifam.hermesexpress.common.domain.RealTimeDeliveryOfferDatasource
+import dev.alibagherifam.hermesexpress.common.data.RealTimeDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.data.DoubleDatasourceDeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.data.LongPollingDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository

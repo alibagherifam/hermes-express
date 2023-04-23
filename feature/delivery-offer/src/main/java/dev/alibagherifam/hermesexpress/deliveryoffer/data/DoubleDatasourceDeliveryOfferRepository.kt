@@ -1,7 +1,7 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.data
 
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
-import dev.alibagherifam.hermesexpress.common.domain.RealTimeDeliveryOfferDatasource
+import dev.alibagherifam.hermesexpress.common.data.RealTimeDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay

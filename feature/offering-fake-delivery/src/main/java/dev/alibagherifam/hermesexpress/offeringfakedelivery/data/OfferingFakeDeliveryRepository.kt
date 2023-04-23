@@ -1,21 +1,22 @@
 package dev.alibagherifam.hermesexpress.offeringfakedelivery.data
 
 import dev.alibagherifam.hermesexpress.cloudmessaging.CloudMessagingTokenDatasource
+import dev.alibagherifam.hermesexpress.common.data.LocationProvider
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
-import dev.alibagherifam.hermesexpress.common.domain.LatLong
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
+import kotlinx.coroutines.flow.first
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.encodeToStringMap
 
 internal class OfferingFakeDeliveryRepository(
     private val cloudMessagingService: CloudMessagingService,
-    private val cloudMessagingTokenDatasource: CloudMessagingTokenDatasource
+    private val cloudMessagingTokenDatasource: CloudMessagingTokenDatasource,
+    private val locationProvider: LocationProvider
 ) {
     suspend fun broadcastFakeDeliveryOffer(stringProvider: StringProvider) {
-        // TODO: Get this value from Location Provider
-        val userLocation = LatLong(35.9818, 50.7387)
+        val userLocation = locationProvider.getUserLocationStream().first()
         val fakeOffer = generateFakeDeliveryOffer(stringProvider, userLocation)
         sendDeliveryOfferMessage(fakeOffer)
     }
