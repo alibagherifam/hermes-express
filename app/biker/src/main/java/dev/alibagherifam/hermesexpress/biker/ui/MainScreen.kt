@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
@@ -51,9 +53,16 @@ fun MainScreen(
             Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
         }
     ) {
+        val sheetHeight = with(LocalDensity.current) {
+            val sheetOffset = sheetState.requireOffset()
+            val screenHeightDp = with(LocalConfiguration.current) {
+                screenHeightDp.dp.toPx()
+            }
+            screenHeightDp - sheetOffset
+        }
         MapScreen(
             mapStateHolder,
-            windowBottomInset = sheetState.requireOffset(),
+            windowBottomInset = sheetHeight,
             onLocationPermissionDeny
         )
     }
