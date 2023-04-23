@@ -18,11 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeTerminals
+import dev.alibagherifam.hermesexpress.common.ui.LocalizationPreviews
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
@@ -93,7 +93,7 @@ internal fun TerminalItem(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFF)
+@LocalizationPreviews
 @Composable
 internal fun TerminalListPreview() {
     HermesTheme {

@@ -21,7 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.lerp
-import androidx.compose.ui.tooling.preview.Preview
+import dev.alibagherifam.hermesexpress.common.ui.LocalizationPreviews
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
 @Composable
@@ -86,7 +86,7 @@ internal fun containerColorForProgressButton(
     }
 }
 
-@Preview
+@LocalizationPreviews
 @Composable
 internal fun ProgressButtonPreview() {
     HermesTheme {

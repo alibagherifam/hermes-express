@@ -14,10 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
+import dev.alibagherifam.hermesexpress.common.ui.LocalizationPreviews
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
@@ -66,7 +66,7 @@ internal fun DeliveryOfferScreen(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFF)
+@LocalizationPreviews
 @Composable
 internal fun DeliveryOfferScreenPreview() {
     HermesTheme {

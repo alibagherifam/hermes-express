@@ -5,15 +5,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
+import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
+import dev.alibagherifam.hermesexpress.common.ui.StringProvider
+import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
 
@@ -53,6 +60,10 @@ fun MainScreen(
             Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
         }
     ) {
+        if (LocalInspectionMode.current) {
+            Surface(Modifier.fillMaxSize()) {}
+            return@BottomSheetScaffold
+        }
         val sheetHeight = with(LocalDensity.current) {
             val sheetOffset = sheetState.requireOffset()
             val screenHeightDp = with(LocalConfiguration.current) {
@@ -64,6 +75,20 @@ fun MainScreen(
             mapStateHolder,
             windowBottomInset = sheetHeight,
             onLocationPermissionDeny
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun MainScreenPreview() {
+    val stringProvider = with(LocalContext.current) {
+        StringProvider { getString(it) }
+    }
+    HermesTheme {
+        MainScreen(
+            offer = generateFakeDeliveryOffer(stringProvider),
+            onLocationPermissionDeny = {}
         )
     }
 }
