@@ -7,4 +7,5 @@ interface DeliveryOfferRepository {
     val receivedOffer: StateFlow<DeliveryOffer?>
     suspend fun acceptOffer()
     suspend fun ignoreOffer()
+    fun tryIgnoreOffer()
 }

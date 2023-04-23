@@ -7,7 +7,6 @@ import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferReposit
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.StartCountUpTimerUseCase
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -137,7 +136,7 @@ internal class DeliveryOfferViewModel(
     }
 
     override fun onCleared() {
-        GlobalScope.launch { repository.ignoreOffer() }
+        repository.tryIgnoreOffer()
         super.onCleared()
     }
 

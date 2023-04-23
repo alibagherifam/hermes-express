@@ -1,7 +1,7 @@
 package dev.alibagherifam.hermesexpress.deliveryoffer.data
 
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.data.RealTimeDeliveryOfferDatasource
+import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -12,9 +12,10 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 internal class DoubleDatasourceDeliveryOfferRepository(
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     dataSource1: RealTimeDeliveryOfferDatasource,
     dataSource2: RealTimeDeliveryOfferDatasource
 ) : DeliveryOfferRepository {
@@ -43,5 +44,11 @@ internal class DoubleDatasourceDeliveryOfferRepository(
 
     override suspend fun ignoreOffer() {
         _receivedOffer.value = null
+    }
+
+    override fun tryIgnoreOffer() {
+        coroutineScope.launch {
+            ignoreOffer()
+        }
     }
 }
