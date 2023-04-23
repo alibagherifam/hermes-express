@@ -60,7 +60,7 @@ internal fun DeliveryOfferScreen(
                 Text(text = stringResource(R.string.label_accept_delivery_offer))
             }
             if (uiState.isAcceptingOfferInProgress) {
-                CircularProgressIndicator(Modifier.matchParentSize())
+                CircularProgressIndicator()
             }
         }
     }
