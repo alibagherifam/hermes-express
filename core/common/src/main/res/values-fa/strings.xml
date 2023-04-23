@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_generic_io_error">لطفا اتصال به اینترنت را بررسی نمایید.</string>
+
+    <string name="fake_data_address_1">کوی نصر، بزرگراه همت، خ گیشا، پ 187</string>
+    <string name="fake_data_address_2">فردوس، بزرگراه ستاری، بلوار فردوس شرقی، خ رامین شمالی، پ 261</string>
+    <string name="fake_data_address_3">کارون شمالی، خ جیحون، خ بهنود، خ شیریانی، پ 23</string>
+    <string name="fake_data_address_4">دروازه شمیران، هفده شهریور، خ کفایی امانی، خ مازندران، پ 165</string>
+</resources>

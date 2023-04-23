@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_accept_delivery_offer">قبول سفر</string>
+    <string name="label_box_required">جعبه</string>
+    <string name="label_currency_unit">تومان</string>
+    <string name="label_fragile">شکستنی</string>
+    <string name="label_minutes">%1$s دقیقه</string>
+
+    <string name="message_offer_accepted">شما سفر را قبول کردید. موفق باشید!</string>
+
+    <string name="a11y_box_required">جعبه الزامی است</string>
+    <string name="a11y_estimated_delivery_time">مدت تقریبی سفر</string>
+    <string name="a11y_fragile_shipment">بسته‌ی شکستنی است</string>
+</resources>

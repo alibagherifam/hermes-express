@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="message_generic_io_error">Check your connection please.</string>
+    <string name="message_generic_io_error">Please check your connection.</string>
 
     <string name="fake_data_address_1">Nasr Neighborhood, Hekmat Highway, Gisha St, No. 187</string>
     <string name="fake_data_address_2">Ferdows, Setareh Hwy, Ferdows East Blvd, Ramin St, No. 261</string>

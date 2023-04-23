@@ -12,6 +12,7 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
 //    desugarJdkLibraries(android, libs)
     configureWithDetekt(libs)
     excludeLicencesFromApk(android)
+    specifySupportedLanguages(android)
 }
 
 fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>, libs: VersionCatalog) {
@@ -44,5 +45,13 @@ fun Project.desugarJdkLibraries(
 private fun excludeLicencesFromApk(android: CommonExtension<*, *, *, *>) {
     android.packaging.resources {
         excludes += "/META-INF/{AL2.0,LGPL2.1}"
+    }
+}
+
+fun specifySupportedLanguages(android: CommonExtension<*, *, *, *>) {
+    android.apply {
+        defaultConfig {
+            resourceConfigurations += listOf("en", "fa")
+        }
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_location_permission">دسترسی به موقعیت مکانی</string>
+    <string name="label_close_app">بستن اپلیکیشن</string>
+    <string name="label_confirm">تایید</string>
+
+    <string name="message_location_permission_required">جهت دریافت سفارش، دسترسی به موقعیت مکانی دستگاه شما لازم می‌باشد. اجرای اپلیکیشن بدون این دسترسی امکان پذیر نمی‌باشد.</string>
+
+    <string name="a11y_my_location_button">دکمه‌ی موقعیت مکانی من</string>
+</resources>
