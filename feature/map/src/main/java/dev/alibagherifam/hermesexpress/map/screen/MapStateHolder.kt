@@ -5,9 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import dev.alibagherifam.hermesexpress.common.domain.LatLong
+import dev.alibagherifam.hermesexpress.map.MapBoxLocationProvider
 import dev.alibagherifam.hermesexpress.map.toPoint
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MapStateHolder {
+class MapStateHolder : KoinComponent {
+    private val locationProvider: MapBoxLocationProvider by inject()
+
     private val _state = mutableStateOf(MapState())
     internal val state: State<MapState> get() = _state
 
@@ -59,6 +64,7 @@ class MapStateHolder {
             }
 
             is MapEvent.UserLocationChange -> {
+                locationProvider.lastLocation = event.newLocation
                 val isFirstUserLocation = (state.value.userLocation == null)
                 updateState {
                     it.copy(userLocation = event.newLocation)
