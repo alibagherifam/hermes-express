@@ -1,8 +1,6 @@
 package dev.alibagherifam.hermesexpress.biker.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,7 +15,7 @@ import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     offer: DeliveryOffer?,
@@ -52,12 +50,11 @@ fun MainScreen(
         snackbarHost = {
             Box(Modifier.fillMaxSize()) { SnackbarHost(it) }
         }
-    ) { paddingValues ->
+    ) {
         MapScreen(
             mapStateHolder,
-            bottomSheetOffset = sheetState.requireOffset(),
-            onLocationPermissionDeny,
-            Modifier.consumeWindowInsets(paddingValues)
+            windowBottomInset = sheetState.requireOffset(),
+            onLocationPermissionDeny
         )
     }
 }
