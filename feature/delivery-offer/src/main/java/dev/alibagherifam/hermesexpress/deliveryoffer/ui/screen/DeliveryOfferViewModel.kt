@@ -5,6 +5,7 @@ import dev.alibagherifam.hermesexpress.common.ui.BaseViewModel
 import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.StartCountUpTimerUseCase
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -15,8 +16,9 @@ import kotlin.time.Duration
 import dev.alibagherifam.hermesexpress.common.R as CommonR
 
 internal class DeliveryOfferViewModel(
-    private val repository: DeliveryOfferRepository,
     private val formatCurrencyUseCase: FormatCurrencyUseCase,
+    private val repository: DeliveryOfferRepository,
+    private val startCountUpTimer: StartCountUpTimerUseCase,
     private val stringProvider: StringProvider
 ) : BaseViewModel<DeliveryOfferUiState>(
     initialState = DeliveryOfferUiState()
@@ -52,11 +54,12 @@ internal class DeliveryOfferViewModel(
 
     private fun startOfferExpiration(expirationDuration: Duration) {
         offerExpirationJob = startCountUpTimer(
+            scope = safeScope,
             totalTime = expirationDuration,
             step = smoothTimerStep,
             doOnEachStep = { elapsedTime ->
                 _uiState.update { it.copy(offerTimeElapsed = elapsedTime) }
-                while (isAcceptingOfferJobRunning()) {
+                while (offerAcceptanceConfirmationJob?.isActive == true) {
                     // Pause expiration during offer acceptance
                     delay(smoothTimerStep)
                 }
@@ -78,6 +81,7 @@ internal class DeliveryOfferViewModel(
 
     private fun startOfferAcceptanceConfirmation() {
         offerAcceptanceConfirmationJob = startCountUpTimer(
+            scope = safeScope,
             totalTime = timeToConfirmOfferAcceptance,
             step = smoothTimerStep,
             doAtTheEnd = { acceptOffer() },
@@ -96,24 +100,6 @@ internal class DeliveryOfferViewModel(
         _uiState.update {
             it.copy(offerAcceptanceConfirmationPercentage = 0f)
         }
-    }
-
-    private fun isAcceptingOfferJobRunning() = (offerAcceptanceConfirmationJob != null)
-
-    private fun startCountUpTimer(
-        totalTime: Duration,
-        step: Duration,
-        doAtTheEnd: suspend () -> Unit,
-        doOnEachStep: suspend (Duration) -> Unit,
-    ): Job = safeScope.launch {
-        var elapsedTime = Duration.ZERO
-        while (elapsedTime < totalTime) {
-            delay(step)
-            elapsedTime += step
-            elapsedTime.coerceAtMost(totalTime)
-            doOnEachStep(elapsedTime)
-        }
-        doAtTheEnd()
     }
 
     private fun acceptOffer() = safeLaunch {

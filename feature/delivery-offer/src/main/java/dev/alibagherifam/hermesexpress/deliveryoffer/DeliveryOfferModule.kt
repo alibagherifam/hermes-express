@@ -6,6 +6,7 @@ import dev.alibagherifam.hermesexpress.deliveryoffer.data.DoubleDatasourceDelive
 import dev.alibagherifam.hermesexpress.deliveryoffer.data.LongPollingDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.FormatCurrencyUseCase
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.StartCountUpTimerUseCase
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferViewModel
 import kotlinx.coroutines.GlobalScope
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -31,5 +32,6 @@ val deliveryOfferModule = module {
     }
 
     factoryOf(::FormatCurrencyUseCase)
+    factoryOf(::StartCountUpTimerUseCase)
     viewModelOf(::DeliveryOfferViewModel)
 }
