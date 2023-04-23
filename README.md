@@ -28,6 +28,8 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 - [FCM](https://firebase.google.com/docs/cloud-messaging) for cloud messaging
 - [Retrofit](https://square.github.io/retrofit/) for HTTP request
 - [Kotlin Serialization](https://kotlinlang.org/docs/serialization.html)
+- [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore) for data
+  storage
 
 ### Map
 
@@ -51,9 +53,9 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
   for [dynamic color](https://m3.material.io/styles/color/dynamic-color/overview) (Android 12+)
 - [Themed launcher icon](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive#user-theming) (
   Android 13+)
-- Multilingual (currently **English** and **Persian**).
-- [Per-app language preferences](https://developer.android.com/guide/topics/resources/app-languages) (
-  Android 13+)
+- Multilingual (currently English and Persian).
+- [Per-app language] (https://developer.android.com/guide/topics/resources/app-languages)
+  preferences (Android 13+)
 
 License
 --------
