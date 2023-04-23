@@ -51,6 +51,9 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
   for [dynamic color](https://m3.material.io/styles/color/dynamic-color/overview) (Android 12+)
 - [Themed launcher icon](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive#user-theming) (
   Android 13+)
+- Multilingual (currently **English** and **Persian**).
+- [Per-app language preferences](https://developer.android.com/guide/topics/resources/app-languages) (
+  Android 13+)
 
 License
 --------
