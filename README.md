@@ -47,8 +47,10 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 ### UI
 
 - Compose UI
-- Material 3 design system with support for dynamic color (Android 12+)
-- Themed launcher icon (Android 13+)
+- Material 3 design system with support
+  for [dynamic color](https://m3.material.io/styles/color/dynamic-color/overview) (Android 12+)
+- [Themed launcher icon](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive#user-theming) (
+  Android 13+)
 
 License
 --------
