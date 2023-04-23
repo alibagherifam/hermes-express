@@ -29,7 +29,7 @@ internal class OfferingFakeDeliveryViewModel(
         _uiState.update {
             it.copy(isOfferingInProgress = true)
         }
-        repository.broadcastFakeDeliveryOffer(stringProvider)
+        repository.broadcastFakeDeliveryOffer()
         _uiState.update {
             val message = stringProvider.getString(R.string.message_fake_offer_sent)
             it.copy(

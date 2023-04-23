@@ -13,9 +13,10 @@ import kotlinx.serialization.properties.encodeToStringMap
 internal class OfferingFakeDeliveryRepository(
     private val cloudMessagingService: CloudMessagingService,
     private val cloudMessagingTokenDatasource: CloudMessagingTokenDatasource,
-    private val locationProvider: LocationProvider
+    private val locationProvider: LocationProvider,
+    private val stringProvider: StringProvider
 ) {
-    suspend fun broadcastFakeDeliveryOffer(stringProvider: StringProvider) {
+    suspend fun broadcastFakeDeliveryOffer() {
         val userLocation = locationProvider.getUserLocationStream().first()
         val fakeOffer = generateFakeDeliveryOffer(stringProvider, userLocation)
         sendDeliveryOfferMessage(fakeOffer)
