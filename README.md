@@ -3,7 +3,7 @@
 > "[Hermes] The herald of the gods, the swift messenger of Zeus, came from the sky and stood before
 > her." <br> — Homer, The Odyssey
 
-![Banner](banner.jpg)
+![Banner](images/banner.jpg)
 
 Hermes Express is a personal project that showcases how to build a delivery Android application
 using state-of-the-art technologies in Android development. The app enables bikers to explore
@@ -57,6 +57,10 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 - Localized Firebase notification messages.
 - [Per-app language](https://developer.android.com/guide/topics/resources/app-languages)
   preferences (Android 13+)
+
+## Dependency Graph
+
+![Dependency Graph](images/dependency-graph.png)
 
 License
 --------
