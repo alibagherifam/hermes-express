@@ -7,19 +7,25 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.lifecycleScope
 import dev.alibagherifam.hermesexpress.biker.ui.MainScreen
 import dev.alibagherifam.hermesexpress.cloudmessaging.CloudMessaging
 import dev.alibagherifam.hermesexpress.cloudmessaging.CloudMessagingDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.common.ui.widget.RequestPermissionScaffold
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import dev.alibagherifam.hermesexpress.cloudmessaging.R as CloudmessagingR
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        get<CloudMessaging>().createDeliveryOfferNotificationChannel(context = this)
         handleNotificationPayload()
+        val cloudMessaging: CloudMessaging = get()
+        cloudMessaging.createDeliveryOfferNotificationChannel(context = this)
+        lifecycleScope.launch {
+            cloudMessaging.subscribeToDeliveryOfferTopic()
+        }
         setContent {
             HermesTheme { Content() }
         }

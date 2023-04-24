@@ -42,6 +42,10 @@ class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
         }
     }
 
+    suspend fun subscribeToDeliveryOfferTopic() {
+        Firebase.messaging.subscribeToTopic(DELIVERY_OFFER_TOPIC).await()
+    }
+
     fun createDeliveryOfferNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -66,5 +70,6 @@ class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
 
         private const val TAG = "cloud_messaging"
         private const val DELIVERY_OFFER_CHANNEL_ID = "channel_delivery_offer"
+        private const val DELIVERY_OFFER_TOPIC = "delivery-offer"
     }
 }
