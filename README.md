@@ -13,7 +13,7 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 
 ## Screenshots
 
-<img width="800" alt="App Screenshots" src="images/screenshots.png">
+![Screenshots](images/screenshots.png)
 
 ## Technologies
 
