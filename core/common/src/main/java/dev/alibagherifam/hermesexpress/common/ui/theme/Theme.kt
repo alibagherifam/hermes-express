@@ -83,11 +83,12 @@ private val DarkColorScheme = darkColorScheme(
 @Composable
 fun HermesTheme(
     isInDarkMode: Boolean = isSystemInDarkTheme(),
-    allowDynamicColor: Boolean = true,
+    allowDynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
+    val isDynamicColorSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colorScheme = when {
-        allowDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        allowDynamicColor && isDynamicColorSupported -> {
             val context = LocalContext.current
             if (isInDarkMode) {
                 dynamicDarkColorScheme(context)
