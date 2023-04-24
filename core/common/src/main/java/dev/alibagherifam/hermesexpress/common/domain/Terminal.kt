@@ -10,8 +10,6 @@ data class Terminal(
     val postalAddress: String
 ) {
     init {
-        require(location.first > 0) { "Latitude ID is not allowed" }
-        require(location.second > 0) { "Longitude ID is not allowed" }
         require(postalAddress.isNotEmpty()) { "Postal address can not be empty" }
     }
 }
