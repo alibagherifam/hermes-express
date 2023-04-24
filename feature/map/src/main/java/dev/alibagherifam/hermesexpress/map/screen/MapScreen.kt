@@ -11,16 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
-import dev.alibagherifam.hermesexpress.common.ui.widget.RequestPermissionDialog
+import dev.alibagherifam.hermesexpress.common.ui.widget.RequestPermissionScaffold
 import dev.alibagherifam.hermesexpress.feature.map.R
 import dev.alibagherifam.hermesexpress.map.view.MapView
 import dev.alibagherifam.hermesexpress.map.view.MyLocationButton
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MapScreen(
     mapStateHolder: MapStateHolder,
@@ -28,10 +24,12 @@ fun MapScreen(
     onLocationPermissionDeny: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val locationPermissionState = rememberPermissionState(
-        Manifest.permission.ACCESS_FINE_LOCATION
-    )
-    if (locationPermissionState.status.isGranted) {
+    RequestPermissionScaffold(
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        rationaleDialogTitle = stringResource(R.string.label_location_permission),
+        rationaleDialogMessage = stringResource(R.string.message_location_permission_required),
+        onPermissionDeny = onLocationPermissionDeny
+    ) {
         Box(modifier) {
             MapView(
                 state = mapStateHolder.state.value,
@@ -46,15 +44,6 @@ fun MapScreen(
                     .offset {
                         IntOffset(x = 0, y = -windowBottomInset.roundToInt())
                     }
-            )
-        }
-    } else {
-        Box(Modifier.fillMaxSize()) {
-            RequestPermissionDialog(
-                title = stringResource(R.string.label_location_permission),
-                message = stringResource(R.string.message_location_permission_required),
-                onConfirmClick = { locationPermissionState.launchPermissionRequest() },
-                onDismissRequest = { onLocationPermissionDeny() }
             )
         }
     }
