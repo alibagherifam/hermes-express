@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import dev.alibagherifam.hermesexpress.biker.ui.MainScreen
+import dev.alibagherifam.hermesexpress.cloudmessaging.CloudMessaging
 import dev.alibagherifam.hermesexpress.cloudmessaging.CloudMessagingDeliveryOfferDatasource
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
@@ -15,6 +16,7 @@ import org.koin.compose.koinInject
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        get<CloudMessaging>().createDeliveryOfferNotificationChannel(context = this)
         handleNotificationPayload()
         setContent {
             HermesTheme {

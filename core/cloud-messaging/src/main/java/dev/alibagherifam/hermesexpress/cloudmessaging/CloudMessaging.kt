@@ -1,6 +1,9 @@
 package dev.alibagherifam.hermesexpress.cloudmessaging
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -13,7 +16,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 
-internal class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
+class CloudMessaging(context: Context) : CloudMessagingTokenDatasource {
     private val Context.dataStore by preferencesDataStore(name = "user-preferences")
     private val dataStore: DataStore<Preferences> = context.dataStore
 
@@ -31,18 +34,37 @@ internal class CloudMessaging(context: Context) : CloudMessagingTokenDatasource 
     }
 
     private suspend fun getSavedToken(): String? = dataStore.data
-        .map { it[KEY_CLOUD_MESSAGING_TOKEN] }.first()
+        .map { it[CLOUD_MESSAGING_TOKEN_KEY] }.first()
 
     override suspend fun saveToken(token: String) {
         dataStore.edit { preferences ->
-            preferences[KEY_CLOUD_MESSAGING_TOKEN] = token
+            preferences[CLOUD_MESSAGING_TOKEN_KEY] = token
+        }
+    }
+
+    fun createDeliveryOfferNotificationChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                DELIVERY_OFFER_CHANNEL_ID,
+                context.getString(R.string.label_delivery_offer_notification_channel_name),
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = context.getString(
+                R.string.message_delivery_offer_notification_channel_description
+            )
+
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            notificationManager.createNotificationChannel(channel)
         }
     }
 
     companion object {
-        private val KEY_CLOUD_MESSAGING_TOKEN =
+        private val CLOUD_MESSAGING_TOKEN_KEY =
             stringPreferencesKey("cloud_messaging_token")
 
-        private const val TAG = "cloud-messaging"
+        private const val TAG = "cloud_messaging"
+        private const val DELIVERY_OFFER_CHANNEL_ID = "channel_delivery_offer"
     }
 }

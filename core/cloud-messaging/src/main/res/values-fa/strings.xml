@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_delivery_offer_notification_channel_name">دریافت سفارش</string>
+    <string name="label_notification_permission">مجوز ارسال اعلان</string>
+
+    <string name="message_delivery_offer_notification_channel_description">سفارش‌ها را دریافت کنید، حتی زمانی که اپلیکیشن در پس‌زمینه است.</string>
+    <string name="message_notification_permission_required">جهت دریافت سفارش، مجوز ارسال اعلان به دستگاه شما لازم می‌باشد. اجرای اپلیکیشن بدون این مجوز امکان پذیر نمی‌باشد.</string>
+</resources>
