@@ -8,52 +8,48 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.alibagherifam.hermesexpress.common.R
 
-val HerculanumFontFamily = FontFamily(
-    Font(R.font.herculanum)
-)
-
 val JensonFontFamily = FontFamily(
     Font(R.font.jenson)
 )
 
 val AppTypography = Typography(
     displayLarge = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 57.sp,
         lineHeight = 64.sp,
         letterSpacing = (-0.25).sp,
     ),
     displayMedium = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 45.sp,
         lineHeight = 52.sp,
         letterSpacing = 0.sp,
     ),
     displaySmall = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 36.sp,
         lineHeight = 44.sp,
         letterSpacing = 0.sp,
     ),
     headlineLarge = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 30.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp,
     ),
     headlineMedium = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 26.sp,
         lineHeight = 36.sp,
         letterSpacing = 0.sp,
     ),
     headlineSmall = TextStyle(
-        fontFamily = HerculanumFontFamily,
+        fontFamily = JensonFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
         lineHeight = 32.sp,
