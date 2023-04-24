@@ -71,11 +71,11 @@ internal fun MapView(
         },
         update = { mapView ->
             val cameraController = mapView.getMapboxMap()
-            if (state.isAnyMarkerUpdateAvailable) {
+            if (state.shouldUpdateMarkers) {
                 markerManager.deleteAllMarkers()
                 if (state.markerLocations.isNotEmpty()) {
                     markerManager.addMarkers(state.markerLocations)
-                    val userLocation = requireNotNull(state.userLocation)
+                    val userLocation = checkNotNull(state.userLocation)
                     cameraController.fitCameraForLocations(
                         locations = state.markerLocations + userLocation
                     )
