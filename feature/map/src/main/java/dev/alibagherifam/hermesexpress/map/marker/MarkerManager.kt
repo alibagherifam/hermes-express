@@ -23,7 +23,7 @@ internal class MarkerManager(private val markerOptions: MarkerOptions) {
         val markerOptions = PointAnnotationOptions()
             .withTextColor(markerOptions.textColor)
             .withTextSize(markerOptions.textSize.value.toDouble())
-            .withIconImage(drawCircleBitmap())
+            .withIconImage(drawRoundedCornerSquareBitmap())
 
         for (index in locations.indices) {
             markerOptions
@@ -33,7 +33,7 @@ internal class MarkerManager(private val markerOptions: MarkerOptions) {
         }
     }
 
-    private fun drawCircleBitmap(): Bitmap {
+    private fun drawRoundedCornerSquareBitmap(): Bitmap {
         val bitmapSize = markerOptions.size.toInt()
         val bitmap = Bitmap.createBitmap(bitmapSize, bitmapSize, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
