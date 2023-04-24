@@ -57,7 +57,7 @@ internal fun DeliveryOfferScreen(
                 isEnabled = !uiState.isAcceptingOfferInProgress,
                 pressedStateColorSaturation = uiState.offerAcceptanceConfirmationPercentage
             ) {
-                Text(text = stringResource(R.string.label_accept_delivery_offer))
+                Text(text = stringResource(R.string.label_accept_offer))
             }
             if (uiState.isAcceptingOfferInProgress) {
                 CircularProgressIndicator()

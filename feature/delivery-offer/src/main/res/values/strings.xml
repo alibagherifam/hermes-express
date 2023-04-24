@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="label_accept_delivery_offer">Accept Offer</string>
+    <string name="label_accept_offer">Accept Offer</string>
     <string name="label_box_required">Box</string>
     <string name="label_currency_unit">USD</string>
     <string name="label_fragile">Fragile</string>
