@@ -3,7 +3,7 @@
 > "[Hermes] The herald of the gods, the swift messenger of Zeus, came from the sky and stood before
 > her." <br> — Homer, The Odyssey
 
-![Banner](images/banner.jpg)
+<img width="700" alt="Dependency Graph" src="images/banner.png">
 
 Hermes Express is a personal project that showcases how to build a delivery Android application
 using state-of-the-art technologies in Android development. The app enables bikers to explore
@@ -60,7 +60,7 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 
 ## Dependency Graph
 
-![Dependency Graph](images/dependency-graph.png)
+<img width="700" alt="Dependency Graph" src="images/dependency-graph.png">
 
 License
 --------
