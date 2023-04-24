@@ -66,6 +66,11 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 
 <img width="600" alt="Dependency Graph" src="images/dependency-graph.png">
 
+## Contribution
+
+Contributions and feedback are welcome and appreciated. Please feel free to fork the repository and
+submit a pull request.
+
 License
 --------
 
