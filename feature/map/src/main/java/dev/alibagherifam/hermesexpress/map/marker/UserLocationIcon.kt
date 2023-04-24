@@ -26,9 +26,9 @@ fun userLocationDefaultIcon(): UserLocationIcon {
     val contentColor = contentColorFor(backgroundColor)
 
     val bitmap = createCircleBitmapWithStroke(
-        size = with(density) { 40.dp.toPx() },
+        size = with(density) { 32.dp.toPx() },
         fillColor = backgroundColor.toArgb(),
-        strokeSize = with(density) { 2.dp.toPx() },
+        strokeSize = with(density) { (1.5).dp.toPx() },
         strokeColor = contentColor.toArgb()
     )
     val background = BitmapDrawable(context.resources, bitmap)
