@@ -5,8 +5,8 @@
 
     <string name="message_generic_io_error">Please check your connection.</string>
 
-    <string name="fake_data_address_1">Nasr Neighborhood, Hekmat Highway, Gisha St, No. 187</string>
-    <string name="fake_data_address_2">Ferdows, Setareh Hwy, Ferdows East Blvd, Ramin St, No. 261</string>
-    <string name="fake_data_address_3">Karun North, Jeyhoon St, Behnoud St, Shiriani St, No. 23</string>
-    <string name="fake_data_address_4">Darvazeh Shemiran, 17th Shahrivar St, Kafaee Amani St, Mazandaran St, No. 165.</string>
+    <string name="fake_data_address_1">1234 Technology Lane, San Jose, CA 95110, United States</string>
+    <string name="fake_data_address_2">5678 Innovation Drive, Palo Alto, CA 94301, United States</string>
+    <string name="fake_data_address_3">9101 Venture Boulevard, Santa Clara, CA 95050, United States</string>
+    <string name="fake_data_address_4">2468 Progress Way, Sunnyvale, CA 94085, United States</string>
 </resources>
