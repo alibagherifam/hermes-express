@@ -3,7 +3,7 @@
 > "[Hermes] The herald of the gods, the swift messenger of Zeus, came from the sky and stood before
 > her." <br> — Homer, The Odyssey
 
-<img width="600" alt="Dependency Graph" src="images/banner.jpg">
+![Banner](images/banner.jpg)
 
 Hermes Express is a personal project that showcases how to build a delivery Android application
 using state-of-the-art technologies in Android development. The app enables bikers to explore
