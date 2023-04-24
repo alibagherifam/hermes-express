@@ -8,12 +8,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
-import dev.alibagherifam.hermesexpress.map.view.LocationPermissionDialog
+import dev.alibagherifam.hermesexpress.common.ui.widget.RequestPermissionDialog
+import dev.alibagherifam.hermesexpress.feature.map.R
 import dev.alibagherifam.hermesexpress.map.view.MapView
 import dev.alibagherifam.hermesexpress.map.view.MyLocationButton
 import kotlin.math.roundToInt
@@ -48,7 +50,9 @@ fun MapScreen(
         }
     } else {
         Box(Modifier.fillMaxSize()) {
-            LocationPermissionDialog(
+            RequestPermissionDialog(
+                title = stringResource(R.string.label_location_permission),
+                message = stringResource(R.string.message_location_permission_required),
                 onConfirmClick = { locationPermissionState.launchPermissionRequest() },
                 onDismissRequest = { onLocationPermissionDeny() }
             )

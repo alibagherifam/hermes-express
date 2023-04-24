@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_location_permission">Location Permission</string>
-    <string name="label_close_app">Close the App</string>
-    <string name="label_confirm">Confirm</string>
 
     <string name="message_location_permission_required">Location permission is required for offering deliveries. The app cannot work without this permission.</string>
 

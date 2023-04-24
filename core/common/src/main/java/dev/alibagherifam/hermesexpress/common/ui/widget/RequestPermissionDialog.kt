@@ -1,4 +1,4 @@
-package dev.alibagherifam.hermesexpress.map.view
+package dev.alibagherifam.hermesexpress.common.ui.widget
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -7,18 +7,20 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import dev.alibagherifam.hermesexpress.common.R
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
-import dev.alibagherifam.hermesexpress.feature.map.R
 
 @Composable
-internal fun LocationPermissionDialog(
+fun RequestPermissionDialog(
+    title: String,
+    message: String,
     onConfirmClick: () -> Unit,
     onDismissRequest: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
-        title = { Text(text = stringResource(R.string.label_location_permission)) },
-        text = { Text(text = stringResource(R.string.message_location_permission_required)) },
+        title = { Text(title) },
+        text = { Text(message) },
         confirmButton = {
             Button(onClick = onConfirmClick) {
                 Text(text = stringResource(R.string.label_confirm))
@@ -34,9 +36,11 @@ internal fun LocationPermissionDialog(
 
 @Preview
 @Composable
-internal fun LocationPermissionDialogPreview() {
+internal fun RequestPermissionDialogPreview() {
     HermesTheme {
-        LocationPermissionDialog(
+        RequestPermissionDialog(
+            title = stringResource(R.string.label_confirm),
+            message = stringResource(R.string.message_generic_io_error),
             onConfirmClick = {},
             onDismissRequest = {}
         )

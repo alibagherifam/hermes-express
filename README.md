@@ -51,11 +51,11 @@ creating a reliable, scalable, and user-friendly app in the delivery domain.
 - Compose UI
 - Material 3 design system with support
   for [dynamic color](https://m3.material.io/styles/color/dynamic-color/overview) (Android 12+)
-- [Themed launcher icon](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive#user-theming) (
-  Android 13+)
+- [Themed launcher icon](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive#user-theming)
+  (Android 13+)
 - Multilingual and currently supports English and Persian.
 - Localized Firebase notification messages.
-- [Per-app language] (https://developer.android.com/guide/topics/resources/app-languages)
+- [Per-app language](https://developer.android.com/guide/topics/resources/app-languages)
   preferences (Android 13+)
 
 License
