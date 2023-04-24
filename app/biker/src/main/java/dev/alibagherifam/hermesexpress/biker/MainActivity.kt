@@ -32,8 +32,12 @@ class MainActivity : ComponentActivity() {
         } else {
             RequestPermissionScaffold(
                 permission = Manifest.permission.POST_NOTIFICATIONS,
-                rationaleDialogTitle = stringResource(CloudmessagingR.string.label_notification_permission),
-                rationaleDialogMessage = stringResource(CloudmessagingR.string.message_notification_permission_required),
+                rationaleDialogTitle = stringResource(
+                    CloudmessagingR.string.label_notification_permission
+                ),
+                rationaleDialogMessage = stringResource(
+                    CloudmessagingR.string.message_notification_permission_required
+                ),
                 onPermissionDeny = { finish() }
             ) {
                 MainScreen(onLocationPermissionDeny = { finish() })

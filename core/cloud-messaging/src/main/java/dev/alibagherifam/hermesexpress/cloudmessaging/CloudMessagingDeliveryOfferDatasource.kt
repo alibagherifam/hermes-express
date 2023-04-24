@@ -7,7 +7,6 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.properties.decodeFromStringMap
 
@@ -24,9 +23,8 @@ class CloudMessagingDeliveryOfferDatasource : RealTimeDeliveryOfferDatasource {
         get() = _incomingOfferStream
 
     fun handleMessagePayload(payload: PayloadMap) {
-        convertPayloadToDeliveryOffer(payload)?.let { offer ->
-            _incomingOfferStream.tryEmit(offer)
-        }
+        val offer = convertPayloadToDeliveryOffer(payload)
+        _incomingOfferStream.tryEmit(offer)
     }
 
     fun handleMessagePayload(payload: Bundle) {
@@ -35,12 +33,8 @@ class CloudMessagingDeliveryOfferDatasource : RealTimeDeliveryOfferDatasource {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    private fun convertPayloadToDeliveryOffer(payload: PayloadMap): DeliveryOffer? = try {
-        Properties.decodeFromStringMap<DeliveryOffer>(payload)
-    } catch (e: SerializationException) {
-        println("I cant deserialize!")
-        null
-    }
+    private fun convertPayloadToDeliveryOffer(payload: PayloadMap): DeliveryOffer =
+        Properties.decodeFromStringMap(payload)
 
     // TODO: Perhaps it would be better to store the serialized Offer
     //  using a single key, rather than flattening all of its properties.

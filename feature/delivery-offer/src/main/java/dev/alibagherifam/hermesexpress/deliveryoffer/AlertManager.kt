@@ -30,7 +30,7 @@ internal fun vibrateDevice(
     context: Context,
     duration: Duration
 ) {
-    val vibrator = if (Build.VERSION.SDK_INT >= 31) {
+    val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val vibratorService = Context.VIBRATOR_MANAGER_SERVICE
         val vibratorManager = context.getSystemService(vibratorService) as VibratorManager
         vibratorManager.defaultVibrator
@@ -38,7 +38,7 @@ internal fun vibrateDevice(
         context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
 
-    if (Build.VERSION.SDK_INT >= 26) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         vibrator.vibrate(
             VibrationEffect.createOneShot(
                 duration.inWholeMilliseconds,

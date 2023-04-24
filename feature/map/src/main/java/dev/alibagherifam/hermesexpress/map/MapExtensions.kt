@@ -29,7 +29,13 @@ internal fun LocationComponentPlugin.getUserLocationStream(): Flow<Point> = call
 }.conflate()
 
 internal fun MapboxMap.fitCameraForLocations(locations: List<Point>) {
-    val viewportPadding = EdgeInsets(100.0, 100.0, 1000.0, 100.0)
-    val fittedViewPort = cameraForCoordinates(locations, viewportPadding)
+    val defaultPadding = 100.0
+    val markerPaddingValues = EdgeInsets(
+        defaultPadding,
+        defaultPadding,
+        defaultPadding * 10,
+        defaultPadding
+    )
+    val fittedViewPort = cameraForCoordinates(locations, markerPaddingValues)
     easeTo(fittedViewPort)
 }

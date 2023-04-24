@@ -9,10 +9,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.deliveryoffer.playAudio
-import dev.alibagherifam.hermesexpress.deliveryoffer.vibrateDevice
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferEvent
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferScreen
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferViewModel
+import dev.alibagherifam.hermesexpress.deliveryoffer.vibrateDevice
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
 import org.koin.androidx.compose.koinViewModel
 import kotlin.time.Duration

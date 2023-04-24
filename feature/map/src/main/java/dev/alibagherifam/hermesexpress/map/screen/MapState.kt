@@ -10,7 +10,7 @@ internal data class MapState(
     val markerLocations: List<Point> = emptyList()
 ) {
     val shouldUpdateMarkers: Boolean
-        get() = isAnyMarkerUpdateAvailable
-                && userLocation != null
-                && requestedCameraOptions == null
+        get() = isAnyMarkerUpdateAvailable &&
+                userLocation != null &&
+                requestedCameraOptions == null
 }
