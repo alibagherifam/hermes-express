@@ -9,27 +9,26 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
-import dev.alibagherifam.hermesexpress.common.domain.generateFakeDeliveryOffer
-import dev.alibagherifam.hermesexpress.common.ui.StringProvider
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
+import dev.alibagherifam.hermesexpress.deliveryoffer.domain.DeliveryOfferRepository
 import dev.alibagherifam.hermesexpress.map.screen.MapScreen
 import dev.alibagherifam.hermesexpress.map.screen.MapStateHolder
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
-    offer: DeliveryOffer?,
-    onLocationPermissionDeny: () -> Unit
-) {
+fun MainScreen(onLocationPermissionDeny: () -> Unit) {
+    val repository: DeliveryOfferRepository = koinInject()
+    val offer by repository.receivedOffer.collectAsState()
     val terminals = offer?.terminals.orEmpty()
     val mapStateHolder = remember { MapStateHolder() }
     mapStateHolder.setMarkerLocations(
@@ -82,13 +81,7 @@ fun MainScreen(
 @Preview
 @Composable
 internal fun MainScreenPreview() {
-    val stringProvider = with(LocalContext.current) {
-        StringProvider { getString(it) }
-    }
     HermesTheme {
-        MainScreen(
-            offer = generateFakeDeliveryOffer(stringProvider),
-            onLocationPermissionDeny = {}
-        )
+        MainScreen(onLocationPermissionDeny = {})
     }
 }
