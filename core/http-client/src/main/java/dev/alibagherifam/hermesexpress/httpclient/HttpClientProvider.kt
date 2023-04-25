@@ -8,13 +8,12 @@ import retrofit2.Retrofit
 
 internal fun provideHttpClient(): Retrofit {
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(ApiKeyInterceptor())
         .build()
 
     val jsonConverter = Json.asConverterFactory("application/json".toMediaType())
 
     return Retrofit.Builder()
-        .baseUrl(Constants.BASE_URL)
+        .baseUrl("http://localhost/")
         .client(okHttpClient)
         .addConverterFactory(jsonConverter)
         .build()
