@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "dev.alibagherifam.hermessexpress.buildlogic"
+group = "dev.alibagherifam.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

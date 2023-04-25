@@ -5,11 +5,11 @@ androidBuildTools = "34.0.0-rc3"
 androidPlugin = "8.0.0"
 androidxComposeCompiler = "1.4.6"
 androidxLifecycle = "2.6.1"
-androidxRoom = "2.5.1"
-coil = "2.3.0"
-coroutines = "1.7.0-RC"
-detekt = "1.22.0"
 kotlin = "1.8.20"
+kotlinxCoroutines = "1.7.0-RC"
+kotlinxSerialization = "1.5.0"
+coil = "2.3.0"
+detekt = "1.22.0"
 
 [libraries]
 # AndroidX
@@ -24,16 +24,13 @@ androidx-datastore = { group = "androidx.datastore", name = "datastore-preferenc
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version = "2.5.3" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidxRoom" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
 
 # KotlinX
-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.4.0" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.5.0" }
-kotlinx-serialization-properties = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-properties", version = "1.5.0" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-serialization-properties = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-properties", version.ref = "kotlinxSerialization" }
 
 # Square
 squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.10.0" }
