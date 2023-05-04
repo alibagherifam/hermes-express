@@ -22,7 +22,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 configureLint(this)
                 defaultConfig {
                     targetSdk = 33
-                    resourceConfigurations.addAll(listOf("en", "fa"))
                 }
             }
         }

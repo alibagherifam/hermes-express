@@ -51,7 +51,7 @@ private fun excludeLicencesFromApk(android: CommonExtension<*, *, *, *>) {
 fun specifySupportedLanguages(android: CommonExtension<*, *, *, *>) {
     android.apply {
         defaultConfig {
-            resourceConfigurations += listOf("en", "fa")
+            resourceConfigurations.addAll(listOf("en", "fa"))
         }
     }
 }
