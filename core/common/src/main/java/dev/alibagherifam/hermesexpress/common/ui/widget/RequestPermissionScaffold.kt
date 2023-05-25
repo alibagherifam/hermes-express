@@ -18,14 +18,14 @@ fun RequestPermissionScaffold(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) = Box(modifier.fillMaxSize()) {
-    val notificationPermissionState = rememberPermissionState(permission)
-    if (notificationPermissionState.status.isGranted) {
+    val permissionState = rememberPermissionState(permission)
+    if (permissionState.status.isGranted) {
         content()
     } else {
         RequestPermissionDialog(
             title = rationaleDialogTitle,
             message = rationaleDialogMessage,
-            onConfirmClick = { notificationPermissionState.launchPermissionRequest() },
+            onConfirmClick = { permissionState.launchPermissionRequest() },
             onDismissRequest = onPermissionDeny
         )
     }
