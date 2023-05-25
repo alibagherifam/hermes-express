@@ -6,8 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import dev.alibagherifam.hermesexpress.common.R
+import dev.alibagherifam.hermesexpress.common.ui.LocalizationPreviews
 import dev.alibagherifam.hermesexpress.common.ui.theme.HermesTheme
 
 @Composable
@@ -34,7 +34,7 @@ fun RequestPermissionDialog(
     )
 }
 
-@Preview
+@LocalizationPreviews
 @Composable
 internal fun RequestPermissionDialogPreview() {
     HermesTheme {
