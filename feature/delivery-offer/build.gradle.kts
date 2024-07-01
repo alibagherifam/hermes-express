@@ -1,5 +1,5 @@
 plugins {
-    id("dev.alibagherifam.feature")
+    alias(libs.plugins.alibagherifam.android.feature)
 }
 
 android {
@@ -7,5 +7,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:cloud-messaging"))
+    implementation(projects.core.cloudMessaging)
 }

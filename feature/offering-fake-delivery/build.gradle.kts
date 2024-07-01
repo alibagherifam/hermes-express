@@ -1,5 +1,5 @@
 plugins {
-    id("dev.alibagherifam.feature")
+    alias(libs.plugins.alibagherifam.android.feature)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -8,8 +8,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:cloud-messaging"))
+    implementation(projects.core.cloudMessaging)
 
-    implementation(libs.squareup.retrofit.core)
+    implementation(libs.retrofit.core)
     implementation(libs.kotlinx.serialization.properties)
 }

@@ -1,5 +1,5 @@
 plugins {
-    id("dev.alibagherifam.android.library")
+    alias(libs.plugins.alibagherifam.android.library)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -8,10 +8,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    implementation(projects.core.common)
+
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.dataStore.preferences)
     implementation(libs.firebase.messaging)
     implementation(libs.koin.android)
     implementation(libs.kotlinx.coroutines.android)

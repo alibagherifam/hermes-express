@@ -1,7 +1,7 @@
 plugins {
-    id("dev.alibagherifam.android.application")
-    id("dev.alibagherifam.compose")
-    alias(libs.plugins.googleServices)
+    alias(libs.plugins.alibagherifam.android.application)
+    alias(libs.plugins.alibagherifam.compose)
+    alias(libs.plugins.gms)
 }
 
 android {
@@ -15,17 +15,17 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    implementation(project(":core:http-client"))
-    implementation(project(":core:cloud-messaging"))
-    implementation(project(":feature:delivery-offer"))
-    implementation(project(":feature:map"))
-    implementation(project(":feature:offering-fake-delivery"))
+    implementation(projects.core.cloudMessaging)
+    implementation(projects.core.common)
+    implementation(projects.core.httpClient)
+    implementation(projects.feature.deliveryOffer)
+    implementation(projects.feature.map)
+    implementation(projects.feature.offeringFakeDelivery)
 
-    implementation(libs.androidx.activity)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.navigation)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
 }

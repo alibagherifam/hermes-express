@@ -1,6 +1,6 @@
 plugins {
-    id("dev.alibagherifam.android.application")
-    id("dev.alibagherifam.compose")
+    alias(libs.plugins.alibagherifam.android.application)
+    alias(libs.plugins.alibagherifam.compose)
 }
 
 android {
@@ -14,11 +14,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    implementation(projects.core.common)
 
-    implementation(libs.androidx.activity)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.navigation)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.koin.android)
 }

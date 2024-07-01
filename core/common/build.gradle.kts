@@ -1,6 +1,6 @@
 plugins {
-    id("dev.alibagherifam.android.library")
-    id("dev.alibagherifam.compose")
+    alias(libs.plugins.alibagherifam.android.library)
+    alias(libs.plugins.alibagherifam.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -9,12 +9,12 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activity)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.google.accompanist)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.accompanist.permissions)
     implementation(libs.koin.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)

@@ -1,5 +1,5 @@
 plugins {
-    id("dev.alibagherifam.feature")
+    alias(libs.plugins.alibagherifam.android.feature)
 }
 
 android {
@@ -7,6 +7,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.mapbox)
-    implementation(libs.google.playServices.location)
+    implementation(libs.mapbox.core)
+    implementation(libs.gms.location)
 }

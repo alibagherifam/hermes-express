@@ -6,6 +6,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -15,9 +16,9 @@ dependencyResolutionManagement {
         maven {
             url = uri("https://api.mapbox.com/downloads/v2/releases/maven")
             credentials {
-                val mapBoxSecretToken: String by settings
+                val mapboxSecretToken: String by settings
                 username = "mapbox"
-                password = mapBoxSecretToken
+                password = mapboxSecretToken
             }
             authentication {
                 create<BasicAuthentication>("basic")
@@ -25,7 +26,9 @@ dependencyResolutionManagement {
         }
     }
 }
+
 rootProject.name = "hermes-express"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app:biker")
 include(":app:customer")
