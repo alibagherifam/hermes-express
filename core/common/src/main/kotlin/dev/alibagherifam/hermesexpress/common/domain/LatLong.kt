@@ -1,3 +1,3 @@
 package dev.alibagherifam.hermesexpress.common.domain
 
-typealias LatLong = Pair<Double, Double>
+typealias Location = Pair<Double, Double>

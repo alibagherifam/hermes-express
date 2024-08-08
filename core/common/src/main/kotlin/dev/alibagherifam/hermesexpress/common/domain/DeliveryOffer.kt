@@ -26,7 +26,7 @@ data class DeliveryOffer(
 
 fun generateFakeDeliveryOffer(
     stringProvider: StringProvider,
-    userLocation: LatLong = LatLong(35.7194, 51.3709)
+    userLocation: Location = Location(35.7194, 51.3709)
 ) = DeliveryOffer(
     id = 1,
     terminals = generateFakeTerminals(stringProvider, userLocation),

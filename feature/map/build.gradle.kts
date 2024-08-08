@@ -8,5 +8,6 @@ android {
 
 dependencies {
     implementation(libs.mapbox.core)
+    implementation(libs.mapbox.compose)
     implementation(libs.gms.location)
 }
