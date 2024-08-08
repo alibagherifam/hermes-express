@@ -5,7 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
 import dev.alibagherifam.hermesexpress.deliveryoffer.playAudio
@@ -14,18 +13,20 @@ import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferScre
 import dev.alibagherifam.hermesexpress.deliveryoffer.ui.screen.DeliveryOfferViewModel
 import dev.alibagherifam.hermesexpress.deliveryoffer.vibrateDevice
 import dev.alibagherifam.hermesexpress.feature.deliveryoffer.R
+import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
 import kotlin.time.Duration
 
-const val deliveryOfferRoute = "delivery-offer"
+@Serializable
+object Offering
 
-fun NavGraphBuilder.addDeliveryOfferScreen(
+fun NavGraphBuilder.offeringScreen(
     onOfferAccepted: () -> Unit,
     onOfferExpired: () -> Unit,
     onTerminalClick: (Terminal) -> Unit,
     onUserMessage: (String) -> Unit
 ) {
-    composable(deliveryOfferRoute) {
+    composable<Offering> {
         val context = LocalContext.current
         LaunchedEffect(key1 = Unit) {
             playAudio(context, audioResId = R.raw.sfx_harp)
@@ -65,8 +66,4 @@ fun NavGraphBuilder.addDeliveryOfferScreen(
             }
         }
     }
-}
-
-fun NavHostController.navigateToDeliveryOffer() {
-    navigate(deliveryOfferRoute)
 }

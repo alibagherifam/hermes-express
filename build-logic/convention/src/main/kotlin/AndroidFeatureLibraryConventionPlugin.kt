@@ -13,6 +13,7 @@ class AndroidFeatureLibraryConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("dev.alibagherifam.android.library")
                 apply("dev.alibagherifam.compose")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             dependencies {
@@ -34,5 +35,6 @@ class AndroidFeatureLibraryConventionPlugin : Plugin<Project> {
         add("implementation", libs.getLibrary("koin.android"))
         add("implementation", libs.getLibrary("koin.compose"))
         add("implementation", libs.getLibrary("kotlinx.coroutines.android"))
+        add("implementation", libs.getLibrary("kotlinx.serialization.json"))
     }
 }

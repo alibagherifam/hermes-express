@@ -10,10 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import dev.alibagherifam.hermesexpress.common.domain.DeliveryOffer
 import dev.alibagherifam.hermesexpress.common.domain.Terminal
-import dev.alibagherifam.hermesexpress.deliveryoffer.ui.addDeliveryOfferScreen
-import dev.alibagherifam.hermesexpress.deliveryoffer.ui.navigateToDeliveryOffer
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.addOfferingFakeDeliveryScreen
-import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.offeringFakeDeliveryRoute
+import dev.alibagherifam.hermesexpress.deliveryoffer.ui.offeringScreen
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.OfferingFakeDelivery
+import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.offeringFakeDeliveryScreen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -23,29 +22,33 @@ fun BottomSheetContentHost(
     snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = offeringFakeDeliveryRoute
+    startDestination: Any = OfferingFakeDelivery
 ) {
     val scope = rememberCoroutineScope()
     if (offer != null) {
         LaunchedEffect(key1 = offer) {
-            navController.navigateToDeliveryOffer()
+            navController.navigate(dev.alibagherifam.hermesexpress.deliveryoffer.ui.Offering)
         }
     }
-    NavHost(navController, startDestination, modifier) {
-        addOfferingFakeDeliveryScreen(
+    NavHost(
+        navController = navController,
+        startDestination = startDestination,
+        modifier = modifier
+    ) {
+        offeringFakeDeliveryScreen(
             onFakeOfferSent = {},
             onUserMessage = {
                 scope.launch { snackbarHostState.showSnackbar(it) }
             }
         )
-        addDeliveryOfferScreen(
+        offeringScreen(
             onOfferAccepted = {
                 navController.popBackStack()
             },
             onOfferExpired = {
                 navController.popBackStack()
             },
-            onTerminalClick,
+            onTerminalClick = onTerminalClick,
             onUserMessage = {
                 scope.launch { snackbarHostState.showSnackbar(it) }
             }

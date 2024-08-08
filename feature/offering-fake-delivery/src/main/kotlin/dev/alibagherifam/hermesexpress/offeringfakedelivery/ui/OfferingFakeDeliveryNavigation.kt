@@ -3,25 +3,26 @@ package dev.alibagherifam.hermesexpress.offeringfakedelivery.ui
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen.OfferingFakeDeliveryEvent
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen.OfferingFakeDeliveryScreen
 import dev.alibagherifam.hermesexpress.offeringfakedelivery.ui.screen.OfferingFakeDeliveryViewModel
+import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
 
-const val offeringFakeDeliveryRoute = "offering-fake-delivery"
+@Serializable
+object OfferingFakeDelivery
 
-fun NavGraphBuilder.addOfferingFakeDeliveryScreen(
+fun NavGraphBuilder.offeringFakeDeliveryScreen(
     onFakeOfferSent: () -> Unit,
     onUserMessage: (String) -> Unit
 ) {
-    composable(offeringFakeDeliveryRoute) {
+    composable<OfferingFakeDelivery> {
         val viewModel: OfferingFakeDeliveryViewModel = koinViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         OfferingFakeDeliveryScreen(
-            uiState,
+            uiState = uiState,
             onSendFakeOffer = {
                 viewModel.onNewEvent(
                     OfferingFakeDeliveryEvent.BroadcastFakeDeliveryRequested
@@ -43,8 +44,4 @@ fun NavGraphBuilder.addOfferingFakeDeliveryScreen(
             }
         }
     }
-}
-
-fun NavController.navigateToOfferingFakeDelivery() {
-    navigate(offeringFakeDeliveryRoute)
 }
