@@ -11,7 +11,7 @@ androidxComposeBom = "2024.08.00-alpha01"
 androidxCore = "1.13.1"
 androidxDataStore = "1.1.1"
 androidxLifecycle = "2.8.4"
-androidxNavigation = "2.8.0-beta07"
+androidxNavigation = "2.8.0-rc01"
 coil = "2.7.0"
 detekt = "1.23.6"
 detektComposeRules = "0.4.10"
@@ -72,11 +72,11 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
 gradleDoctor = { id = "com.osacky.doctor", version.ref = "gradleDoctor" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 versions = { id = "com.github.ben-manes.versions", version.ref = "versionsPlugin" }
